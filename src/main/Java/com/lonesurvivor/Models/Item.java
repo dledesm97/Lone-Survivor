@@ -1,4 +1,4 @@
-package Java.GameFiles;
+package com.lonesurvivor.Models;
 
 public class Item {
 

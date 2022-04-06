@@ -1,0 +1,72 @@
+[
+
+
+    {
+    "locationName": "cockpit",
+    "locationDescription": "This is the cockpit. Pilots fly the plane from here.",
+    "locationItems": ["radio", "compass"],
+    "locationDirections": {"north": "outside plane", "south": "first class"}
+    },
+  {
+    "locationName": "first class",
+    "locationDescription": "This is the first class seating area.",
+    "locationItems": ["flare", "raft"],
+    "locationDirections": {"north": "cockpit", "south": "economy class"}
+  },
+   {
+    "locationName": "economy class",
+    "locationDescription": "This is the economy sitting area.",
+    "locationItems": ["flashlight", "lifejacket"],
+    "locationDirections": {"north": "first class", "south": "service area"}
+  },
+   {
+    "locationName": "service area",
+    "locationDescription": "This is the service area run by the flight attendants.",
+    "locationItems": ["food", "knife"],
+    "locationDirections": {"north": "economy class", "south": "outside plane"}
+  },
+  {
+    "locationName": "outside plane",
+    "locationDescription": "You are outside the plane crash. Dense tropical rainforest surround the area.",
+    "locationItems": [],
+    "locationDirections": {"north": "plane", "south": "forest", "east":  "???", "west":  "???"}
+  },
+  {
+    "locationName": "forest",
+    "locationDescription": "Dense tropical rainforest surround the area. You hear sounds of water nearby.",
+    "locationItems": [],
+    "locationDirections": {"north": "outside plane", "south": "bridge", "east":  "???", "west":  "???"}
+  },
+  {
+    "locationName": "bridge",
+    "locationDescription": "An old steel bridge wrapped in vegetation appears. Seems safe to cross.",
+    "locationItems": [],
+    "locationDirections": {"north": "forest", "east": "cross bridge"}
+  },
+  {
+    "locationName": "east of bridge",
+    "locationDescription": "You make it across the bridge safely. You hear sounds of unintelligible voices nearby.",
+    "locationItems": [],
+    "locationDirections": {"west": "cross bridge", "south": "investigate sound"}
+  },
+  {
+    "locationName": "local village",
+    "locationDescription": "You come across a local village and see human faces about. You are relieved. ",
+    "locationItems": [],
+    "locationDirections": {"north": "steel bridge"}
+  },
+  {
+    "locationName": "lair - mysterious animal",
+    "locationDescription": "You hear low growling noises, and you see what looks to be a mutated bear and probably the result of a bad science experiment! ",
+    "locationItems": [],
+    "locationDirections": {"north": "forest"}
+  },
+  {
+    "locationName": "forest dead end",
+    "locationDescription": "The forest seems too dense to go any further at this point. Might be best to re-trace your steps.",
+    "locationItems": [],
+    "locationDirections": {"north": "forest"}
+  }
+
+
+  ]

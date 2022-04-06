@@ -1,6 +1,4 @@
 [
-
-
   {
     "locationName": "outside plane",
     "locationDescription": "You are outside the plane crash. Dense tropical rainforest surround the area.",
@@ -43,6 +41,4 @@
     "locationItems": [],
     "locationDirections": {"north": "economy class"}
   }
-
-
 ]

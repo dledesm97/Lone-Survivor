@@ -1,4 +1,4 @@
-package Java.GameFiles;
+package com.lonesurvivor.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,10 +18,6 @@ public class Location {
         this.description = description;
         this.items = items;
         this.direction = direction;
-
-        /*for (Object item : items) {
-            Item i = new Item();
-        }*/
     }
 
     public String getName() {

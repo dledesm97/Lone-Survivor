@@ -1,4 +1,4 @@
-package Java.GameFiles;
+package com.lonesurvivor.Models;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

@@ -1,23 +1,15 @@
 package Java;
 
 import Java.GameFiles.GameEngine;
-import Java.GameFiles.GuiStartPage;
-import Java.GameFiles.MusicClass;
 import org.json.simple.parser.ParseException;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Scanner;
-/*
-TODO addlayout:correct h&V- Call GuiClass.gui when there is (sout) call Start() from GuiClass after name is entered.
- */
+
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
-        new GuiStartPage();
-
-        MusicClass musicClass = new MusicClass();
-        //musicClass.audioFile();
         Scanner scan = new Scanner(System.in);
         GameEngine game = new GameEngine();
 
