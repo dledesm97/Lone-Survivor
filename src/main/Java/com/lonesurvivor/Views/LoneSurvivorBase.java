@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomeBase extends JFrame
+public class LoneSurvivorBase extends JFrame
         implements ActionListener {
 
 
@@ -24,7 +24,7 @@ public class HomeBase extends JFrame
     private JLabel file;
 
 
-    public HomeBase() {
+    public LoneSurvivorBase() {
         setTitle("HomeBase");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
