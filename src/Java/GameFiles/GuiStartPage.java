@@ -129,7 +129,7 @@ public class GuiStartPage implements ActionListener {
        }
        else if(e.getSource()==jbutton2){
 
-           JOptionPane.showMessageDialog(null," help","Help Commands", JOptionPane.INFORMATION_MESSAGE);
+           JOptionPane.showMessageDialog(null,"\"go north\",\"go south\",\"go west\",\"go east\",\"get inventory\",\"get radio\",\"get compass\",\"get flare\",\"get raft\",\"get flashlight\",\"get lifejacket\",\"get food\",\"get knife\",\"look around\",\"use radio\",\"use compass\",\"use flare\",\"use raft\",\"use flashlight\",\"use lifejacket\",\"use food\",\"use knife\",\"quit game\",\"help game\",\"help commands\" ","Help Commands", JOptionPane.INFORMATION_MESSAGE);
 
        }
 
