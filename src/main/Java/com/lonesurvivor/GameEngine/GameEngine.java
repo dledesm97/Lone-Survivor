@@ -76,12 +76,12 @@ public class GameEngine {
                 "******************************************************");
 
         //Welcome message of the game
-        System.out.println("VERSION NEW!!!!!!!!!!!!\ngit ");
-        System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
-        System.out.println("You were a passenger on a plane that crash landed into a forest in the middle of nowhere.");
-        System.out.println("As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.");
-        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
-        System.out.println("******************************************************");
+//        System.out.println("VERSION NEW!!!!!!!!!!!!\ngit ");
+//        System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
+//        System.out.println("You were a passenger on a plane that crash landed into a forest in the middle of nowhere.");
+//        System.out.println("As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.");
+//        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
+//        System.out.println("******************************************************");
 
         while (!hasWon) {
             playerInterface();
