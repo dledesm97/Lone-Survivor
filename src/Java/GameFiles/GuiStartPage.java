@@ -21,6 +21,7 @@ public class GuiStartPage implements ActionListener {
     private JButton jbutton1;
     private JButton jbutton2;
     Container container;
+    JOptionPane jOption = new JOptionPane();
     JPanel textPanel =  new JPanel();
     JTextArea textArea = new JTextArea();
     Font font = new Font("Verdana", Font.BOLD,78);
@@ -128,6 +129,7 @@ public class GuiStartPage implements ActionListener {
        }
        else if(e.getSource()==jbutton2){
 
+           JOptionPane.showMessageDialog(null," help","Help Commands", JOptionPane.INFORMATION_MESSAGE);
 
        }
 
