@@ -89,7 +89,7 @@ public class JSONParserClass {
             JSONObject locDirections = (JSONObject) obj.get("locationDirections");
             //JSONArray locDirections = (JSONArray) obj.get("locationDirections");
 
-           // location = new Location(name, description, locItems, locDirections);
+           location = new Location(name, description, locItems, locDirections);
             //System.out.println(location);
             locations.add(location);
         }
