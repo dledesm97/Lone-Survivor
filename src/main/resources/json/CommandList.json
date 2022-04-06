@@ -1,0 +1,6 @@
+[
+  {"verb": ["go", "get", "look", "use", "quit", "help"]},
+  {"noun": ["radio", "compass", "flare", "raft", "flashlight", "lifejacket", "food", "knife", "around", "north", "south", "west", "east", "game", "commands", "inventory"]},
+  {"valid commands": ["go north", "go south", "go west", "go east", "get inventory","get radio", "get compass", "get flare", "get raft", "get flashlight", "get lifejacket", "get food", "get knife", "look around", "use radio", "use compass", "use flare", "use raft", "use flashlight", "use lifejacket", "use food", "use knife", "quit game", "help game", "help commands"]}
+]
+
