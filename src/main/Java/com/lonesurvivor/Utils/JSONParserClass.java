@@ -1,5 +1,6 @@
 package com.lonesurvivor.Utils;
 
+
 import com.lonesurvivor.Models.Location;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,15 +17,18 @@ import java.util.List;
 public class JSONParserClass {
 
     private JSONParser jsonParser;
-    private BufferedReader in; //TODO: ASSIGNED BUT NEVER ACCESSED
+    private BufferedReader in;
     private FileReader locReader;
     private FileReader commReader;
     private FileReader infoReader;
+    //private FileReader outsReader;
 
     private JSONArray locFile;
-
+    //private JSONObject locFile;
     private JSONArray commFile;
     private JSONObject infoFile;
+    //private JSONArray outsFile;
+
     private List<Location> locations;
     private Location location;
 
@@ -40,7 +44,6 @@ public class JSONParserClass {
 
     private String gameInfo;
 
-    //FIXME: MAKE METHOD DYNAMIC TO READ WHATEVER PATH IS PASSED INTO IT
     public JSONParserClass() throws IOException, ParseException {
         InputStream is = getFileFromResourceAsStream("json/PlaneCrash.json");
         InputStreamReader isr = new InputStreamReader(is);
@@ -48,16 +51,23 @@ public class JSONParserClass {
         InputStream is2 = getFileFromResourceAsStream("json/CommandList.json");
         InputStreamReader isr2 = new InputStreamReader(is2);
         InputStream is3 = getFileFromResourceAsStream("json/GameInfo.json");
-       InputStreamReader isr3 = new InputStreamReader(is3);
+        InputStreamReader isr3 = new InputStreamReader(is3);
 
         locations = new ArrayList<>();
         commands = new ArrayList<>();
-
-        //TODO: CANNOT FIND WHERE CALLED AGAIN
-        // DOES NOTHING, IF NEVER CALLED AGAIN SAFE TO REMOVE
-        in = new BufferedReader(new InputStreamReader(System.in)); //Does nothing when removed
-
+        in = new BufferedReader(new InputStreamReader(System.in));
         jsonParser = new JSONParser();
+
+        //locReader = new FileReader("src/Java/External_Files/PlaneCrash.json");
+        //commReader = new FileReader("src/Java/External_Files/CommandList.json");
+        //infoReader = new FileReader("src/Java/External_Files/GameInfo.json");
+        //outsReader = new FileReader("src/Java/External_Files/Outside.json");
+
+        //locFile = (JSONArray) jsonParser.parse(locReader);
+
+        //commFile = (JSONArray) jsonParser.parse(commReader);
+        //infoFile = (JSONObject) jsonParser.parse(infoReader);
+        //outsFile = (JSONArray) jsonParser.parse(outsReader);
 
         locFile = (JSONArray) jsonParser.parse(isr);
         commFile = (JSONArray) jsonParser.parse(isr2);
@@ -66,7 +76,30 @@ public class JSONParserClass {
     }
 
     public List<Location> locationParser() {
+
+        //for (Object o : locFile)
+        //for (int i = 0; i < locFile.size(); i++)
         for (Object o : locFile){
+            //JSONObject obj = (JSONObject) locFile.get("cockpit");
+
+            JSONObject obj = (JSONObject) o;
+            String name = (String) obj.get("locationName");
+            String description = (String) obj.get("locationDescription");
+            JSONArray locItems = (JSONArray) obj.get("locationItems");
+            JSONObject locDirections = (JSONObject) obj.get("locationDirections");
+            //JSONArray locDirections = (JSONArray) obj.get("locationDirections");
+
+           // location = new Location(name, description, locItems, locDirections);
+            //System.out.println(location);
+            locations.add(location);
+        }
+        return locations;
+    }
+
+    /*public List<Location> outsideParser() {
+        //for (Object o : locFile)
+        //for (int i = 0; i < locFile.size(); i++)
+        for (Object o : outsFile){
             //JSONObject obj = (JSONObject) locFile.get("cockpit");
 
             JSONObject obj = (JSONObject) o;
@@ -81,7 +114,7 @@ public class JSONParserClass {
             locations.add(location);
         }
         return locations;
-    }
+    }*/
 
     public List<JSONArray> commandParser() {
         verbObj = (JSONObject) commFile.get(0);
@@ -101,6 +134,7 @@ public class JSONParserClass {
 
     public String gameInfoParser() {
         gameInfo = (String) infoFile.get("gameInfo");
+
         return gameInfo;
     }
 

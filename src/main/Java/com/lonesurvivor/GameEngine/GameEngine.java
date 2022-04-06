@@ -1,17 +1,19 @@
 package com.lonesurvivor.GameEngine;
 
+
 import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
+import com.lonesurvivor.Views.GuiStartPage;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.List;
 import java.util.Map;
 
-/*
- Starts and initializes game and keeps it running, the "heart" of the program
+/**
+ * Starts and initializes game and keeps it running, the "heart" of the program
  */
 public class GameEngine {
 
@@ -19,7 +21,7 @@ public class GameEngine {
     //private CommandProcessor processor;
     private JSONParserClass jsonParserClass;
     //private GameLogic logic;
-    private BufferedReader in; //TODO: Never used
+    private BufferedReader in;
     //private JSONParser jsonParser;
     //private FileReader reader;
     //private JSONArray file;
@@ -32,7 +34,7 @@ public class GameEngine {
     private Location playerLocation;
     private int dayCount;
     private double randNum;
-    private boolean hasWon;
+    private boolean checkWin;
 
 
     public GameEngine() throws IOException, ParseException {
@@ -50,41 +52,47 @@ public class GameEngine {
         player = new Player();
         dayCount = 1;
         //randNum = Math.random();
-        hasWon = false; //better name could be hasWon
+        checkWin = false;
+
     }
 
-    /*NOTE: INITIALIZES GAME && RUNS THE GAME
-        -sets default location of player
-        -prints welcome message hardcode
-        -while user has not won take player input using the playerInterface() method
-        -checks whether won or not
-     */
-    public void startGame() throws IOException, ParseException  {
+
+
+    public void startGame() throws IOException, ParseException {
+        //String input;
+        //locationParser();
+
+
         player.setPlayerLocation(locations.get(2));
         playerLocation = player.getPlayerLocation();
+//        System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
+//        System.out.println("You were a passenger on a plane that crash landed into a forest in the middle of nowhere.");
+//        System.out.println("As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.");
+//        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
+//        System.out.println("******************************************************");
+        //GuiClass.gui.startGame();
+        GuiStartPage.gui.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
+                "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
+                "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
+                "You have three days to make it back to civilization or survive until rescue. Good luck.",
+                "******************************************************");
 
-        //Welcome message of the game
-        System.out.println("VERSION NEW!!!!!!!!!!!!\ngit ");
-        System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
-        System.out.println("You were a passenger on a plane that crash landed into a forest in the middle of nowhere.");
-        System.out.println("As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.");
-        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
-        System.out.println("******************************************************");
-
-        while (!hasWon) {
-            playerInterface();
+        while (checkWin == false) {
+            //while(dayCount < 3)
+            //logic.playerInterface();
+            //checkWin();
+            playerInterface();//parser work
             checkWin();
         }
+
     }
 
     public void checkWin() {
         if (playerLocation.equals(locations.get(8))) {
             System.out.println(playerLocation.getDescription());
             System.out.println("Congratulations and thank you for playing.");
-            hasWon = true;
+            checkWin = true;
         }
-        //TODO: either handle for rescued win on day 3 OR decide that they die
-        //FIXME: edit gameinfo.json to reflect these results
         else if (dayCount == 4) {
             System.out.println("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.");
             System.out.println("You died. Thank you for playing.");
@@ -92,33 +100,17 @@ public class GameEngine {
         }
     }
 
-    /* NOTE:
-        -prompts user to input a command
-        -validates that user enter 2 word commands
-        -if so then it passes that invokes commandProcessor() method to trigger each input case
-     */
     public void playerInterface() throws IOException, ParseException {
-        /* NOTE: DISPLAY SCREEN
-            -currentDay
-            -players current location
-            -location description
-            -displays current location directions
-         */
-        System.out.println("\n******************************************************");
+        //playerLocation.getName()
+        System.out.println("******************************************************");
         System.out.println("It is Day " + dayCount);
         System.out.println("You are currently located in " + playerLocation.getName().toUpperCase());
         System.out.println(playerLocation.getDescription());
         //System.out.println("Items: " + playerLocation.getItems());
         System.out.println("Directions: " + playerLocation.getDirection());
-
-        /* NOTE: INPUT PROMPT
-            -prompts user for input
-            -parses user input in TextParser.InitialInput() method
-         */
-        System.out.println("\nEnter a command (or 'help commands' to see a list of commands): ");
+        System.out.println("Enter a command (or 'help commands' to see a list of commands): ");
         input = in.readLine();
         parser.InitialInput(input);
-
         if (parser.getValidCommand().size() == 2) {
             command = parser.getValidCommand();
             //processor.processCommand(command);

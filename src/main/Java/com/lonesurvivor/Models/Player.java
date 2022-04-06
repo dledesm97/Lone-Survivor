@@ -1,6 +1,7 @@
 package com.lonesurvivor.Models;
 
-import java.util.ArrayList;
+
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ public class Player {
     private Location playerLocation;
 
     public Player() {
+
         inventory = new LinkedHashSet<>();
     }
 
