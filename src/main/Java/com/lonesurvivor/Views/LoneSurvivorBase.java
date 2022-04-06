@@ -24,7 +24,7 @@ public class LoneSurvivorBase extends JFrame
     private JLabel file;
 
 
-    public LoneSurvivorBase() {
+    public LoneSurvivorBase(){
         setTitle("HomeBase");
         setBounds(300, 90, 900, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
