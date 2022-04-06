@@ -1,5 +1,7 @@
-package Java.GameFiles;
+package com.lonesurvivor.Utils;
 
+
+import com.lonesurvivor.Models.Location;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -43,12 +45,12 @@ public class JSONParserClass {
     private String gameInfo;
 
     public JSONParserClass() throws IOException, ParseException {
-        InputStream is = getFileFromResourceAsStream("Java/External_Files/PlaneCrash.json");
+        InputStream is = getFileFromResourceAsStream("json/PlaneCrash.json");
         InputStreamReader isr = new InputStreamReader(is);
         //InputStreamReader isr1 = new InputStreamReader(getFileFromResourceAsStream("Java/External_Files/PlaneCrash.json"));
-        InputStream is2 = getFileFromResourceAsStream("Java/External_Files/CommandList.json");
+        InputStream is2 = getFileFromResourceAsStream("json/CommandList.json");
         InputStreamReader isr2 = new InputStreamReader(is2);
-        InputStream is3 = getFileFromResourceAsStream("Java/External_Files/GameInfo.json");
+        InputStream is3 = getFileFromResourceAsStream("json/GameInfo.json");
         InputStreamReader isr3 = new InputStreamReader(is3);
 
         locations = new ArrayList<>();
@@ -87,7 +89,7 @@ public class JSONParserClass {
             JSONObject locDirections = (JSONObject) obj.get("locationDirections");
             //JSONArray locDirections = (JSONArray) obj.get("locationDirections");
 
-            location = new Location(name, description, locItems, locDirections);
+           // location = new Location(name, description, locItems, locDirections);
             //System.out.println(location);
             locations.add(location);
         }

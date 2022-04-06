@@ -1,4 +1,4 @@
-package Java.GameFiles;
+package com.lonesurvivor.Models;
 
 import javax.sound.sampled.*;
 import java.io.File;

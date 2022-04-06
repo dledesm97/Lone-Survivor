@@ -1,6 +1,10 @@
-package Java;
+package com.lonesurvivor;
 
-import Java.GameFiles.GameEngine;
+
+
+import com.lonesurvivor.GameEngine.GameEngine;
+import com.lonesurvivor.Models.MusicClass;
+import com.lonesurvivor.Views.GuiStartPage;
 import org.json.simple.parser.ParseException;
 
 import java.awt.*;
@@ -10,9 +14,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
+        GuiStartPage guiStartPage = new GuiStartPage();
+
         Scanner scan = new Scanner(System.in);
         GameEngine game = new GameEngine();
-
+        MusicClass music = new MusicClass();
+        music.audioFile();
         /*while(true) {
             System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
             System.out.println("Are you ready to play? (Y/N)"); //main - if Y, starting game, if N, re-loops to beginning
