@@ -3,13 +3,15 @@ package Java.GameFiles;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.List;
 
 /**
  * Takes input, gives player their current state, and decides logic of the game (the brain)
  */
-public class GameLogic {
+public class GameLogic extends JPanel {
 
     private TextParser parser;
     private CommandProcessor processor;
@@ -29,7 +31,7 @@ public class GameLogic {
         //in = new BufferedReader(new InputStreamReader(System.in));
     }
 
-    public void playerInterface() throws IOException, ParseException {
+    public Component playerInterface() throws IOException, ParseException {
         System.out.println("You are currently located in the ");
         System.out.println("Enter a command (or 'help commands' to see a list of commands): ");
         input = in.readLine();
@@ -44,6 +46,7 @@ public class GameLogic {
         //command = parser.getValidCommand();
         //processor.processCommand(command);
 
+        return null;
     }
 
     public void playerActions() {

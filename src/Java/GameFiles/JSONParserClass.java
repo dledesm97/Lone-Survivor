@@ -53,7 +53,7 @@ public class JSONParserClass {
 
         locations = new ArrayList<>();
         commands = new ArrayList<>();
-        in = new BufferedReader(new InputStreamReader(System.in));
+        //in = new BufferedReader(new InputStreamReader(System.in));Fix it
         jsonParser = new JSONParser();
 
         //locReader = new FileReader("src/Java/External_Files/PlaneCrash.json");

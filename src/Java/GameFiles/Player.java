@@ -12,6 +12,7 @@ public class Player {
     private Location playerLocation;
 
     public Player() {
+
         inventory = new LinkedHashSet<>();
     }
 

@@ -1,11 +1,8 @@
 package Java.GameFiles;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,23 +51,29 @@ public class GameEngine {
     }
 
 
-    public void startGame() throws IOException, ParseException  {
+    public void startGame() throws IOException, ParseException {
         //String input;
         //locationParser();
 
         player.setPlayerLocation(locations.get(2));
         playerLocation = player.getPlayerLocation();
-        System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
-        System.out.println("You were a passenger on a plane that crash landed into a forest in the middle of nowhere.");
-        System.out.println("As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.");
-        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
-        System.out.println("******************************************************");
+//        System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
+//        System.out.println("You were a passenger on a plane that crash landed into a forest in the middle of nowhere.");
+//        System.out.println("As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.");
+//        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
+//        System.out.println("******************************************************");
+        //GuiClass.gui.startGame();
+        GuiStartPage.gui.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
+                "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
+                "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
+                "You have three days to make it back to civilization or survive until rescue. Good luck.",
+                "******************************************************");
 
         while (checkWin == false) {
             //while(dayCount < 3)
             //logic.playerInterface();
             //checkWin();
-            playerInterface();
+            playerInterface();//parser work
             checkWin();
         }
 
