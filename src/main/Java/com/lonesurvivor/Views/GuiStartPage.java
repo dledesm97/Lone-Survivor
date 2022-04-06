@@ -126,7 +126,8 @@ public class GuiStartPage implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        if(e.getSource()== startButton){
           // frame.dispose();
-           GuiPlane plane = new GuiPlane();
+           //GuiPlane plane = new GuiPlane();
+           HomeBase home = new HomeBase();
        }
        else if(e.getSource()== helpButton){
 
