@@ -57,9 +57,11 @@ public class GameEngine {
     }
 
 
+
     public void startGame() throws IOException, ParseException {
         //String input;
         //locationParser();
+
 
         player.setPlayerLocation(locations.get(2));
         playerLocation = player.getPlayerLocation();
