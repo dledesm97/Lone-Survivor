@@ -367,6 +367,6 @@ public class GameEngine {
     }
 
     public void setDayCount(int dayCount) {
-        this.dayCount = dayCount;
+        GameEngine.dayCount = dayCount;
     }
 }
