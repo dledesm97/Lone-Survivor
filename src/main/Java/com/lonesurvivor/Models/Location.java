@@ -10,7 +10,6 @@ public class Location {
     private String name;
     private String description;
     private List<String> items;
-    //private Map<String, String> direction;
     private Map<String, String> direction;
 
     public Location(String name, String description, ArrayList<String> items, HashMap<String, String> direction) {
