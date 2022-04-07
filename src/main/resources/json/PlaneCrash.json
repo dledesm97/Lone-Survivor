@@ -1,71 +1,69 @@
 [
-
-
     {
     "locationName": "cockpit",
     "locationDescription": "This is the cockpit. Pilots fly the plane from here.",
     "locationItems": ["radio", "compass"],
-    "locationDirections": {"north": "outside plane", "south": "first class"}
+    "locationDirections": {"north":"","east": "outside plane", "south": "first class", "west": ""}
     },
   {
     "locationName": "first class",
     "locationDescription": "This is the first class seating area.",
     "locationItems": ["flare", "raft"],
-    "locationDirections": {"north": "cockpit", "south": "economy class"}
+    "locationDirections": {"north": "cockpit", "east":"","south": "economy class","west": ""}
   },
    {
     "locationName": "economy class",
     "locationDescription": "This is the economy sitting area.",
     "locationItems": ["flashlight", "lifejacket"],
-    "locationDirections": {"north": "first class", "south": "service area"}
+    "locationDirections": {"north": "first class", "east":"","south": "service area", "west": ""}
   },
    {
     "locationName": "service area",
     "locationDescription": "This is the service area run by the flight attendants.",
     "locationItems": ["food", "knife"],
-    "locationDirections": {"north": "economy class", "south": "outside plane"}
+    "locationDirections": {"north": "economy class", "east": "outside plane","south": "", "west": ""}
   },
   {
     "locationName": "outside plane",
     "locationDescription": "You are outside the plane crash. Dense tropical rainforest surround the area.",
     "locationItems": [],
-    "locationDirections": {"north": "plane", "south": "forest", "east":  "???", "west":  "???"}
+    "locationDirections": {"north": "", "east":  "???","south": "forest", "west":  "plane"}
   },
   {
     "locationName": "forest",
     "locationDescription": "Dense tropical rainforest surround the area. You hear sounds of water nearby.",
     "locationItems": [],
-    "locationDirections": {"north": "outside plane", "south": "bridge", "east":  "???", "west":  "???"}
+    "locationDirections": {"north": "outside plane", "east":  "forest deadend","south": "bridge", "west":  "???"}
   },
   {
     "locationName": "bridge",
     "locationDescription": "An old steel bridge wrapped in vegetation appears. Seems safe to cross.",
     "locationItems": [],
-    "locationDirections": {"north": "forest", "east": "cross bridge"}
+    "locationDirections": {"north": "forest", "east": "cross bridge", "south": "lair","west": ""}
   },
   {
     "locationName": "east of bridge",
     "locationDescription": "You make it across the bridge safely. You hear sounds of unintelligible voices nearby.",
     "locationItems": [],
-    "locationDirections": {"west": "cross bridge", "south": "investigate sound"}
+    "locationDirections": {"north":"", "east":"","south": "local village","west": "cross bridge"}
   },
   {
     "locationName": "local village",
     "locationDescription": "You come across a local village and see human faces about. You are relieved. ",
     "locationItems": [],
-    "locationDirections": {"north": "steel bridge"}
+    "locationDirections": {"north": "steel bridge","east": "","south": "","west": ""}
   },
   {
-    "locationName": "lair - mysterious animal",
+    "locationName": "lair",
     "locationDescription": "You hear low growling noises, and you see what looks to be a mutated bear and probably the result of a bad science experiment! ",
     "locationItems": [],
-    "locationDirections": {"north": "forest"}
+    "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
   },
   {
     "locationName": "forest dead end",
     "locationDescription": "The forest seems too dense to go any further at this point. Might be best to re-trace your steps.",
     "locationItems": [],
-    "locationDirections": {"north": "forest"}
+    "locationDirections": {"north":"","east":"","south":"","west": "forest"}
   }
 
 

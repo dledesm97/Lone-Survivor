@@ -76,21 +76,13 @@ public class JSONParserClass {
     }
 
     public List<Location> locationParser() {
-
-        //for (Object o : locFile)
-        //for (int i = 0; i < locFile.size(); i++)
         for (Object o : locFile){
-            //JSONObject obj = (JSONObject) locFile.get("cockpit");
-
             JSONObject obj = (JSONObject) o;
-            String name = (String) obj.get("locationName");
-            String description = (String) obj.get("locationDescription");
-            JSONArray locItems = (JSONArray) obj.get("locationItems");
-            JSONObject locDirections = (JSONObject) obj.get("locationDirections");
-            //JSONArray locDirections = (JSONArray) obj.get("locationDirections");
 
-           location = new Location(name, description, locItems, locDirections);
-            //System.out.println(location);
+            // creating location object by passing it's respective paramaters with their data types.
+            location = new Location((String) obj.get("locationName"),(String) obj.get("locationDescription"),(JSONArray)obj.get("locationItems"),(JSONObject) obj.get("locationDirections"));
+
+            //adding the newly created location object into an arraylist
             locations.add(location);
         }
         return locations;

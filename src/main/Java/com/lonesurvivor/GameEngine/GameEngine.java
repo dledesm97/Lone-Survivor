@@ -114,9 +114,20 @@ public class GameEngine {
         System.out.println("\n******************************************************");
         System.out.println("It is Day " + dayCount);
         System.out.println("You are currently located in " + player.getPlayerLocation().getName().toUpperCase());
-        System.out.println(player.getPlayerLocation().getName());
+        //System.out.println(player.getPlayerLocation().getName());
         //System.out.println("Items: " + playerLocation.getItems());
-        System.out.println("Directions: " + player.getPlayerLocation().getDirection());
+        //System.out.println("Directions: " + player.getPlayerLocation().getDirection());
+
+        //iterating through the directions map to get all the available exits
+        for(Map.Entry<String,String> entry: player.getPlayerLocation().getDirection().entrySet()){
+            //checking if there is no available exit
+            if(entry.getValue().isEmpty()){
+                System.out.println(entry.getKey() + ": No exit this way!");
+            }
+            else{
+                System.out.println(entry.getKey() + " exit: " + entry.getValue());
+            }
+        }
 
         /* NOTE: INPUT PROMPT
             -prompts user for input
