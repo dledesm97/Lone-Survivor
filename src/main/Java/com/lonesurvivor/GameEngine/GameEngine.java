@@ -63,12 +63,7 @@ public class GameEngine {
     public void startGame() throws IOException, ParseException  {
         player.setPlayerLocation(locations.get(2));
         playerLocation = player.getPlayerLocation();
-//        System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
-//        System.out.println("You were a passenger on a plane that crash landed into a forest in the middle of nowhere.");
-//        System.out.println("As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.");
-//        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
-//        System.out.println("******************************************************");
-        //GuiClass.gui.startGame();
+
         GuiStartPage.gui.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
                 "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
                 "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
