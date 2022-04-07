@@ -14,7 +14,7 @@
    {
     "locationName": "economy class",
     "locationDescription": "This is the economy sitting area.",
-    "locationItems": ["flashlight", "lifejacket"],
+     "locationItems": ["flashlight", "life jacket"],
     "locationDirections": {"north": "first class", "east":"","south": "service area", "west": ""}
   },
    {

@@ -170,9 +170,7 @@ public class GameEngine {
                 player.lookEngine(command.get(1));
                 break;
             case "use":
-                //Use engine
-                //still need to implement
-                break;
+                player.useEngine(command.get(1));
             case "quit":
                 //quit engine
                 player.quitEngine(command.get(1));
