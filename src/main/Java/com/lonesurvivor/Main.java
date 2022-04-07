@@ -15,11 +15,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
         GuiStartPage guiStartPage = new GuiStartPage();
-
+        MusicClass music = new MusicClass();
+        music.audioFile();
         Scanner scan = new Scanner(System.in);
         GameEngine game = new GameEngine();
-       // MusicClass music = new MusicClass();
-        //music.audioFile();
+
+
         /*while(true) {
             System.out.println("Welcome to Lone Survivor, a text-based adventure game! ");
             System.out.println("Are you ready to play? (Y/N)"); //main - if Y, starting game, if N, re-loops to beginning
