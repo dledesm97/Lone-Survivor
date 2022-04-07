@@ -1,15 +1,22 @@
 package com.lonesurvivor.Views;
 
+import com.lonesurvivor.GameEngine.GameEngine;
+import org.json.simple.parser.ParseException;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class LoneSurvivorBase extends JFrame
         implements ActionListener {
-
-
+    public static LoneSurvivorBase GUI;//singleton instance of class to use global
+    GameEngine gameEngine;// init gameEngine in class
     //Fields
     private Container c;
     private JLabel title;
@@ -24,42 +31,49 @@ public class LoneSurvivorBase extends JFrame
     private JLabel file;
 
 
-    public LoneSurvivorBase(){
-        setTitle("HomeBase");
-        setBounds(300, 90, 900, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(true);
 
-        c = getContentPane();
-        c.setBackground(Color.CYAN);
+    public LoneSurvivorBase(GameEngine gameEngine) throws IOException, ParseException {//Lone Survivor Base Camp
+        GUI = this; // init global singleton (ctor) is used
+        this.gameEngine = gameEngine;//init gameEngine within class
+        setTitle("Survivor");
+        setBounds(300, 100, 900, 600);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
+
+        c = getContentPane();//Container as base frame
+        c.setBackground(Color.DARK_GRAY);
         c.setLayout(null);
 
-        title = new JLabel("Crash Site");
+
+        title = new JLabel("Crash Site");//Lable displaying name "crash site"
         title.setFont(new Font("Arial", Font.PLAIN, 40));
+        title.setForeground(Color.ORANGE);
         title.setSize(300, 30);
         title.setLocation(300, 30);
         c.add(title);
 
 
 
-        input = new JTextField();
+        input = new JTextField();//input field for player
         input.setFont(new Font("Arial", Font.PLAIN, 15));
         input.setSize(200, 40);
         input.setLocation(15, 525);
         c.add(input);
 
-        display = new JLabel("Display");
+        display = new JLabel("Display");//label text display
         display.setFont(new Font("Arial", Font.PLAIN, 20));
+        display.setForeground(Color.ORANGE);
         display.setSize(150, 100);
         display.setLocation(10, 385);
         c.add(display);
 
         input1 = new JTextArea();
         input1.setFont(new Font("Arial", Font.PLAIN, 15));
-        input1.setSize(200, 75);
-        input1.setLocation(15, 450);
+        input1.setSize(356, 75);
+        input1.setLocation(15, 350);
         input1.setLineWrap(true);
         c.add(input1);
+        setText("Hello");
 
         north = new JButton("North");
         north.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -99,6 +113,7 @@ public class LoneSurvivorBase extends JFrame
 
         file = new JLabel("File");
         file.setFont(new Font("Arial", Font.PLAIN, 20));
+        file.setForeground(Color.ORANGE);
         file.setSize(500, 25);
         file.setBackground(Color.BLACK);
         file.setLocation(10, 50);
@@ -107,10 +122,42 @@ public class LoneSurvivorBase extends JFrame
 
 
         setVisible(true);
+       // gameEngine.startGame();
+    }
+    public void setText(String text){
+
+        input1.setText(text);
+    }
+
+    public void setMultipleText(String... text){// a varags to add strings
+        String joinText = String.join("\n", text);//variable to hold text and join it together
+        setText(joinText);//call setText method to join input1 text
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) {// Set String Var  commmand to pass as switch var (each click has a command in it.)
+        String command = e.getActionCommand();//returns the command string assc with the action ('click)
+        switch(command){
+            case "North":
+                gameEngine.handleInput("go north");//calling the method handleInput() in GameEngine Class to parse the "clicks"
+                break;
+            case "South":
+                gameEngine.handleInput("go south");
+                break;
+            case "East":
+                gameEngine.handleInput("go east");
+                break;
+            case "West":
+                gameEngine.handleInput("go west");
+                break;
+            case "SUBMIT":
+                gameEngine.handleInput(input.getText());//
+                break;
+            default://Do nothing
+
+
+
+        }
 
     }
 }

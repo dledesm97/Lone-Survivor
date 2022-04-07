@@ -14,11 +14,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
-        GuiStartPage guiStartPage = new GuiStartPage();
-        MusicClass music = new MusicClass();
-        music.audioFile();
-        Scanner scan = new Scanner(System.in);
-        GameEngine game = new GameEngine();
+        GameEngine game = new GameEngine();//create and init start of game
+        GuiStartPage guiStartPage = new GuiStartPage(game);//create init and start UI page
+        MusicClass music = new MusicClass(); // create and init Music Page
+        //music.audioFile();// calls method to start the music
+        Scanner scan = new Scanner(System.in);// IDK if we need this we dont use it???
+
 
 
         /*while(true) {
@@ -58,7 +59,7 @@ public class Main {
         }
 
 
-        game.startGame();
+        //game.startGame();//???Game has to start before anything runs
 
     }
 }
