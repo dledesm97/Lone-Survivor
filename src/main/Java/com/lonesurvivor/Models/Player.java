@@ -159,6 +159,8 @@ public class Player {
 //        if(getItems().contains(noun)){
 //            System.out.println("Using " + noun);
 //        }
+
+        //Creating an Item object using the name of the item
         Item item = new Item(noun);
         item.useItem();
 

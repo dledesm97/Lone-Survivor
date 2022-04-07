@@ -13,7 +13,7 @@ public class Item {
     }
 
     public void useItem(){
-//        System.out.println("Using " + getItemName());
+        //depending on the item that is passed they will have a different functionality
         switch (itemName.toLowerCase()){
             case "flare":
                 System.out.println("Hopefully someone can see my signal");
