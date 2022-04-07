@@ -5,7 +5,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class MusicClass {
-    public void audioFile() {
+
+   public MusicClass(){
+    }
+
+    public static boolean audioFile() {
         try {
             File song  =  new File("src/main/resources/Get Up OffaThat Thing.wav");
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(song);
@@ -15,8 +19,12 @@ public class MusicClass {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
             clip.flush();
 
+
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
+
 }
+

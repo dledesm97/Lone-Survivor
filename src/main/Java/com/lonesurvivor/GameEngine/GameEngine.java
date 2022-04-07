@@ -71,9 +71,8 @@ public class GameEngine {
                 "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
                 "You have three days to make it back to civilization or survive until rescue. Good luck.",
                 "******************************************************",
-                 "\"It is Day \" + dayCount",
-                "You are currently located in " + player.getPlayerLocation().getName().toUpperCase(),
-                player.getPlayerLocation().getName(),"Directions: " + player.getPlayerLocation().getDirection());
+                "If your ready to start your journey please enter, 'help commands' in the text bar to see a list of option");
+
 
         //Welcome message of the game
 //        System.out.println("VERSION NEW!!!!!!!!!!!!\ngit ");
