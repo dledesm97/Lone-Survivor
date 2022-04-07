@@ -8,10 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class GuiStartPage implements ActionListener {
-    public static GuiStartPage gui;//Singleton
+    public static GuiStartPage gui;//Singleton to use global
 
     //Fields
     private String greeting;
@@ -21,44 +22,31 @@ public class GuiStartPage implements ActionListener {
     private JPanel panel2;
     private JButton startButton;
     private JButton helpButton;
-    Container container;
+    private Container container;
     JOptionPane jOption = new JOptionPane();
-    JPanel textPanel =  new JPanel();
-    JTextArea textArea = new JTextArea();
     Font font = new Font("Verdana", Font.BOLD,78);
 
 
-    public GuiStartPage() throws IOException {
+    public GuiStartPage(GameEngine gameEngine) throws IOException {
         gui = this;
+        this.gameEngine = gameEngine;//init gameEngine
         JFrame frame = new JFrame(); //create Jframe object
         frame.setSize(800,600);//set window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//set frame to open and close on exit
         frame.setTitle("LONE SURVIVOR");//set a title for the frame
-        frame.setLayout(new BorderLayout());
+        frame.setLayout(new FlowLayout());
         frame.setVisible(true);
 
-
-        textPanel.setBackground(Color.BLACK);
-        textPanel.setForeground(Color.WHITE);
-        textArea.setBackground(Color.BLACK);
-        textArea.setForeground(Color.WHITE);
-        textArea.setText("Welcome to Lone Survivor");
-
-
-
         container = frame.getContentPane();
+        container.setBackground(Color.DARK_GRAY);
 
         //Create title text
         createTitleText();
 
         panel2 = new JPanel();
-        panel2.setBounds(300,400,200,100);
-        //panel2.setBackground(Color.black);
+        panel2.setBounds(300,400,200,400);
+        panel2.setBackground(Color.DARK_GRAY);
         container.add(panel2);
-
-        textPanel.setBounds(400,400,200,400);
-        container.add(textPanel);
-        textPanel.add(textArea);
 
         //Start Button
         startGameButton();
@@ -72,14 +60,6 @@ public class GuiStartPage implements ActionListener {
 
 
 
-    }
-    public void setText(String text){
-
-        textArea.setText(text);
-    }
-    public void setMultipleText(String... text){// a varags to add strings
-        String joinText = String.join("\n", text);//take everything and join it together
-        setText(joinText);// join text
     }
 
     private void createHelpButton(){
@@ -103,9 +83,9 @@ public class GuiStartPage implements ActionListener {
     private void createTitleText(){
         panel1 = new JPanel();//then create Jpanel Object
         panel1.setBounds(50,100,700,150);//then set bounds of title panel
-        panel1.setBackground(Color.BLACK);// set background color of panel
+        panel1.setBackground(Color.DARK_GRAY);// set background color of panel
         JLabel jlabel1 = new JLabel("Lone Survivor");// create label
-        jlabel1.setForeground(Color.WHITE);//title to be put on the panel
+        jlabel1.setForeground(Color.ORANGE);//title to be put on the panel
         panel1.add(jlabel1);//add label to panel
         jlabel1.setFont(font);
         container.add(panel1);//add panel to container
@@ -117,17 +97,18 @@ public class GuiStartPage implements ActionListener {
     }
 
 
-    public static void guiShow() throws IOException, ParseException {
 
-
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
        if(e.getSource()== startButton){
           // frame.dispose();
-           //GuiPlane plane = new GuiPlane();
-           LoneSurvivorBase home = new LoneSurvivorBase();
+           try {
+               LoneSurvivorBase home = new LoneSurvivorBase(gameEngine);
+               gameEngine.startGame();
+           } catch (IOException | ParseException ex) {
+               ex.printStackTrace();
+           }
        }
        else if(e.getSource()== helpButton){
 
