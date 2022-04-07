@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
+//### Checking the update of code base
 public class LoneSurvivorBase extends JFrame
         implements ActionListener {
     public static LoneSurvivorBase GUI;//singleton instance of class to use global
