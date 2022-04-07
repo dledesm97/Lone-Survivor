@@ -5,6 +5,7 @@ import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
 import com.lonesurvivor.Views.GuiStartPage;
+import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -64,11 +65,15 @@ public class GameEngine {
         player.setPlayerLocation(locations.get(2));
         playerLocation = player.getPlayerLocation();
 
-        GuiStartPage.gui.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
+        //Created a singleton to call setMultiple Text Method from LoneSurvivorBase
+        LoneSurvivorBase.GUI.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
                 "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
                 "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
                 "You have three days to make it back to civilization or survive until rescue. Good luck.",
-                "******************************************************");
+                "******************************************************",
+                 "\"It is Day \" + dayCount",
+                "You are currently located in " + player.getPlayerLocation().getName().toUpperCase(),
+                player.getPlayerLocation().getName(),"Directions: " + player.getPlayerLocation().getDirection());
 
         //Welcome message of the game
 //        System.out.println("VERSION NEW!!!!!!!!!!!!\ngit ");
@@ -78,10 +83,10 @@ public class GameEngine {
 //        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
 //        System.out.println("******************************************************");
 
-        while (!hasWon) {
-            playerInterface();
-            checkWin();
-        }
+//        while (!hasWon) {
+//            playerInterface();
+//            checkWin();
+//        }
     }
 
     public void checkWin() {
@@ -104,43 +109,47 @@ public class GameEngine {
         -validates that user enter 2 word commands
         -if so then it passes that invokes commandProcessor() method to trigger each input case
      */
-    public void playerInterface() throws IOException, ParseException {
+    public void setupInterface() throws IOException, ParseException {
         /* NOTE: DISPLAY SCREEN
             -currentDay
             -players current location
             -location description
             -displays current location directions
          */
-        System.out.println("\n******************************************************");
-        System.out.println("It is Day " + dayCount);
-        System.out.println("You are currently located in " + player.getPlayerLocation().getName().toUpperCase());
-        //System.out.println(player.getPlayerLocation().getName());
-        //System.out.println("Items: " + playerLocation.getItems());
-        //System.out.println("Directions: " + player.getPlayerLocation().getDirection());
+//        System.out.println("\n******************************************************");
+//        System.out.println("It is Day " + dayCount);
+//        System.out.println("You are currently located in " + player.getPlayerLocation().getName().toUpperCase());
+//        System.out.println(player.getPlayerLocation().getName());
+//        //System.out.println("Items: " + playerLocation.getItems());
+//        System.out.println("Directions: " + player.getPlayerLocation().getDirection());
+//
+//        /* NOTE: INPUT PROMPT
+//            -prompts user for input
+//            -parses user input in TextParser.InitialInput() method
+//         */
+//        System.out.println("\nEnter a command (or 'help commands' to see a list of commands): ");
 
-        //iterating through the directions map to get all the available exits
-        for(Map.Entry<String,String> entry: player.getPlayerLocation().getDirection().entrySet()){
-            //checking if there is no available exit
-            if(entry.getValue().isEmpty()){
-                System.out.println(entry.getKey() + ": No exit this way!");
+
+//        input = in.readLine();
+//        handleInput(input);
+//
+    }
+    public void handleInput(String input){// public method handleInput if you give it input from GUI (copy and paste from above)
+
+        try {
+            parser.InitialInput(input);
+
+            if (parser.getValidCommand().size() == 2) {
+                command = parser.getValidCommand();
+                //processor.processCommand(command);
+                commandProcessor();
             }
-            else{
-                System.out.println(entry.getKey() + " exit: " + entry.getValue());
-            }
-        }
-
-        /* NOTE: INPUT PROMPT
-            -prompts user for input
-            -parses user input in TextParser.InitialInput() method
-         */
-        System.out.println("\nEnter a command (or 'help commands' to see a list of commands): ");
-        input = in.readLine();
-        parser.InitialInput(input);
-
-        if (parser.getValidCommand().size() == 2) {
-            command = parser.getValidCommand();
-            //processor.processCommand(command);
-            commandProcessor();
+            //TODO update printed text to UI
+          //  checkWin();TODO ???
+        } catch (IOException e) {
+     //       e.printStackTrace();
+        } catch (ParseException e) {
+     //       e.printStackTrace();
         }
     }
 
