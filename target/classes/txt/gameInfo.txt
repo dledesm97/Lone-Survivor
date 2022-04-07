@@ -1,0 +1,9 @@
+    Lone Survivor is a text based adventure game,
+    where you are the sole survivor of a plane crash in an uncharted forest.
+    Your goal is to make it back to civilization or attempt to call for rescue...
+    you only have 3 days to do so, before fate takes the wheel.
+
+    Commands for this game are TYPED using 2 words -- a [VERB] [NOUN] -- (e.g. look around)
+
+    ***NOTE: that not all nouns work with each verb and vice versa.
+    To see a full list of all the verbs and nouns in the game, type 'help commands'***

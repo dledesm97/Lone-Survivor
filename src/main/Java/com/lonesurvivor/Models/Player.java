@@ -1,7 +1,9 @@
 package com.lonesurvivor.Models;
 
 import com.lonesurvivor.GameEngine.GameEngine;
+import com.lonesurvivor.Utils.DisplayScreen;
 import com.lonesurvivor.Utils.JSONParserClass;
+import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
@@ -12,6 +14,8 @@ import java.util.Set;
 
 
 public class Player {
+    //CONSTANTS
+    private static final String GAME_INFO_PATH = "gameInfo.txt";
 
     // Fields
     private String name;
@@ -19,7 +23,6 @@ public class Player {
     private Location playerLocation;
     private List<Location> locations;
     private JSONParserClass jsonParserClass = new JSONParserClass();
-
 
     public Player(String name, List<Location> locations) throws IOException, ParseException {
         this.name = name;
@@ -186,7 +189,9 @@ public class Player {
             //JSONObject fileInfo = (JSONObject) jsonParser.parse(reader);
             //String gameInfo = (String) fileInfo.get("gameInfo");
             //System.out.println(gameInfo);
-            System.out.println(jsonParserClass.gameInfoParser());
+            
+            LoneSurvivorBase.GUI.setMultipleText(DisplayScreen.showScreen(GAME_INFO_PATH));
+//            DisplayScreen.showScreen(GAME_INFO_PATH);
         }
     }
 

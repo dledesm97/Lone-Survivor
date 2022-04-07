@@ -50,8 +50,10 @@ public class JSONParserClass {
         //InputStreamReader isr1 = new InputStreamReader(getFileFromResourceAsStream("Java/External_Files/PlaneCrash.json"));
         InputStream is2 = getFileFromResourceAsStream("json/CommandList.json");
         InputStreamReader isr2 = new InputStreamReader(is2);
-        InputStream is3 = getFileFromResourceAsStream("json/GameInfo.json");
-        InputStreamReader isr3 = new InputStreamReader(is3);
+
+        //TODO: SAFE TO DELETE
+//        InputStream is3 = getFileFromResourceAsStream("json/GameInfo.json");
+//        InputStreamReader isr3 = new InputStreamReader(is3);
 
         locations = new ArrayList<>();
         commands = new ArrayList<>();
@@ -71,7 +73,9 @@ public class JSONParserClass {
 
         locFile = (JSONArray) jsonParser.parse(isr);
         commFile = (JSONArray) jsonParser.parse(isr2);
-        infoFile = (JSONObject) jsonParser.parse(isr3);
+
+        //TODO:SAFE TO DELETE
+//        infoFile = (JSONObject) jsonParser.parse(isr3);
 
     }
 
@@ -124,11 +128,12 @@ public class JSONParserClass {
         return commands;
     }
 
-    public String gameInfoParser() {
-        gameInfo = (String) infoFile.get("gameInfo");
-
-        return gameInfo;
-    }
+    //TODO: REPLACED WITH TXT READER UTIL DISPLAYSCREEN -- SAFE TO DELETE
+//    public String gameInfoParser() {
+//        gameInfo = (String) infoFile.get("gameInfo");
+//
+//        return gameInfo;
+//    }
 
     private static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JSONParserClass.class.getClassLoader();
