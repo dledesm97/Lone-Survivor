@@ -9,10 +9,10 @@ public class Location {
 
     private String name;
     private String description;
-    private List<String> items;
+    private List<Item> items;
     private Map<String, String> direction;
 
-    public Location(String name, String description, ArrayList<String> items, HashMap<String, String> direction) {
+    public Location(String name, String description, ArrayList<Item> items, HashMap<String, String> direction) {
         this.name = name;
         this.description = description;
         this.items = items;
@@ -27,7 +27,7 @@ public class Location {
         return description;
     }
 
-    public List<String> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 

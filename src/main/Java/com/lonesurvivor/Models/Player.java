@@ -87,35 +87,39 @@ public class Player {
     }
 
     public void getEngine(String noun) throws IOException, ParseException {
-        //get item from JSON file
-        //reader = new FileReader("src/Java/External_Files/location.json");
-        //JSONArray fileArray = (JSONArray) jsonParser.parse(reader);
+        //storing the items available in that location in a list
+        List<Item> playerItem = playerLocation.getItems();
 
-        //JSONObject inventory = (JSONObject) fileArray.get(0); //this line needs to be based on where the player is
-        //JSONObject item = (JSONObject) inventory.get("inventory");
-        //String itemName = (String) inventory.get("locationItems");
-
-        //String itemName = (String) item.get("itemName");
-        //System.out.println(itemName);
         if (noun.equals("inventory")) {
             System.out.println(getItems());
         }
-        List<String> playerItem = playerLocation.getItems();
 
-        if (playerItem.contains(noun)){
+        else if (playerItem.contains(noun)) {
             addItems(noun);
-            //need to remove items from location after picking it up
-            for (Location location : locations) {
-                if (location.getItems().contains(noun)) {
-                    location.getItems().remove(noun);
-                    System.out.println(noun + " was removed from " + location.getName());
-                }
-            }
-
+            playerItem.remove(noun);
+            System.out.println(noun + " was removed from " + playerLocation.getName());
         }
         else {
             System.out.println("There is no " + noun);
         }
+//            if (playerLocation.getItems().contains(noun)) {
+//                playerLocation.getItems().remove(noun);
+//                System.out.println(noun + " was removed from " + playerLocation.getName());
+//            }
+//            else{
+//                System.out.println("There is no" + noun);
+//            }
+
+        //need to remove items from location after picking it up
+//            for (Location location : locations) {
+//                if (location.getItems().contains(noun)) {
+//                    location.getItems().remove(noun);
+//                    System.out.println(noun + " was removed from " + location.getName());
+//                }
+//            }
+//        else {
+//            System.out.println("There is no " + noun);
+//        }
 
     }
 
@@ -150,8 +154,15 @@ public class Player {
 
 
     }
+    public void useEngine(String noun){
+//        System.out.println("using" + noun);
+//        if(getItems().contains(noun)){
+//            System.out.println("Using " + noun);
+//        }
+        Item item = new Item(noun);
+        item.useItem();
 
-    public void useEngine(String noun){}
+    }
 
     public void quitEngine(String noun){
         if (noun.equals("game")) {
