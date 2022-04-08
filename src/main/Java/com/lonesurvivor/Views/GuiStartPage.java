@@ -36,12 +36,12 @@ public class GuiStartPage implements ActionListener {
         gui = this;
         this.gameEngine = gameEngine;//init gameEngine
         JFrame frame = new JFrame(); //create Jframe object
-        frame.setSize(1200,900);//set window
+        frame.setSize(1100,900);//set window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//set frame to open and close on exit
         frame.setTitle("LONE SURVIVOR");//set a title for the frame
 
         ImageIcon image;
-        frame.add(new JLabel( new ImageIcon("src/main/resources/LoneSurvivor.png")));
+       // frame.add(new JLabel( new ImageIcon("src/main/resources/LoneSurvivor.png")));
         frame.setLayout(new FlowLayout());
         frame.setVisible(true);
 
