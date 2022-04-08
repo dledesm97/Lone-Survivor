@@ -5,6 +5,7 @@ package com.lonesurvivor;
 import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Models.MusicClass;
 import com.lonesurvivor.Views.GuiStartPage;
+import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.parser.ParseException;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -14,9 +15,22 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException, ParseException, LineUnavailableException {
-        GameEngine game = new GameEngine();//create and init start of game
-        GuiStartPage guiStartPage = new GuiStartPage(game);//create init and start UI page
+    public static void main(String[] args) {
+        GameEngine game = null;//create and init start of game
+        try {
+            game = new GameEngine();
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            try {
+                LoneSurvivorBase StartPage = new LoneSurvivorBase(game);//create init and start UI page
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         MusicClass music = new MusicClass(); // create and init Music Page
        // MusicClass.audioFile();// calls method to start the music
         Scanner scan = new Scanner(System.in);// IDK if we need this we dont use it???
