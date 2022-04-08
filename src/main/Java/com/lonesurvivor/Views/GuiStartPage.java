@@ -2,32 +2,37 @@ package com.lonesurvivor.Views;
 
 
 import com.lonesurvivor.GameEngine.GameEngine;
+import com.lonesurvivor.Models.MusicClass;
 import org.json.simple.parser.ParseException;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class GuiStartPage implements ActionListener {
     public static GuiStartPage gui;//Singleton to use global
-
+    Clip clip = AudioSystem.getClip();
     //Fields
+    MusicClass musicClass ;
     private String greeting;
+    LoneSurvivorBase loneSurvivorBase;
     GameEngine gameEngine;
     private JFrame frame;
     private JPanel panel1;
     private JPanel panel2;
     private JButton startButton;
-    private JButton helpButton;
+    private JButton musicButton;
     private Container container;
     JOptionPane jOption = new JOptionPane();
     Font font = new Font("Verdana", Font.BOLD,78);
 
 
-    public GuiStartPage(GameEngine gameEngine) throws IOException {
+    public GuiStartPage(GameEngine gameEngine) throws IOException, LineUnavailableException {
         gui = this;
         this.gameEngine = gameEngine;//init gameEngine
         JFrame frame = new JFrame(); //create Jframe object
@@ -66,11 +71,11 @@ public class GuiStartPage implements ActionListener {
 
     private void createHelpButton(){
         //Help button shows instructions when clicked
-        helpButton = new JButton("HELP");
-        helpButton.addActionListener(this);
-        helpButton.setBackground(Color.WHITE);
-        helpButton.setForeground(Color.blue);
-        panel2.add(helpButton);
+        musicButton = new JButton("Music");
+        musicButton.addActionListener(this);
+        musicButton.setBackground(Color.WHITE);
+        musicButton.setForeground(Color.blue);
+        panel2.add(musicButton);
     }
 
     private void startGameButton(){
@@ -95,7 +100,7 @@ public class GuiStartPage implements ActionListener {
 
     public void startGame(){
         startButton.setVisible(false);
-        helpButton.setVisible(false);
+        musicButton.setVisible(false);
     }
 
 
@@ -103,21 +108,25 @@ public class GuiStartPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       if(e.getSource()== startButton){
-          // frame.dispose();
-           try {
-               LoneSurvivorBase home = new LoneSurvivorBase(gameEngine);
-               gameEngine.startGame();
-           } catch (IOException | ParseException ex) {
-               ex.printStackTrace();
-           }
+        if (e.getSource() == startButton) {
+            // frame.dispose();
+            try {
+                LoneSurvivorBase home = new LoneSurvivorBase(gameEngine);
+                //
+                // loneSurvivorBase.setVisible(true);
+                gameEngine.startGame();
+            } catch (IOException | ParseException ex) {
+                ex.printStackTrace();
+            }
+//        } else if (e.getSource() == musicButton && MusicClass.audioFile()) {
+//
+//                clip.stop();
+//
+//
+//        }else{
+//            clip.start();
+//            clip.getControls();
        }
-       else if(e.getSource()== helpButton){
 
-           JOptionPane.showMessageDialog(null,"\"go north\",\"go south\",\"go west\",\"go east\",\"get inventory\",\"get radio\",\"get compass\",\"get flare\",\"get raft\",\"get flashlight\",\"get lifejacket\",\"get food\",\"get knife\",\"look around\",\"use radio\",\"use compass\",\"use flare\",\"use raft\",\"use flashlight\",\"use lifejacket\",\"use food\",\"use knife\",\"quit game\",\"help game\",\"help commands\" ","Help Commands", JOptionPane.INFORMATION_MESSAGE);
-
-       }
-
-     }
-
+    }
 }

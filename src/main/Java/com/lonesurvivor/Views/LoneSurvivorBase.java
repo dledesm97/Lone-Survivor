@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-//### Checking the update of code base
+
 public class LoneSurvivorBase extends JFrame
         implements ActionListener {
     public static LoneSurvivorBase GUI;//singleton instance of class to use global
@@ -22,21 +22,21 @@ public class LoneSurvivorBase extends JFrame
     private JLabel title;
     private JTextField input;
     private JLabel display;
-    private JTextArea input1;
+    private JTextPane input1;
     private JButton north;
     private JButton south;
     private JButton east;
     private JButton west;
     private JButton reset;
     private JLabel file;
-
+    private JTextPane commandFeedBack;
 
 
     public LoneSurvivorBase(GameEngine gameEngine) throws IOException, ParseException {//Lone Survivor Base Camp
         GUI = this; // init global singleton (ctor) is used
         this.gameEngine = gameEngine;//init gameEngine within class
         setTitle("Survivor");
-        setBounds(300, 100, 900, 600);
+        setBounds(300, 100, 1200, 900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -45,33 +45,33 @@ public class LoneSurvivorBase extends JFrame
         c.setLayout(null);
 
 
-        title = new JLabel("Crash Site");//Lable displaying name "crash site"
-        title.setFont(new Font("Arial", Font.PLAIN, 40));
+        title = new JLabel("Lone Survivor");//Lable displaying name "crash site"
+        title.setFont(new Font("Arial", Font.PLAIN, 75));
         title.setForeground(Color.ORANGE);
-        title.setSize(300, 30);
-        title.setLocation(300, 30);
+        title.setSize(500, 230);
+        title.setLocation(340, 30);
         c.add(title);
 
 
 
         input = new JTextField();//input field for player
-        input.setFont(new Font("Arial", Font.PLAIN, 15));
+        input.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 15));
         input.setSize(200, 40);
-        input.setLocation(15, 525);
+        input.setLocation(15, 790);
         c.add(input);
 
-        display = new JLabel("Display");//label text display
+        display = new JLabel("DISPLAY");//label text display
         display.setFont(new Font("Arial", Font.PLAIN, 20));
         display.setForeground(Color.ORANGE);
         display.setSize(150, 100);
-        display.setLocation(10, 385);
+        display.setLocation(10, 475);
         c.add(display);
 
-        input1 = new JTextArea();
+        input1 = new JTextPane();
         input1.setFont(new Font("Arial", Font.PLAIN, 15));
-        input1.setSize(356, 75);
-        input1.setLocation(15, 350);
-        input1.setLineWrap(true);
+        input1.setSize(356, 235);
+        input1.setLocation(15, 550);
+        //input1.setLineWrap(true);
         c.add(input1);
         setText("Hello");
 
@@ -105,9 +105,9 @@ public class LoneSurvivorBase extends JFrame
 
         reset = new JButton("SUBMIT");
         reset.setFont(new Font("Arial", Font.PLAIN, 15));
-        reset.setSize(70, 20);
+        reset.setSize(80, 30);
         reset.setLayout(new BorderLayout());
-        reset.setLocation(220, 540);
+        reset.setLocation(220, 795);
         reset.addActionListener(this);
         c.add(reset);
 
@@ -152,6 +152,7 @@ public class LoneSurvivorBase extends JFrame
                 break;
             case "SUBMIT":
                 gameEngine.handleInput(input.getText());//
+
                 break;
             default://Do nothing
 
