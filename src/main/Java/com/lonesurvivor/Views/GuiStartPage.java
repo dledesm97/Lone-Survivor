@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class GuiStartPage implements ActionListener {
     public static GuiStartPage gui;//Singleton to use global
-    Clip clip = AudioSystem.getClip();
+    Clip clip = AudioSystem.getClip();//
     //Fields
     MusicClass musicClass ;
     private String greeting;

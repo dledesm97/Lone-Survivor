@@ -37,7 +37,7 @@ public class LoneSurvivorBase extends JFrame
 
 
     public LoneSurvivorBase(GameEngine gameEngine) throws IOException, ParseException {//Lone Survivor Base Camp
-        GUI = this; // init global singleton (ctor) is used
+        GUI = this; // init global singleton (ctor)
         this.gameEngine = gameEngine;//init gameEngine within class
         setTitle("Survivor");
         setBounds(300, 100, 1200, 900);
