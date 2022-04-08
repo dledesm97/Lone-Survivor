@@ -27,44 +27,43 @@
     "locationName": "outside plane",
     "locationDescription": "You are outside the plane crash. Dense tropical rainforest surround the area.",
     "locationItems": [],
-    "locationDirections": {"north": "", "east":  "???","south": "forest", "west":  "plane"}
+    "locationDirections": {"north": "", "east":  "","south": "forest", "west":  "plane"}
   },
   {
     "locationName": "forest",
     "locationDescription": "Dense tropical rainforest surround the area. You hear sounds of water nearby.",
     "locationItems": [],
-    "locationDirections": {"north": "outside plane", "east":  "forest deadend","south": "bridge", "west":  "???"}
-  },
-  {
-    "locationName": "bridge",
-    "locationDescription": "An old steel bridge wrapped in vegetation appears. Seems safe to cross.",
-    "locationItems": [],
-    "locationDirections": {"north": "forest", "east": "cross bridge", "south": "lair","west": ""}
-  },
-  {
-    "locationName": "east of bridge",
-    "locationDescription": "You make it across the bridge safely. You hear sounds of unintelligible voices nearby.",
-    "locationItems": [],
-    "locationDirections": {"north":"", "east":"","south": "local village","west": "cross bridge"}
-  },
-  {
-    "locationName": "local village",
-    "locationDescription": "You come across a local village and see human faces about. You are relieved. ",
-    "locationItems": [],
-    "locationDirections": {"north": "steel bridge","east": "","south": "","west": ""}
-  },
-  {
-    "locationName": "lair",
-    "locationDescription": "You hear low growling noises, and you see what looks to be a mutated bear and probably the result of a bad science experiment! ",
-    "locationItems": [],
-    "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
+    "locationDirections": {"north": "outside plane", "east":  "forest","south": "bridge", "west":  "???"}
   },
   {
     "locationName": "forest dead end",
     "locationDescription": "The forest seems too dense to go any further at this point. Might be best to re-trace your steps.",
     "locationItems": [],
     "locationDirections": {"north":"","east":"","south":"","west": "forest"}
+  },
+  {
+    "locationName": "bridge",
+    "locationDescription": "An old steel bridge that goes east is wrapped in vegetation appears. Seems safe to cross. Hopefully there is no troll",
+    "locationItems": [],
+    "locationDirections": {"north": "forest", "east": "village", "south": "lair","west": ""}
+  },
+  {
+    "locationName": "village",
+    "locationDescription": "You come across a local village and see human faces about. You are relieved. ",
+    "locationItems": [],
+    "locationDirections": {"north": "bridge","east": "","south": "","west": "TLG Building"}
+  },
+  {
+    "locationName": "TLG Building",
+    "locationDescription": "You entered the village, but there seems to be one building left..the TLG Building",
+    "locationItems": [],
+    "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
+  },
+  {
+    "locationName": "lair",
+    "locationDescription": "You hear low growling noises, and you see what looks to be a mutated bear and probably the result of a bad science experiment! ",
+    "locationItems": [],
+    "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
   }
-
 
   ]

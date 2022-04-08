@@ -19,17 +19,9 @@ public class Main {
         GameEngine game = null;//create and init start of game
         try {
             game = new GameEngine();
+            LoneSurvivorBase StartPage = new LoneSurvivorBase(game);//create init and start UI page
         } catch (IOException | ParseException e) {
-            e.printStackTrace();
-        }
-        try {
-            try {
-                LoneSurvivorBase StartPage = new LoneSurvivorBase(game);//create init and start UI page
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Could not properly read file");
         }
         MusicClass music = new MusicClass(); // create and init Music Page
        // MusicClass.audioFile();// calls method to start the music
