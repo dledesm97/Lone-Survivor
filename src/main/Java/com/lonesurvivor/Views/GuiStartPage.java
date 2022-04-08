@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class GuiStartPage implements ActionListener {
     public static GuiStartPage gui;//Singleton to use global
-    Clip clip = AudioSystem.getClip();
+    Clip clip = AudioSystem.getClip();//
     //Fields
     MusicClass musicClass ;
     private String greeting;
@@ -41,7 +41,7 @@ public class GuiStartPage implements ActionListener {
         frame.setTitle("LONE SURVIVOR");//set a title for the frame
 
         ImageIcon image;
-       // frame.add(new JLabel( new ImageIcon("src/main/resources/LoneSurvivor.png")));
+        frame.add(new JLabel( new ImageIcon("src/main/resources/LoneSurvivor.png")));
         frame.setLayout(new FlowLayout());
         frame.setVisible(true);
 
@@ -92,12 +92,6 @@ public class GuiStartPage implements ActionListener {
         jlabel1.setFont(font);
         container.add(panel1);//add panel to container
     }
-
-    public void startGame(){
-        startButton.setVisible(false);
-        musicButton.setVisible(false);
-    }
-
 
 
 

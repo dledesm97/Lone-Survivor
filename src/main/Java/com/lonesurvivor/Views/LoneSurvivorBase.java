@@ -28,7 +28,7 @@ public class LoneSurvivorBase extends JFrame
     private JButton east;
     private JButton west;
     private JButton enter;
-    private JButton reset;
+    private JButton submit;
     private JLabel file;
     private JPanel enterButton;
     private JTextPane commandFeedBack;
@@ -37,8 +37,9 @@ public class LoneSurvivorBase extends JFrame
 
 
     public LoneSurvivorBase(GameEngine gameEngine) throws IOException, ParseException {//Lone Survivor Base Camp
-        GUI = this; // init global singleton (ctor) is used
+        GUI = this; // init global singleton (ctor)
         this.gameEngine = gameEngine;//init gameEngine within class
+
         setTitle("Survivor");
         setBounds(300, 100, 1200, 900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -55,10 +56,12 @@ public class LoneSurvivorBase extends JFrame
         title.setSize(500, 90);
         title.setLocation(340, 30);
         c.add(title);
+        title.setVisible(false);
 
-        enterButton = new JPanel();
-        enterButton.setBounds(300,100,200,500);
-        enterButton.setBackground(Color.RED);
+
+        enterButton = new JPanel();//The JPanel for the splash page
+        enterButton.setBounds(1,1,1200,900);
+        enterButton.setBackground(Color.WHITE);
         enterButton.setVisible(true);
 
         input = new JTextField();//input field for player
@@ -66,6 +69,7 @@ public class LoneSurvivorBase extends JFrame
         input.setSize(200, 40);
         input.setLocation(15, 790);
         c.add(input);
+        input.setVisible(false);
 
         display = new JLabel("DISPLAY");//label text display
         display.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -73,6 +77,7 @@ public class LoneSurvivorBase extends JFrame
         display.setSize(150, 100);
         display.setLocation(10, 475);
         c.add(display);
+        display.setVisible(false);
 
         input1 = new JTextPane();
         input1.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -82,6 +87,7 @@ public class LoneSurvivorBase extends JFrame
         input1.setLocation(15, 550);
         //input1.setLineWrap(true);
         c.add(input1);
+        input1.setVisible(false);
 
 
         north = new JButton("North");
@@ -91,6 +97,7 @@ public class LoneSurvivorBase extends JFrame
         north.setLocation(985, 680);
         north.addActionListener(this);
         c.add(north);
+        north.setVisible(false);
 
         south = new JButton("South");
         south.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -99,6 +106,7 @@ public class LoneSurvivorBase extends JFrame
         south.setLocation(985, 725);
         south.addActionListener(this);
         c.add(south);
+        south.setVisible(false);
 
         west = new JButton("West");
         west.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -107,6 +115,7 @@ public class LoneSurvivorBase extends JFrame
         west.setLocation(939, 703);
         west.addActionListener(this);
         c.add(west);
+        west.setVisible(false);
 
         east = new JButton("East");
         east.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -115,14 +124,16 @@ public class LoneSurvivorBase extends JFrame
         east.setLocation(1025, 703);
         east.addActionListener(this);
         c.add(east);
+        east.setVisible(false);
 
-        reset = new JButton("SUBMIT");
-        reset.setFont(new Font("Arial", Font.PLAIN, 15));
-        reset.setSize(80, 30);
-        reset.setLayout(new BorderLayout());
-        reset.setLocation(220, 795);
-        reset.addActionListener(this);
-        c.add(reset);
+        submit = new JButton("SUBMIT");
+        submit.setFont(new Font("Arial", Font.PLAIN, 15));
+        submit.setSize(80, 30);
+        submit.setLayout(new BorderLayout());
+        submit.setLocation(220, 795);
+        submit.addActionListener(this);
+        c.add(submit);
+        submit.setVisible(false);
 
         file = new JLabel("File");
         file.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -131,27 +142,28 @@ public class LoneSurvivorBase extends JFrame
         file.setBackground(Color.BLACK);
         file.setLocation(10, 50);
         c.add(file);
+        file.setVisible(false);
 
        //Splashpage
        splashPage();
-       //commandPrompts
+       //CommandPrompts
         commandPromptsTextField();
         //ViewMap
         viewMapPane();
 
         setVisible(true);
-       // gameEngine.startGame();
+        gameEngine.startGame();
     }
-    public void setText(String text){
+    public void setText(String text){//Method to set the incoming text
 
         input1.setText(text);
     }
 
-    public void setMultipleText(String... text){// a varags to add strings
+    public void setMultipleText(String... text){// a varags to add text strings
         String joinText = String.join("\n", text);//variable to hold text and join it together
         setText(joinText);//call setText method to join input1 text
     }
-    public void splashPage(){
+    public void splashPage(){// Izzy would enter Splash Page file info here
         enter = new JButton("Enter");
         enter.setFont(new Font("Arial", Font.PLAIN, 15));
         enter.setSize(80, 30);
@@ -159,6 +171,13 @@ public class LoneSurvivorBase extends JFrame
         enter.setLocation(220, 795);
         enter.addActionListener(this);
         enterButton.add(enter);
+        c.add(enterButton);
+        enter.setVisible(true);
+        ImageIcon image;
+        enterButton.add(new JLabel( new ImageIcon("src/main/resources/LoneSurvivor.png")));//SplashPage place holder file
+        enterButton.setLayout(new FlowLayout());
+        enterButton.setVisible(true);
+        //enterButton.add(image);
 
     }
     public void commandPromptsTextField(){//TODO : create label
@@ -169,6 +188,7 @@ public class LoneSurvivorBase extends JFrame
         commandFeedBack.setSize(356, 235);
         commandFeedBack.setLocation(455, 590);
         c.add(commandFeedBack);
+        commandFeedBack.setVisible(false);
     }
     public void viewMapPane(){//TODO : create label
         viewMap = new JTextPane();
@@ -178,10 +198,27 @@ public class LoneSurvivorBase extends JFrame
         viewMap.setSize(700, 335);
         viewMap.setLocation(260, 190);
         c.add(viewMap);
+        viewMap.setVisible(false);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {// Set String Var  commmand to pass as switch var (each click has a command in it.)
+        if(e.getSource()==enter){//if enter is 'clicked' set visible to true for gamming page and false for splash page.
+            viewMap.setVisible(true);
+            commandFeedBack.setVisible(true);
+            enterButton.setVisible(false);
+            enter.setVisible(false);
+            file.setVisible(true);
+            submit.setVisible(true);
+            east.setVisible(true);
+            west.setVisible(true);
+            north.setVisible(true);
+            south.setVisible(true);
+            input1.setVisible(true);
+            display.setVisible(true);
+            input.setVisible(true);
+            title.setVisible(true);
+        }
         String command = e.getActionCommand();//returns the command string assc with the action ('click)
         switch(command){
             case "North":
