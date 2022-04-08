@@ -28,7 +28,7 @@ public class GuiStartPage implements ActionListener {
     private JButton startButton;
     private JButton musicButton;
     private Container container;
-    JOptionPane jOption = new JOptionPane();
+
     Font font = new Font("Verdana", Font.BOLD,78);
 
 
@@ -36,11 +36,12 @@ public class GuiStartPage implements ActionListener {
         gui = this;
         this.gameEngine = gameEngine;//init gameEngine
         JFrame frame = new JFrame(); //create Jframe object
-        frame.setSize(500,500);//set window
+        frame.setSize(1200,900);//set window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//set frame to open and close on exit
         frame.setTitle("LONE SURVIVOR");//set a title for the frame
 
-        frame.add(new JLabel(new ImageIcon("resources/images/loneSurvivor.png")));
+        ImageIcon image;
+        frame.add(new JLabel( new ImageIcon("src/main/resources/LoneSurvivor.png")));
         frame.setLayout(new FlowLayout());
         frame.setVisible(true);
 
@@ -51,7 +52,7 @@ public class GuiStartPage implements ActionListener {
         createTitleText();
 
         panel2 = new JPanel();
-        panel2.setBounds(300,400,200,400);
+        panel2.setBounds(300,400,1200,900);
         panel2.setBackground(Color.DARK_GRAY);
         container.add(panel2);
 
@@ -60,12 +61,6 @@ public class GuiStartPage implements ActionListener {
 
         //Help button shows instructions when clicked
         createHelpButton();
-
-//        JOptionPane jp = new JOptionPane();
-//        greeting = JOptionPane.showInputDialog("Welcome to Lone Survivor: Enter your Name");
-
-
-
 
     }
 
@@ -80,7 +75,7 @@ public class GuiStartPage implements ActionListener {
 
     private void startGameButton(){
         //Start game button starts game
-        startButton = new JButton("START");
+        startButton = new JButton("ENTER");
         startButton.addActionListener(this);
         startButton.setBackground(Color.WHITE);
         startButton.setForeground(Color.blue);
