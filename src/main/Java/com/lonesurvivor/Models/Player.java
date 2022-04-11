@@ -80,7 +80,7 @@ public class Player {
             }
         }
         catch (NullPointerException e) {
-            System.out.println("Invalid command!");
+            LoneSurvivorBase.GUI.setMultipleText("Invalid command!");
         }
 
         /*playerLocation = player.getPlayerLocation();
@@ -94,16 +94,16 @@ public class Player {
         List<Item> playerItem = playerLocation.getItems();
 
         if (noun.equals("inventory")) {
-            System.out.println(getItems());
+            LoneSurvivorBase.GUI.setMultipleText(getItems().toString());
         }
 
         else if (playerItem.contains(noun)) {
             addItems(noun);
             playerItem.remove(noun);
-            System.out.println(noun + " was removed from " + playerLocation.getName());
+            LoneSurvivorBase.GUI.setMultipleText(noun + " was removed from " + playerLocation.getName());
         }
         else {
-            System.out.println("There is no " + noun);
+            LoneSurvivorBase.GUI.setMultipleText("There is no " + noun);
         }
 //            if (playerLocation.getItems().contains(noun)) {
 //                playerLocation.getItems().remove(noun);
@@ -133,10 +133,10 @@ public class Player {
         //you see the following items: flashlight, life jacket
 
 
-        System.out.println("You look around and see: ");
-        System.out.println(playerLocation.getDescription());
-        System.out.println("Items: " + playerLocation.getItems());
-        System.out.println("Directions: " + playerLocation.getDirection());
+        LoneSurvivorBase.GUI.setMultipleText("You look around and see: ");
+        LoneSurvivorBase.GUI.setMultipleText(playerLocation.getDescription());
+        LoneSurvivorBase.GUI.setMultipleText("Items: " + playerLocation.getItems());
+        LoneSurvivorBase.GUI.setMultipleText("Directions: " + playerLocation.getDirection());
 
         /*for (Location location : locations) {
             //JSONObject location = (JSONObject) fileArray.get(0);
@@ -171,7 +171,7 @@ public class Player {
 
     public void quitEngine(String noun){
         if (noun.equals("game")) {
-            System.out.println("Quitting now...");
+            LoneSurvivorBase.GUI.setMultipleText("Quitting now...");
             System.exit(0);
         }
     }
@@ -182,7 +182,7 @@ public class Player {
             //JSONArray fileInfo = (JSONArray) jsonParser.parse(reader);
             //JSONObject gameInfo = (JSONObject) fileInfo.get(2);
             //System.out.println(gameInfo);
-            System.out.println(jsonParserClass.commandParser().get(2));
+            LoneSurvivorBase.GUI.setMultipleText(jsonParserClass.commandParser().get(2).toString());// Stringify the jpclass
         }
         else if (noun.equals("game")){
             //reader = new FileReader("src/Java/External_Files/GameInfo.json");
@@ -199,7 +199,7 @@ public class Player {
 
     public void addItems(String item) {
         inventory.add(item);
-        System.out.println("Player has added " + item + " to their inventory. ");
+        LoneSurvivorBase.GUI.setMultipleText("Player has added " + item + " to their inventory. ");
     }
 
     // Accessor Methods
