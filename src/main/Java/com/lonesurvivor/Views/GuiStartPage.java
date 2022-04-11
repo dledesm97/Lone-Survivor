@@ -104,7 +104,7 @@ public class GuiStartPage implements ActionListener {
                 //
                 // loneSurvivorBase.setVisible(true);
                 gameEngine.startGame();
-            } catch (IOException | ParseException ex) {
+            } catch (IOException | ParseException | java.text.ParseException ex) {
                 ex.printStackTrace();
             }
 //        } else if (e.getSource() == musicButton && MusicClass.audioFile()) {

@@ -5,12 +5,16 @@ import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
 import com.lonesurvivor.Views.GuiStartPage;
+import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
+
+import static com.lonesurvivor.Views.LocationFrame.textDisplayGui;
 
 /**
  * Starts and initializes game and keeps it running, the "heart" of the program
@@ -61,17 +65,22 @@ public class GameEngine {
         -while user has not won take player input using the playerInterface() method
         -checks whether won or not
      */
-    public void startGame() throws IOException, ParseException  {
+    public void startGame() throws IOException, ParseException, java.text.ParseException {
         player.setPlayerLocation(locations.get(2));
         playerLocation = player.getPlayerLocation();
 
         //Created a singleton to call setMultiple Text Method from LoneSurvivorBase
-        LoneSurvivorBase.GUI.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
-                "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
-                "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
-                "You have three days to make it back to civilization or survive until rescue. Good luck.",
-                "******************************************************",
-                "If your ready to start your journey please enter, 'help commands' in the text bar to see a list of option");
+//        LoneSurvivorBase.GUI.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
+//                "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
+//                "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
+//                "You have three days to make it back to civilization or survive until rescue. Good luck.",
+//                "******************************************************",
+//                "If your ready to start your journey please enter, 'help commands' in the text bar to see a list of option");
+
+        LocationFrame locationFrame = new LocationFrame(player.getPlayerLocation());
+        locationFrame.renderFrame();
+        textDisplayGui("Welcome to Lone Survivor, a text-based adventure game! \n You were a passenger on a plane that crash landed into a forest in the middle of nowhere.\n As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.\n You have three days to make it back to civilization or survive until rescue. Good luck.\n If your ready to start your journey please enter, help commands in the text bar to see a list of option\n");
+
 
 
         //Welcome message of the game
