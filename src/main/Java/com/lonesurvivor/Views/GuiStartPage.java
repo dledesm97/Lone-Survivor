@@ -21,7 +21,7 @@ public class GuiStartPage implements ActionListener {
     MusicClass musicClass ;
     private String greeting;
     LoneSurvivorBase loneSurvivorBase;
-    GameEngine gameEngine;
+    //GameEngine gameEngine;
     private JFrame frame;
     private JPanel panel1;
     private JPanel panel2;
@@ -34,7 +34,7 @@ public class GuiStartPage implements ActionListener {
 
     public GuiStartPage(GameEngine gameEngine) throws IOException, LineUnavailableException {
         gui = this;
-        this.gameEngine = gameEngine;//init gameEngine
+//        this.gameEngine = gameEngine;//init gameEngine
         JFrame frame = new JFrame(); //create Jframe object
         frame.setSize(1100,900);//set window
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//set frame to open and close on exit
@@ -100,10 +100,10 @@ public class GuiStartPage implements ActionListener {
         if (e.getSource() == startButton) {
             // frame.dispose();
             try {
-                LoneSurvivorBase home = new LoneSurvivorBase(gameEngine);
+                LoneSurvivorBase home = new LoneSurvivorBase();
                 //
                 // loneSurvivorBase.setVisible(true);
-                gameEngine.startGame();
+                GameEngine.getInstance().startGame();
             } catch (IOException | ParseException | java.text.ParseException ex) {
                 ex.printStackTrace();
             }
