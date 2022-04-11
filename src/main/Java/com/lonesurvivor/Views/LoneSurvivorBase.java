@@ -3,25 +3,26 @@ package com.lonesurvivor.Views;
 import com.lonesurvivor.GameEngine.GameEngine;
 import org.json.simple.parser.ParseException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoneSurvivorBase extends JFrame
         implements ActionListener {
     public static LoneSurvivorBase GUI;//singleton instance of class to use global
     GameEngine gameEngine;// init gameEngine in class
     //Fields
+    List<String> message = new ArrayList<>();//Because the Json file is a List we create an ArrayList ot add
     private Container c;
     private JLabel title;
     private JTextField input;
     private JLabel display;
+    private JLabel msg;
     private JTextPane input1;
     private JButton north;
     private JButton south;
@@ -78,6 +79,14 @@ public class LoneSurvivorBase extends JFrame
         display.setLocation(10, 475);
         c.add(display);
         display.setVisible(false);
+
+        msg = new JLabel("PLAYER_MSG");//label text display
+        msg.setFont(new Font("Arial", Font.PLAIN, 20));
+        msg.setForeground(Color.WHITE);
+        msg.setSize(150, 100);
+        msg.setLocation(453, 520);
+        c.add(msg);
+        msg.setVisible(false);
 
         input1 = new JTextPane();
         input1.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -147,7 +156,7 @@ public class LoneSurvivorBase extends JFrame
        //Splashpage
        splashPage();
        //CommandPrompts
-        commandPromptsTextField();
+        commandMsgReturn();
         //ViewMap
         viewMapPane();
 
@@ -155,13 +164,19 @@ public class LoneSurvivorBase extends JFrame
         gameEngine.startGame();
     }
     public void setText(String text){//Method to set the incoming text
+        message.add(text);//Storing all messages in a arraylist of Strings
 
-        input1.setText(text);
+
+    }
+    public void getMessages(){//void helper method that shows  messages TODO: If condition filter result to textpanes
+        viewMap.setText(String.join("\n", message));//Message in Array List print ot GUI viewMap
+        message.clear();// message clears old message when
     }
 
-    public void setMultipleText(String... text){// a varags to add text strings
+    public void  setMultipleText(String... text){// a varags to add text strings
         String joinText = String.join("\n", text);//variable to hold text and join it together
         setText(joinText);//call setText method to join input1 text
+
     }
     public void splashPage(){// Izzy would enter Splash Page file info here
         enter = new JButton("Enter");
@@ -180,7 +195,7 @@ public class LoneSurvivorBase extends JFrame
         //enterButton.add(image);
 
     }
-    public void commandPromptsTextField(){//TODO : create label
+    public void commandMsgReturn(){
         commandFeedBack = new JTextPane();
         commandFeedBack.setFont(new Font("Arial", Font.PLAIN, 15));
         commandFeedBack.setBackground(Color.WHITE);
@@ -218,6 +233,7 @@ public class LoneSurvivorBase extends JFrame
             display.setVisible(true);
             input.setVisible(true);
             title.setVisible(true);
+            msg.setVisible(true);
         }
         String command = e.getActionCommand();//returns the command string assc with the action ('click)
         switch(command){
