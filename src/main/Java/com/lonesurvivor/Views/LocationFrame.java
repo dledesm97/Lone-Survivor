@@ -8,7 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LocationFrame extends JPanel implements ActionListener {
+
+public class LocationFrame extends JPanel  implements ActionListener{
     
     private JButton north;
     private JButton south;
@@ -24,7 +25,6 @@ public class LocationFrame extends JPanel implements ActionListener {
     private JSeparator separator;
     private JLabel imageLabel;
     private String text;
-    private JFrame frame;
     private JScrollPane jScroll;
 
     public LocationFrame(Location location) {
@@ -48,7 +48,7 @@ public class LocationFrame extends JPanel implements ActionListener {
         menuBar.add (fileMenu);
         menuBar.add (helpMenu);
         east = new JButton ("W"); //FIXME Swap the directions
-        textDisplay = new JTextArea (5, 5);
+        textDisplay = new JTextArea (10, 5);
         commandInput = new JTextField (5);
         jcomp8 = new JLabel ("Enter Commands");
         enter = new JButton ("Enter");
@@ -63,8 +63,7 @@ public class LocationFrame extends JPanel implements ActionListener {
 
 
         //set components properties
-        jScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        jScroll.setWheelScrollingEnabled(true);
+
         textDisplay.setEnabled (false);
         textDisplay.setBackground(Color.lightGray);
         textDisplay.setBorder(new LineBorder(Color.BLACK));
@@ -80,6 +79,8 @@ public class LocationFrame extends JPanel implements ActionListener {
         commandInput.addActionListener(this);
 
 
+
+
         //adjust size and set layout
         setPreferredSize (new Dimension (632, 610));
         setLayout (null);
@@ -91,13 +92,13 @@ public class LocationFrame extends JPanel implements ActionListener {
         add (west);
         add (menuBar);
         add (east);
-        add (textDisplay);
         add (commandInput);
         add (jcomp8);
         add (enter);
         add (InventoryBox);
         add (separator);
         add (imageLabel);
+        add (jScroll);
 
         //set component bounds (only needed by Absolute Positioning)
         north.setBounds (500, 530, 55, 25);
@@ -112,6 +113,7 @@ public class LocationFrame extends JPanel implements ActionListener {
         InventoryBox.setBounds (445, 400, 165, 125);
         separator.setBounds(0, 380,1160,25);
         imageLabel.setBounds(20,50,590,320);
+        jScroll.setBounds(20, 400, 410, 125);
 
 
     }
@@ -122,7 +124,7 @@ public class LocationFrame extends JPanel implements ActionListener {
         frame.getContentPane().add (new LocationFrame(currentLocation));
         frame.pack();
         frame.setVisible (true);
-        this.frame = frame;
+
     }
 
     public void textParser(){
@@ -172,4 +174,6 @@ public class LocationFrame extends JPanel implements ActionListener {
     public void setCurrentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
     }
+
+
 }

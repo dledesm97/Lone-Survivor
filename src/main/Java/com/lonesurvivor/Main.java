@@ -2,24 +2,19 @@ package com.lonesurvivor;
 
 
 
-import com.lonesurvivor.GameEngine.GameEngine;
-import com.lonesurvivor.Models.MusicClass;
-import com.lonesurvivor.Views.GuiStartPage;
-import com.lonesurvivor.Views.LoneSurvivorBase;
+import com.lonesurvivor.Views.MasterGui;
 import org.json.simple.parser.ParseException;
 
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException, java.text.ParseException {
 
+        MasterGui masterGui = new MasterGui();
+
         //TODO refactor versions
 //        GameEngine game = new GameEngine();
-        GameEngine.getInstance().startGame();
+//        GameEngine.getInstance().startGame();
 
 //        GameEngine game = null;//create and init start of game
 //        try {
