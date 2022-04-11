@@ -1,5 +1,6 @@
 package com.lonesurvivor.Utils;
 
+import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
@@ -38,7 +39,8 @@ public class TextParser {
         String newStr = text.trim().toLowerCase();
 
         if (newStr.equals("")) {
-            System.out.println("Please enter a command.");
+            LoneSurvivorBase.GUI.setMultipleText("Please enter a command.");
+            //LoneSurvivorBase.GUI.commandPromptsTextField
         } else {
             command = TokenizeCommand(newStr);
             command.forEach(System.out::println);
@@ -73,7 +75,7 @@ public class TextParser {
         //clears list so there is only ever two elements in it at a time
         validCommand.clear();
         if (command.size() != 2) {
-            System.out.println("Valid command must contain only two words. Type 'help commands' for a list of valid commands.");
+            LoneSurvivorBase.GUI.setMultipleText("Valid command must contain only two words. Type 'help commands' for a list of valid commands.");
         }
         else {
             verb = command.get(0);
@@ -86,11 +88,11 @@ public class TextParser {
                     validCommand.add(noun);
                 }
                 else {
-                    System.out.println(comm + " is not a valid action");
+                    LoneSurvivorBase.GUI.setMultipleText(comm + " is not a valid action");
                 }
             }
             else{
-                System.out.println(verb + " " + noun + " is not a valid action");
+                LoneSurvivorBase.GUI.setMultipleText(verb + " " + noun + " is not a valid action");
             }
         }
     }
