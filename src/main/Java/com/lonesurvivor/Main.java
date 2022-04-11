@@ -18,8 +18,8 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException, java.text.ParseException {
 
         //TODO refactor versions
-        GameEngine game = new GameEngine();
-        game.startGame();
+//        GameEngine game = new GameEngine();
+        GameEngine.getInstance().startGame();
 
 //        GameEngine game = null;//create and init start of game
 //        try {

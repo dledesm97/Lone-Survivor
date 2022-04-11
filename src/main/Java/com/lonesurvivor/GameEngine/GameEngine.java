@@ -20,6 +20,7 @@ import static com.lonesurvivor.Views.LocationFrame.textDisplayGui;
  * Starts and initializes game and keeps it running, the "heart" of the program
  */
 public class GameEngine {
+    private static GameEngine engine = null;
 
     private TextParser parser;
     //private CommandProcessor processor;
@@ -40,6 +41,20 @@ public class GameEngine {
     private boolean hasWon;
     public static int dayCount;
 
+    public static GameEngine getInstance(){
+        if(engine == null){
+            try{
+                engine = new GameEngine();
+            }catch (IOException e){
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }catch (ParseException e){
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }
+        }
+        return engine;
+    }
 
     public GameEngine() throws IOException, ParseException {
         parser = new TextParser();

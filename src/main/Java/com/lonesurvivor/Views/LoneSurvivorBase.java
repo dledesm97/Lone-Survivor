@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class LoneSurvivorBase extends JFrame
         implements ActionListener {
     public static LoneSurvivorBase GUI;//singleton instance of class to use global
-    GameEngine gameEngine;// init gameEngine in class
+    //GameEngine gameEngine;// init gameEngine in class
     //Fields
     List<String> message = new ArrayList<>();//Because the Json file is a List we create an ArrayList ot add
     private Container c;
@@ -37,9 +37,9 @@ public class LoneSurvivorBase extends JFrame
 
 
 
-    public LoneSurvivorBase(GameEngine gameEngine) throws IOException, ParseException, java.text.ParseException {//Lone Survivor Base Camp
+    public LoneSurvivorBase() throws IOException, ParseException, java.text.ParseException {//Lone Survivor Base Camp
         GUI = this; // init global singleton (ctor)
-        this.gameEngine = gameEngine;//init gameEngine within class
+        //this.gameEngine = gameEngine;//init gameEngine within class
 
         setTitle("Survivor");
         setBounds(300, 100, 1200, 900);
@@ -161,7 +161,7 @@ public class LoneSurvivorBase extends JFrame
         viewMapPane();
 
         setVisible(true);
-        gameEngine.startGame();
+        GameEngine.getInstance().startGame();
     }
     public void setText(String text){//Method to set the incoming text
         message.add(text);//Storing all messages in a arraylist of Strings
@@ -238,19 +238,19 @@ public class LoneSurvivorBase extends JFrame
         String command = e.getActionCommand();//returns the command string assc with the action ('click)
         switch(command){
             case "North":
-                gameEngine.handleInput("go north");//calling the method handleInput() in GameEngine Class to parse the "clicks"
+                GameEngine.getInstance().handleInput("go north");//calling the method handleInput() in GameEngine Class to parse the "clicks"
                 break;
             case "South":
-                gameEngine.handleInput("go south");
+                GameEngine.getInstance().handleInput("go south");
                 break;
             case "East":
-                gameEngine.handleInput("go east");
+                GameEngine.getInstance().handleInput("go east");
                 break;
             case "West":
-                gameEngine.handleInput("go west");
+                GameEngine.getInstance().handleInput("go west");
                 break;
             case "SUBMIT":
-                gameEngine.handleInput(input.getText());//
+                GameEngine.getInstance().handleInput(input.getText());//
 
                 break;
             default://Do nothing
