@@ -5,12 +5,16 @@ import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
 import com.lonesurvivor.Views.GuiStartPage;
+import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.List;
 import java.util.Map;
+
+import static com.lonesurvivor.Views.LocationFrame.textDisplayGui;
 
 /**
  * Starts and initializes game and keeps it running, the "heart" of the program
@@ -61,18 +65,23 @@ public class GameEngine {
         -while user has not won take player input using the playerInterface() method
         -checks whether won or not
      */
-    public void startGame() throws IOException, ParseException  {
+    public void startGame() throws IOException, ParseException, java.text.ParseException {
         player.setPlayerLocation(locations.get(2));
         playerLocation = player.getPlayerLocation();
 
         //Created a singleton to call setMultiple Text Method from LoneSurvivorBase
-        LoneSurvivorBase.GUI.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
-                "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
-                "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
-                "You have three days to make it back to civilization or survive until rescue. Good luck.",
-                "******************************************************",
-                "If your ready to start your journey please enter, 'help commands' in the text bar to see a list of option");
-        LoneSurvivorBase.GUI.getMessages();
+//        LoneSurvivorBase.GUI.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
+//                "You were a passenger on a plane that crash landed into a forest in the middle of nowhere.",
+//                "As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.",
+//                "You have three days to make it back to civilization or survive until rescue. Good luck.",
+//                "******************************************************",
+//                "If your ready to start your journey please enter, 'help commands' in the text bar to see a list of option");
+
+        LocationFrame locationFrame = new LocationFrame(player.getPlayerLocation());
+        locationFrame.renderFrame();
+        textDisplayGui("Welcome to Lone Survivor, a text-based adventure game! \n You were a passenger on a plane that crash landed into a forest in the middle of nowhere.\n As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.\n You have three days to make it back to civilization or survive until rescue. Good luck.\n If your ready to start your journey please enter, help commands in the text bar to see a list of option\n");
+
+
 
         //Welcome message of the game
 //        System.out.println("VERSION NEW!!!!!!!!!!!!\ngit ");
@@ -90,15 +99,15 @@ public class GameEngine {
 
     public void checkWin() {
         if (playerLocation.equals(locations.get(8))) {
-            LoneSurvivorBase.GUI.setMultipleText(playerLocation.getDescription());
-            LoneSurvivorBase.GUI.setMultipleText("Congratulations and thank you for playing.");
+            System.out.println(playerLocation.getDescription());
+            System.out.println("Congratulations and thank you for playing.");
             hasWon = true;
         }
         //TODO: either handle for rescued win on day 3 OR decide that they die
         //FIXME: edit gameinfo.json to reflect these results
         else if (dayCount == 4) {
-            LoneSurvivorBase.GUI.setMultipleText("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.");
-            LoneSurvivorBase.GUI.setMultipleText("You died. Thank you for playing.");
+            System.out.println("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.");
+            System.out.println("You died. Thank you for playing.");
             System.exit(0);
         }
     }
@@ -143,28 +152,13 @@ public class GameEngine {
                 //processor.processCommand(command);
                 commandProcessor();
             }
-            showOutput();
+            //TODO update printed text to UI
+           //checkWin();TODO ???
         } catch (IOException e) {
      //       e.printStackTrace();
         } catch (ParseException e) {
      //       e.printStackTrace();
         }
-    }
-    public void showOutput(){
-        LoneSurvivorBase.GUI.setMultipleText("\n******************************************************");
-        LoneSurvivorBase.GUI.setMultipleText("It is Day " + dayCount);
-        LoneSurvivorBase.GUI.setMultipleText("You are currently located in " + player.getPlayerLocation().getName().toUpperCase());
-        LoneSurvivorBase.GUI.setMultipleText(player.getPlayerLocation().getName());
-        LoneSurvivorBase.GUI.setMultipleText("Items: " + playerLocation.getItems());
-        LoneSurvivorBase.GUI.setMultipleText("Directions: " + player.getPlayerLocation().getDirection());
-
-        /* NOTE: INPUT PROMPT
-            -prompts user for input
-            -parses user input in TextParser.InitialInput() method
-         */
-        LoneSurvivorBase.GUI.setMultipleText("\nEnter a command (or 'help commands' to see a list of commands): ");
-
-        LoneSurvivorBase.GUI.getMessages();
     }
 
     public void commandProcessor() throws IOException, ParseException {
