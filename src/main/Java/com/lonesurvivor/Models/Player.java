@@ -14,6 +14,7 @@ import java.util.Set;
 
 
 public class Player {
+    private static Player player = null;
     //CONSTANTS
     private static final String GAME_INFO_PATH = "gameInfo.txt";
 
@@ -23,6 +24,24 @@ public class Player {
     private Location playerLocation;
     private List<Location> locations;
     private JSONParserClass jsonParserClass = new JSONParserClass();
+
+    public static Player getInstance(){
+        if(player == null){
+            try {
+                player = new Player();
+            }catch (IOException e){
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }catch (ParseException e){
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }
+        }
+        return player;
+    }
+
+    public Player() throws IOException, ParseException {
+    }
 
     public Player(String name, List<Location> locations) throws IOException, ParseException {
         this.name = name;
