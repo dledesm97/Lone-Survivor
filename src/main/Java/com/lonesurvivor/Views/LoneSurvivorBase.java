@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LoneSurvivorBase extends JFrame
         implements ActionListener {

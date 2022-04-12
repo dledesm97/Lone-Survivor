@@ -4,15 +4,11 @@ import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
-import com.lonesurvivor.Views.GuiStartPage;
-import com.lonesurvivor.Views.LocationFrame;
-import com.lonesurvivor.Views.LoneSurvivorBase;
+import com.lonesurvivor.Views.SplashScreen;
 import org.json.simple.parser.ParseException;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.List;
-import java.util.Map;
 
 import static com.lonesurvivor.Views.LocationFrame.textDisplayGui;
 
@@ -33,7 +29,7 @@ public class GameEngine {
     private List<Location> locations;
     //private List<Location> outsides;
     //private Location location;
-    private Player player;
+    public Player player;
     private List<String> command;
     private String input;
     private Location playerLocation;
@@ -68,7 +64,7 @@ public class GameEngine {
         //jsonParser = new JSONParser();
         //reader = new FileReader("src/Java/External_Files/location.json");
         //file = (JSONArray) jsonParser.parse(reader);
-        player = new Player("John Doe", locations);
+        this.player = new Player("John Doe", locations);
         setDayCount(1);
         //randNum = Math.random();
         hasWon = false; //better name could be hasWon
@@ -92,10 +88,12 @@ public class GameEngine {
 //                "******************************************************",
 //                "If your ready to start your journey please enter, 'help commands' in the text bar to see a list of option");
 
-        LocationFrame locationFrame = new LocationFrame(player.getPlayerLocation());
-        locationFrame.renderFrame();
-        textDisplayGui("Welcome to Lone Survivor, a text-based adventure game! \n You were a passenger on a plane that crash landed into a forest in the middle of nowhere.\n As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.\n You have three days to make it back to civilization or survive until rescue. Good luck.\n If your ready to start your journey please enter, help commands in the text bar to see a list of option\n");
-
+//        LocationFrame locationFrame = new LocationFrame(player.getPlayerLocation());
+//        locationFrame.renderFrame();
+//        textDisplayGui("Welcome to Lone Survivor, a text-based adventure game! \n You were a passenger on a plane that crash landed into a forest in the middle of nowhere.\n As you awaken from unconsciousness, you quickly realize you are the only survivor aboard the crash.\n You have three days to make it back to civilization or survive until rescue. Good luck.\n If your ready to start your journey please enter, help commands in the text bar to see a list of option\n");
+//
+//        SplashScreen splashScreen = new SplashScreen();
+//        splashScreen.renderFrame();
 
 
         //Welcome message of the game
@@ -114,8 +112,9 @@ public class GameEngine {
 
     public void checkWin() {
         if (playerLocation.equals(locations.get(8))) {
-            System.out.println(playerLocation.getDescription());
-            System.out.println("Congratulations and thank you for playing.");
+            textDisplayGui(playerLocation.getDescription());
+            //System.out.println(playerLocation.getDescription());
+            //System.out.println("Congratulations and thank you for playing.");
             hasWon = true;
         }
         //TODO: either handle for rescued win on day 3 OR decide that they die
@@ -168,11 +167,11 @@ public class GameEngine {
                 commandProcessor();
             }
             //TODO update printed text to UI
-           //checkWin();TODO ???
+            //checkWin();TODO ???
         } catch (IOException e) {
-     //       e.printStackTrace();
+            //       e.printStackTrace();
         } catch (ParseException e) {
-     //       e.printStackTrace();
+            //       e.printStackTrace();
         }
     }
 
