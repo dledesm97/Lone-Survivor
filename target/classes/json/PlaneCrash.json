@@ -2,66 +2,77 @@
     {
     "locationName": "cockpit",
     "locationDescription": "This is the cockpit. Pilots fly the plane from here.",
+      "locationImage" : "src/main/resources/images/cockpit.png",
     "locationItems": ["radio", "compass"],
     "locationDirections": {"north":"","east": "outside plane", "south": "first class", "west": ""}
     },
   {
     "locationName": "first class",
     "locationDescription": "This is the first class seating area.",
+    "locationImage" : "src/main/resources/images/first_class.png",
     "locationItems": ["flare", "raft"],
     "locationDirections": {"north": "cockpit", "east":"","south": "economy class","west": ""}
   },
    {
     "locationName": "economy class",
     "locationDescription": "This is the economy sitting area.",
+     "locationImage" : "src/main/resources/images/cabin.png",
      "locationItems": ["flashlight", "life jacket"],
     "locationDirections": {"north": "first class", "east":"","south": "service area", "west": ""}
   },
    {
     "locationName": "service area",
     "locationDescription": "This is the service area run by the flight attendants.",
-    "locationItems": ["food", "knife"],
+     "locationImage" : "src/main/resources/images/service_area.png",
+     "locationItems": ["food", "knife"],
     "locationDirections": {"north": "economy class", "east": "outside plane","south": "", "west": ""}
   },
   {
     "locationName": "outside plane",
     "locationDescription": "You are outside the plane crash. Dense tropical rainforest surround the area.",
+    "locationImage" : "src/main/resources/images/planecrash.png",
     "locationItems": [],
     "locationDirections": {"north": "", "east":  "","south": "forest", "west":  "plane"}
   },
   {
-    "locationName": "forest",
+    "locationName": "Forest",
     "locationDescription": "Dense tropical rainforest surround the area. You hear sounds of water nearby.",
+    "locationImage" : "src/main/resources/images/forest_greenery.png",
     "locationItems": [],
     "locationDirections": {"north": "outside plane", "east":  "forest","south": "bridge", "west":  "???"}
   },
   {
-    "locationName": "forest dead end",
+    "locationName": "Forest Dead End",
     "locationDescription": "The forest seems too dense to go any further at this point. Might be best to re-trace your steps.",
+    "locationImage" : "src/main/resources/images/forest_dead_end.png",
     "locationItems": [],
     "locationDirections": {"north":"","east":"","south":"","west": "forest"}
   },
   {
-    "locationName": "bridge",
+    "locationName": "Bridge",
     "locationDescription": "An old steel bridge that goes east is wrapped in vegetation appears. Seems safe to cross. Hopefully there is no troll",
+    "locationImage" : "src/main/resources/images/bridge.png",
     "locationItems": [],
     "locationDirections": {"north": "forest", "east": "village", "south": "lair","west": ""}
   },
   {
-    "locationName": "village",
+    "locationName": "Village",
     "locationDescription": "You come across a local village and see human faces about. You are relieved. ",
+    "locationImage" : "src/main/resources/images/forest_village.png",
     "locationItems": [],
-    "locationDirections": {"north": "bridge","east": "","south": "","west": "TLG Building"}
+    "locationDirections": {"north": "","east": "TLG Building","south": "","west": "bridge"}
   },
   {
     "locationName": "TLG Building",
     "locationDescription": "You entered the village, but there seems to be one building left..the TLG Building",
+    "locationImage" : "src/main/resources/images/building.png",
     "locationItems": [],
     "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
   },
   {
-    "locationName": "lair",
+    "locationName": "Lair",
     "locationDescription": "You hear low growling noises, and you see what looks to be a mutated bear and probably the result of a bad science experiment! ",
+    "locationImage" : "src/main/resources/images/lair.png",
     "locationItems": [],
     "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
   }
