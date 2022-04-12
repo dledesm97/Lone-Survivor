@@ -1,6 +1,7 @@
 package com.lonesurvivor.Utils;
 
 
+import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Models.Location;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,6 +16,8 @@ import java.util.List;
  * reads and parses all the json files using Simple
  */
 public class JSONParserClass {
+
+    private static JSONParserClass parser = null;
 
     private JSONParser jsonParser;
     private BufferedReader in;
@@ -43,6 +46,21 @@ public class JSONParserClass {
     private JSONArray commList;
 
     private String gameInfo;
+
+    public static JSONParserClass getInstance(){
+        if(parser == null){
+            try{
+                parser = new JSONParserClass();
+            }catch (IOException e){
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }catch (ParseException e){
+                System.out.println(e.getMessage());
+                System.exit(0);
+            }
+        }
+        return parser;
+    }
 
     public JSONParserClass() throws IOException, ParseException {
         InputStream is = getFileFromResourceAsStream("json/PlaneCrash.json");
