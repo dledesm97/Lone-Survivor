@@ -17,7 +17,7 @@ public class SplashScreen extends JPanel implements ActionListener {
         jcomp1 = new JButton ("Start");
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (632, 610));
+        setPreferredSize (new Dimension (626, 705));
         setLayout (null);
         setBackground(Color.LIGHT_GRAY);
 
@@ -25,8 +25,8 @@ public class SplashScreen extends JPanel implements ActionListener {
         //set props for components
         ImageIcon imageIcon = new ImageIcon("src/main/resources/LoneSurvivor.png"); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it
-        Image newImg = image.getScaledInstance(632, 610,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        imageLabel = new JLabel( new ImageIcon(newImg));
+        Image newImg = image.getScaledInstance(626, 705,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        imageLabel = new JLabel( new ImageIcon(newImg)); //
 
         jcomp1.setOpaque(true);
         jcomp1.addActionListener(this);
@@ -38,7 +38,7 @@ public class SplashScreen extends JPanel implements ActionListener {
 
         //set component bounds (only needed by Absolute Positioning)
         jcomp1.setBounds (275, 345, 100, 20);
-        imageLabel.setBounds (0, 0, 632, 610);
+        imageLabel.setBounds (0, 0, 626, 705);
     }
 
 

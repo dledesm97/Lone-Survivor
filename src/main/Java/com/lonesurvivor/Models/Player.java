@@ -3,6 +3,7 @@ package com.lonesurvivor.Models;
 import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Utils.DisplayScreen;
 import com.lonesurvivor.Utils.JSONParserClass;
+import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.parser.ParseException;
 
@@ -24,15 +25,13 @@ public class Player {
     private Location playerLocation;
     private List<Location> locations;
     private JSONParserClass jsonParserClass = new JSONParserClass();
+    private int health = 50;
 
     public static Player getInstance(){
         if(player == null){
             try {
                 player = new Player();
-            }catch (IOException e){
-                System.out.println(e.getMessage());
-                System.exit(0);
-            }catch (ParseException e){
+            }catch (IOException | ParseException e){
                 System.out.println(e.getMessage());
                 System.exit(0);
             }
@@ -46,7 +45,6 @@ public class Player {
     public Player(String name, List<Location> locations) throws IOException, ParseException {
         this.name = name;
         this.locations = locations;
-
 
     // instantiate when class is instantiated
     // inventory = new LinkedHashSet<>();
@@ -99,7 +97,8 @@ public class Player {
             }
         }
         catch (NullPointerException e) {
-            LoneSurvivorBase.GUI.setMultipleText("Invalid command!");
+           // LoneSurvivorBase.GUI.setMultipleText("Invalid command!");
+            LocationFrame.textDisplayGui("Invalid command!");
         }
 
         /*playerLocation = player.getPlayerLocation();
@@ -113,16 +112,19 @@ public class Player {
         List<Item> playerItem = playerLocation.getItems();
 
         if (noun.equals("inventory")) {
-            LoneSurvivorBase.GUI.setMultipleText(getItems().toString());
+           // LoneSurvivorBase.GUI.setMultipleText(getItems().toString());
+            LocationFrame.textDisplayGui(getItems().toString());
         }
 
         else if (playerItem.contains(noun)) {
             addItems(noun);
             playerItem.remove(noun);
-            LoneSurvivorBase.GUI.setMultipleText(noun + " was removed from " + playerLocation.getName());
+            //LoneSurvivorBase.GUI.setMultipleText(noun + " was removed from " + playerLocation.getName());
+            LocationFrame.textDisplayGui(noun + " was removed from " + playerLocation.getName());
         }
         else {
-            LoneSurvivorBase.GUI.setMultipleText("There is no " + noun);
+           // LoneSurvivorBase.GUI.setMultipleText("There is no " + noun);
+            LocationFrame.textDisplayGui("There is no " + noun);
         }
 //            if (playerLocation.getItems().contains(noun)) {
 //                playerLocation.getItems().remove(noun);
@@ -152,10 +154,12 @@ public class Player {
         //you see the following items: flashlight, life jacket
 
 
-        LoneSurvivorBase.GUI.setMultipleText("You look around and see: ");
-        LoneSurvivorBase.GUI.setMultipleText(playerLocation.getDescription());
-        LoneSurvivorBase.GUI.setMultipleText("Items: " + playerLocation.getItems());
-        LoneSurvivorBase.GUI.setMultipleText("Directions: " + playerLocation.getDirection());
+//        LoneSurvivorBase.GUI.setMultipleText("You look around and see: ");
+//        LoneSurvivorBase.GUI.setMultipleText(playerLocation.getDescription());
+//        LoneSurvivorBase.GUI.setMultipleText("Items: " + playerLocation.getItems());
+//        LoneSurvivorBase.GUI.setMultipleText("Directions: " + playerLocation.getDirection());
+        LocationFrame.textDisplayGui("You look around and see: \n" + playerLocation.getDescription() +
+                                               "\nItems: " + playerLocation.getItems() + "\nDirections: " + playerLocation.getDirection());
 
         /*for (Location location : locations) {
             //JSONObject location = (JSONObject) fileArray.get(0);
@@ -190,7 +194,8 @@ public class Player {
 
     public void quitEngine(String noun){
         if (noun.equals("game")) {
-            LoneSurvivorBase.GUI.setMultipleText("Quitting now...");
+           // LoneSurvivorBase.GUI.setMultipleText("Quitting now...");
+            LocationFrame.textDisplayGui("Quitting now...");
             System.exit(0);
         }
     }
@@ -201,7 +206,8 @@ public class Player {
             //JSONArray fileInfo = (JSONArray) jsonParser.parse(reader);
             //JSONObject gameInfo = (JSONObject) fileInfo.get(2);
             //System.out.println(gameInfo);
-            LoneSurvivorBase.GUI.setMultipleText(jsonParserClass.commandParser().get(2).toString());// Stringify the jpclass
+            // LoneSurvivorBase.GUI.setMultipleText(jsonParserClass.commandParser().get(2).toString());// Stringify the jpclass
+            LocationFrame.textDisplayGui(jsonParserClass.commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
             //reader = new FileReader("src/Java/External_Files/GameInfo.json");
@@ -209,7 +215,8 @@ public class Player {
             //String gameInfo = (String) fileInfo.get("gameInfo");
             //System.out.println(gameInfo);
             
-            LoneSurvivorBase.GUI.setMultipleText(DisplayScreen.showScreen(GAME_INFO_PATH));
+            //LoneSurvivorBase.GUI.setMultipleText(DisplayScreen.showScreen(GAME_INFO_PATH));
+            LocationFrame.textDisplayGui(DisplayScreen.showScreen(GAME_INFO_PATH));
 //            DisplayScreen.showScreen(GAME_INFO_PATH);
         }
     }
@@ -240,7 +247,15 @@ public class Player {
         return playerLocation;
     }
 
-//    // empty method
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    //    // empty method
 //    public void performAction() {}
 
 }

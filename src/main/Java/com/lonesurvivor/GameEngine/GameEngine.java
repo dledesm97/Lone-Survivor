@@ -5,6 +5,8 @@ import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
 import com.lonesurvivor.Views.SplashScreen;
+import org.json.simple.JSONArray;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
@@ -23,9 +25,9 @@ public class GameEngine {
     private JSONParserClass jsonParserClass;
     //private GameLogic logic;
     private BufferedReader in; //TODO: Never used
-    //private JSONParser jsonParser;
-    //private FileReader reader;
-    //private JSONArray file;
+    private JSONParser jsonParser;
+    private FileReader reader;
+    private JSONArray file;
     private List<Location> locations;
     //private List<Location> outsides;
     //private Location location;
@@ -58,12 +60,12 @@ public class GameEngine {
         jsonParserClass = new JSONParserClass();
         //logic = new GameLogic();
         //locations = new ArrayList<>();
-        in = new BufferedReader(new InputStreamReader(System.in));
+        //in = new BufferedReader(new InputStreamReader(System.in));
         locations = jsonParserClass.locationParser();
         //outsides = jsonParserClass.outsideParser();
         //jsonParser = new JSONParser();
-        //reader = new FileReader("src/Java/External_Files/location.json");
-        //file = (JSONArray) jsonParser.parse(reader);
+        reader = new FileReader("src/main/resources/json/PlaneCrash.json");
+        file = (JSONArray) jsonParser.parse(reader);
         //this.player = new Player("John Doe", locations);
         setDayCount(1);
         //randNum = Math.random();
@@ -77,7 +79,7 @@ public class GameEngine {
         -checks whether won or not
      */
     public void startGame() throws IOException, ParseException, java.text.ParseException {
-        Player.getInstance().setPlayerLocation(locations.get(2));
+        //Player.getInstance().setPlayerLocation(locations.get(2));
         playerLocation = Player.getInstance().getPlayerLocation();
 
         //Created a singleton to call setMultiple Text Method from LoneSurvivorBase
@@ -178,10 +180,8 @@ public class GameEngine {
             }
             //TODO update printed text to UI
             //checkWin();TODO ???
-        } catch (IOException e) {
-            //       e.printStackTrace();
-        } catch (ParseException e) {
-            //       e.printStackTrace();
+        } catch (IOException | ParseException e) {
+            System.out.println(e.getMessage());
         }
     }
 
