@@ -37,7 +37,7 @@ public class GameEngine {
     private Location playerLocation;
     private double randNum;
     private boolean hasWon;
-    public static int dayCount;
+    public static int dayCount = 1;
 
     public static GameEngine getInstance(){
         if(engine == null){
@@ -55,21 +55,26 @@ public class GameEngine {
     }
 
     public GameEngine() throws IOException, ParseException {
-        parser = new TextParser();
+
         //processor = new CommandProcessor();
-        jsonParserClass = new JSONParserClass();
+        //jsonParserClass = new JSONParserClass();
         //logic = new GameLogic();
         //locations = new ArrayList<>();
         //in = new BufferedReader(new InputStreamReader(System.in));
-        locations = jsonParserClass.locationParser();
+        //locations = jsonParserClass.locationParser();
         //outsides = jsonParserClass.outsideParser();
         //jsonParser = new JSONParser();
-        reader = new FileReader("src/main/resources/json/PlaneCrash.json");
-        file = (JSONArray) jsonParser.parse(reader);
+        //reader = new FileReader("src/main/resources/json/PlaneCrash.json");
+        //file = (JSONArray) jsonParser.parse(reader);
         //this.player = new Player("John Doe", locations);
-        setDayCount(1);
         //randNum = Math.random();
-        hasWon = false; //better name could be hasWon
+        parser = new TextParser();
+        hasWon = false;
+        locations = JSONParserClass.getInstance().locationParser();
+        Player.getInstance().setPlayerLocation(locations.get(2));
+
+
+//better name could be hasWon
     }
 
     /*NOTE: INITIALIZES GAME && RUNS THE GAME
@@ -79,8 +84,17 @@ public class GameEngine {
         -checks whether won or not
      */
     public void startGame() throws IOException, ParseException, java.text.ParseException {
-        //Player.getInstance().setPlayerLocation(locations.get(2));
-        playerLocation = Player.getInstance().getPlayerLocation();
+
+
+        for (Location aLocation : locations){
+            System.out.println(aLocation);
+        }
+
+//        while (!hasWon) {
+//            playerInterface();
+//            checkWin();
+        }
+        //playerLocation = Player.getInstance().getPlayerLocation();
 
         //Created a singleton to call setMultiple Text Method from LoneSurvivorBase
 //        LoneSurvivorBase.GUI.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
@@ -106,11 +120,8 @@ public class GameEngine {
 //        System.out.println("You have three days to make it back to civilization or survive until rescue. Good luck.");
 //        System.out.println("******************************************************");
 
-//        while (!hasWon) {
-//            playerInterface();
-//            checkWin();
-//        }
-    }
+
+
 
     public void checkWin() {
         if(validateWin(playerLocation, locations)) {
@@ -143,13 +154,21 @@ public class GameEngine {
         -validates that user enter 2 word commands
         -if so then it passes that invokes commandProcessor() method to trigger each input case
      */
-    public void setupInterface() throws IOException, ParseException {
+    public void playerInterface() throws IOException, ParseException {
+
+
+
+//        Player.getInstance().setPlayerLocation(locations.get(2));
+//        playerLocation = Player.getInstance().getPlayerLocation();
+//
+
         /* NOTE: DISPLAY SCREEN
             -currentDay
             -players current location
             -location description
             -displays current location directions
          */
+
 //        System.out.println("\n******************************************************");
 //        System.out.println("It is Day " + dayCount);
 //        System.out.println("You are currently located in " + player.getPlayerLocation().getName().toUpperCase());
@@ -168,6 +187,7 @@ public class GameEngine {
 //        handleInput(input);
 //
     }
+
     public void handleInput(String input){// public method handleInput if you give it input from GUI (copy and paste from above)
 
         try {

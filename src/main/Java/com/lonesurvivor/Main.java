@@ -1,10 +1,7 @@
 package com.lonesurvivor;
 
-
-
 import com.lonesurvivor.Views.MasterGui;
 import org.json.simple.parser.ParseException;
-
 import java.io.IOException;
 
 public class Main {

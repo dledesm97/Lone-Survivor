@@ -20,20 +20,20 @@ public class LocationFrame extends JPanel  implements ActionListener{
     private JMenuBar menuBar;
     private JButton east;
     private static JTextArea textDisplay;
-    private JTextField commandInput;
+    private static JTextField commandInput;
     private JLabel jcomp8;
     private JButton enter;
     private JList InventoryBox;
     private Location currentLocation;
     private JSeparator separator;
     private JLabel imageLabel;
-    private String text;
+    private static String text;
     private JScrollPane jScroll;
     private JTextArea playerStatsDisplay;
     private JSeparator seperatorTwo;
     private JLabel playerStatsLabel;
 
-    public LocationFrame(Location location) {
+    public LocationFrame() {
 
         //construct preComponents
         JMenu fileMenu = new JMenu ("File");
@@ -142,7 +142,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
     }
 
     public void locationMapper(){
-        textDisplayGui(currentLocation.getDescription());
+        textDisplayGui(Player.getInstance().getPlayerLocation().getDescription());
     }
 
 //    public void renderFrame(){
@@ -154,9 +154,8 @@ public class LocationFrame extends JPanel  implements ActionListener{
 //
 //    }
 
-    public void textParser(){
+    public static void textParser(){
         text = commandInput.getText();
-        System.out.println(text);
         game.handleInput(text);
         commandInput.setText("");
     }
