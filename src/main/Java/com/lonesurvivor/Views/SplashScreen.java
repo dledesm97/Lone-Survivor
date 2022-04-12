@@ -23,7 +23,7 @@ public class SplashScreen extends JPanel implements ActionListener {
 
 
         //set props for components
-        ImageIcon imageIcon = new ImageIcon("src/main/resources/LoneSurvivor.png"); // load the image to a imageIcon
+        ImageIcon imageIcon = new ImageIcon("src/main/resources/images/lone_survivor.png"); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it
         Image newImg = image.getScaledInstance(626, 705,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         imageLabel = new JLabel( new ImageIcon(newImg)); //
