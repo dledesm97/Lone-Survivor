@@ -29,7 +29,7 @@ public class GameEngine {
     private List<Location> locations;
     //private List<Location> outsides;
     //private Location location;
-    public Player player;
+    //public Player player;
     private List<String> command;
     private String input;
     private Location playerLocation;
@@ -64,7 +64,7 @@ public class GameEngine {
         //jsonParser = new JSONParser();
         //reader = new FileReader("src/Java/External_Files/location.json");
         //file = (JSONArray) jsonParser.parse(reader);
-        this.player = new Player("John Doe", locations);
+        //this.player = new Player("John Doe", locations);
         setDayCount(1);
         //randNum = Math.random();
         hasWon = false; //better name could be hasWon
@@ -77,8 +77,8 @@ public class GameEngine {
         -checks whether won or not
      */
     public void startGame() throws IOException, ParseException, java.text.ParseException {
-        player.setPlayerLocation(locations.get(2));
-        playerLocation = player.getPlayerLocation();
+        Player.getInstance().setPlayerLocation(locations.get(2));
+        playerLocation = Player.getInstance().getPlayerLocation();
 
         //Created a singleton to call setMultiple Text Method from LoneSurvivorBase
 //        LoneSurvivorBase.GUI.setMultipleText("Welcome to Lone Survivor, a text-based adventure game! ",
@@ -181,25 +181,25 @@ public class GameEngine {
         //move engine
         switch (command.get(0)) {
             case "go":
-                player.moveEngine(command.get(1));
+                Player.getInstance().moveEngine(command.get(1));
                 break;
             case "get":
                 //get engine
-                player.getEngine(command.get(1));
+                Player.getInstance().getEngine(command.get(1));
                 break;
             case "look":
                 //look engine
-                player.lookEngine(command.get(1));
+                Player.getInstance().lookEngine(command.get(1));
                 break;
             case "use":
-                player.useEngine(command.get(1));
+                Player.getInstance().useEngine(command.get(1));
             case "quit":
                 //quit engine
-                player.quitEngine(command.get(1));
+                Player.getInstance().quitEngine(command.get(1));
                 break;
             case "help":
                 //help engine
-                player.helpEngine(command.get(1));
+                Player.getInstance().helpEngine(command.get(1));
                 break;
         }
 
