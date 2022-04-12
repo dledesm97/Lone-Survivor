@@ -111,12 +111,14 @@ public class GameEngine {
     }
 
     public void checkWin() {
-        if (playerLocation.equals(locations.get(8))) {
-            textDisplayGui(playerLocation.getDescription());
-            //System.out.println(playerLocation.getDescription());
-            //System.out.println("Congratulations and thank you for playing.");
-            hasWon = true;
-        }
+        if(validateWin(playerLocation, locations)) {
+
+//            if (playerLocation.equals(locations.get(8))) {
+                textDisplayGui(playerLocation.getDescription());
+                //System.out.println(playerLocation.getDescription());
+                //System.out.println("Congratulations and thank you for playing.");
+                hasWon = true;
+            }
         //TODO: either handle for rescued win on day 3 OR decide that they die
         //FIXME: edit gameinfo.json to reflect these results
         else if (dayCount == 4) {
@@ -125,6 +127,14 @@ public class GameEngine {
             System.exit(0);
         }
     }
+
+    public boolean validateWin(Location currentLocation, List<Location> locationList){
+        if (currentLocation.equals(locationList.get(8))) {
+            return true;
+        }
+        return false;
+    }
+
 
     /* NOTE:
         -prompts user to input a command
