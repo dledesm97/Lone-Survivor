@@ -1,12 +1,15 @@
 package com.lonesurvivor.Views;
 
 import com.lonesurvivor.Models.Location;
+import com.lonesurvivor.Models.Player;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import static com.lonesurvivor.Views.MasterGui.game;
 
 
 public class LocationFrame extends JPanel  implements ActionListener{
@@ -17,17 +20,20 @@ public class LocationFrame extends JPanel  implements ActionListener{
     private JMenuBar menuBar;
     private JButton east;
     private static JTextArea textDisplay;
-    private JTextField commandInput;
+    private static JTextField commandInput;
     private JLabel jcomp8;
     private JButton enter;
     private JList InventoryBox;
     private Location currentLocation;
     private JSeparator separator;
     private JLabel imageLabel;
-    private String text;
+    private static String text;
     private JScrollPane jScroll;
+    private JTextArea playerStatsDisplay;
+    private JSeparator seperatorTwo;
+    private JLabel playerStatsLabel;
 
-    public LocationFrame(Location location) {
+    public LocationFrame() {
 
         //construct preComponents
         JMenu fileMenu = new JMenu ("File");
@@ -36,6 +42,8 @@ public class LocationFrame extends JPanel  implements ActionListener{
         JMenu helpMenu = new JMenu ("Help");
         JMenuItem commandsItem = new JMenuItem ("Commands");
         helpMenu.add (commandsItem);
+        JMenuItem soundItem = new JMenuItem ("Sound");
+        helpMenu.add (soundItem);
         JMenuItem aboutItem = new JMenuItem ("About");
         helpMenu.add (aboutItem);
         String[] InventoryBoxItems = {"Item 1", "Item 2", "Item 3"};
@@ -55,6 +63,9 @@ public class LocationFrame extends JPanel  implements ActionListener{
         InventoryBox = new JList (InventoryBoxItems);
         separator = new JSeparator();
         jScroll = new JScrollPane(textDisplay);
+        playerStatsDisplay = new JTextArea (5, 5);
+        seperatorTwo = new JSeparator ();
+        playerStatsLabel = new JLabel ("Player Stats");
         // formatting Images
         ImageIcon imageIcon = new ImageIcon("src/main/resources/3fazpri7n5t51.jpg"); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it
@@ -69,6 +80,9 @@ public class LocationFrame extends JPanel  implements ActionListener{
         textDisplay.setBorder(new LineBorder(Color.BLACK));
         textDisplay.setLineWrap(true);
         textDisplay.setDisabledTextColor(Color.BLACK);
+        playerStatsDisplay.setEnabled(false);
+        playerStatsDisplay.setBackground(Color.lightGray);
+        playerStatsDisplay.setBorder(new LineBorder(Color.BLACK));
         InventoryBox.setBackground(Color.lightGray);
         InventoryBox.setBorder(new LineBorder(Color.BLACK));
         enter.addActionListener(this);
@@ -82,7 +96,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
 
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (632, 610));
+        setPreferredSize (new Dimension (626, 705));
         setLayout (null);
         setBackground(Color.LIGHT_GRAY);
 
@@ -99,38 +113,50 @@ public class LocationFrame extends JPanel  implements ActionListener{
         add (separator);
         add (imageLabel);
         add (jScroll);
+        add (seperatorTwo);
+        add (playerStatsDisplay);
+        add (playerStatsLabel);
 
         //set component bounds (only needed by Absolute Positioning)
-        north.setBounds (500, 530, 55, 25);
-        south.setBounds (500, 580, 55, 25);
-        west.setBounds (555, 555, 55, 25);
+        north.setBounds (500, 625, 55, 25);
+        south.setBounds (500, 675, 55, 25);
+        west.setBounds (555, 650, 55, 25);
         menuBar.setBounds (0, 0, 1160, 30);
-        east.setBounds (445, 555, 55, 25);
-        textDisplay.setBounds (20, 400, 410, 125);
-        commandInput.setBounds (20, 555, 205, 30);
-        jcomp8.setBounds (25, 535, 100, 25);
-        enter.setBounds (235, 555, 80, 30);
-        InventoryBox.setBounds (445, 400, 165, 125);
-        separator.setBounds(0, 380,1160,25);
-        imageLabel.setBounds(20,50,590,320);
-        jScroll.setBounds(20, 400, 410, 125);
+        east.setBounds (445, 650, 55, 25);
+        jScroll.setBounds(15, 495, 410, 125);
+        commandInput.setBounds (20, 650, 205, 30);
+        jcomp8.setBounds (20, 625, 100, 25);
+        enter.setBounds (245, 650, 80, 30);
+        InventoryBox.setBounds (445, 495, 165, 125);
+        separator.setBounds (0, 470, 1160, 5);
+        playerStatsDisplay.setBounds (15, 50, 595, 55);
+        seperatorTwo.setBounds (0, 115, 1160, 5);
+        playerStatsLabel.setBounds (15, 30, 100, 25);
+        imageLabel.setBounds(15, 130, 595, 320);
 
 
-    }
-
-    public void renderFrame(){
-        JFrame frame = new JFrame("Lone Survivor");
-        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add (new LocationFrame(currentLocation));
-        frame.pack();
-        frame.setVisible (true);
+        //setting up player data
+        setPlayerStatsDisplay();
+        locationMapper();
 
     }
 
-    public void textParser(){
+    public void locationMapper(){
+        textDisplayGui(Player.getInstance().getPlayerLocation().getDescription());
+    }
+
+//    public void renderFrame(){
+//        JFrame frame = new JFrame("Lone Survivor");
+//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+//        frame.getContentPane().add (new LocationFrame(currentLocation));
+//        frame.pack();
+//        frame.setVisible (true);
+//
+//    }
+
+    public static void textParser(){
         text = commandInput.getText();
-        System.out.println(text);
-        //GameEngine.commandProcesser(text)
+        game.handleInput(text);
         commandInput.setText("");
     }
 
@@ -145,6 +171,9 @@ public class LocationFrame extends JPanel  implements ActionListener{
         textDisplay.setText(displayText);
     }
 
+    public void setPlayerStatsDisplay(){
+        playerStatsDisplay.setText(Player.getInstance().getName() + "\n" + Player.getInstance().getHealth());
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
