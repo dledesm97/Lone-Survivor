@@ -1,8 +1,9 @@
-package com.lonesurvivor.Views;
+package com.lonesurvivor.UnusedClasses;
 
 
 import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Models.MusicClass;
+import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.parser.ParseException;
 
 import javax.sound.sampled.*;

@@ -1,5 +1,6 @@
 package com.lonesurvivor.Views;
 
+import com.lonesurvivor.Models.MusicClass;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 
@@ -34,6 +35,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
     private JTextArea playerStatsDisplay;
     private JSeparator seperatorTwo;
     private JLabel playerStatsLabel;
+    private JFrame frame;
 
     public LocationFrame() throws IOException {
 
@@ -95,6 +97,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
         north.addActionListener(this);
         south.addActionListener(this);
         commandInput.addActionListener(this);
+        soundItem.addActionListener(this);
 
 
 
@@ -211,6 +214,17 @@ public class LocationFrame extends JPanel  implements ActionListener{
         playerStatsDisplay.setText(Player.getInstance().getName() + "\n" + Player.getInstance().getHealth());
     }
 
+    private void renderSoundFrame() {
+        MusicClass musicClass = new MusicClass();
+        frame = new JFrame("Sound Controls");
+        frame.setDefaultCloseOperation (JFrame.DISPOSE_ON_CLOSE);
+        frame.getContentPane().add (musicClass);
+        frame.pack();
+        frame.setVisible (true);
+
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -231,9 +245,12 @@ public class LocationFrame extends JPanel  implements ActionListener{
                 case "Enter":
                     textParser();
                     break;
+                case "Sound":
+                    renderSoundFrame();
                 default://Do nothing
         }
         }
+
 
     private static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JSONParserClass.class.getClassLoader();
