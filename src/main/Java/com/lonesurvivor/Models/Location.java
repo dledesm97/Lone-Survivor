@@ -1,7 +1,5 @@
 package com.lonesurvivor.Models;
 
-import com.lonesurvivor.Views.LoneSurvivorBase;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +10,10 @@ public class Location {
     private String name;
     private String description;
     private String image;
-    private List<Item> items;
+    private ArrayList<String> items;
     private Map<String, String> direction;
 
-    public Location(String name, String description, String image ,ArrayList<Item> items, HashMap<String, String> direction) {
+    public Location(String name, String description, String image ,ArrayList<String> items, HashMap<String, String> direction) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -31,7 +29,7 @@ public class Location {
         return description;
     }
 
-    public List<Item> getItems() {
+    public ArrayList<String> getItems() {
         return items;
     }
 

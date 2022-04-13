@@ -2,7 +2,7 @@
   {
     "locationName": "cockpit",
     "locationDescription": "This is the cockpit. Pilots fly the plane from here.",
-    "locationImage" : "images/cockpit.png",
+    "locationImage" : "images/cockpit.jpg",
     "locationItems": ["radio", "compass"],
     "locationDirections": {"north":"","east": "outside plane", "south": "first class", "west": ""}
   },
@@ -25,54 +25,54 @@
     "locationDescription": "This is the service area run by the flight attendants.",
     "locationImage" : "images/service_area.png",
     "locationItems": ["food", "knife"],
-    "locationDirections": {"north": "economy class", "east": "outside plane","south": "", "west": ""}
+    "locationDirections": {"north": "economy class", "east": "","south": "", "west": ""}
   },
   {
     "locationName": "outside plane",
     "locationDescription": "You are outside the plane crash. Dense tropical rainforest surround the area.",
-    "locationImage" : "images/planecrash.png",
+    "locationImage" : "images/planecrash.jpg",
     "locationItems": [],
-    "locationDirections": {"north": "", "east":  "","south": "forest", "west":  "plane"}
+    "locationDirections": {"north": "", "east":  "","south": "forest", "west":  "cockpit"}
   },
   {
-    "locationName": "Forest",
+    "locationName": "forest",
     "locationDescription": "Dense tropical rainforest surround the area. You hear sounds of water nearby.",
-    "locationImage" : "images/forest_greenery.png",
+    "locationImage" : "images/forest_greenery.jpg",
     "locationItems": [],
-    "locationDirections": {"north": "outside plane", "east":  "forest","south": "bridge", "west":  "???"}
+    "locationDirections": {"north": "outside plane", "east":  "forest","south": "bridge", "west":  ""}
   },
   {
     "locationName": "Forest Dead End",
     "locationDescription": "The forest seems too dense to go any further at this point. Might be best to re-trace your steps.",
-    "locationImage" : "images/forest_dead_end.png",
+    "locationImage" : "images/forest_dead_end.jpg",
     "locationItems": [],
     "locationDirections": {"north":"","east":"","south":"","west": "forest"}
   },
   {
-    "locationName": "Bridge",
+    "locationName": "bridge",
     "locationDescription": "An old steel bridge that goes east is wrapped in vegetation appears. Seems safe to cross. Hopefully there is no troll",
-    "locationImage" : "images/bridge.png",
+    "locationImage" : "images/bridge.jpg",
     "locationItems": [],
     "locationDirections": {"north": "forest", "east": "village", "south": "lair","west": ""}
   },
   {
-    "locationName": "Village",
+    "locationName": "village",
     "locationDescription": "You come across a local village and see human faces about. You are relieved. ",
-    "locationImage" : "src/main/resources/images/forest_village.png",
+    "locationImage" : "images/forest_village.jpg",
     "locationItems": [],
-    "locationDirections": {"north": "","east": "TLG Building","south": "","west": "bridge"}
+    "locationDirections": {"north": "","east": "tlg building","south": "","west": "bridge"}
   },
   {
-    "locationName": "TLG Building",
+    "locationName": "tlg building",
     "locationDescription": "You entered the village, but there seems to be one building left..the TLG Building",
-    "locationImage" : "src/main/resources/images/building.png",
+    "locationImage" : "images/building.jpg",
     "locationItems": [],
-    "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
+    "locationDirections": {"north": "","east": "","south": "","west": "tlg building"}
   },
   {
-    "locationName": "Lair",
+    "locationName": "lair",
     "locationDescription": "You hear low growling noises, and you see what looks to be a mutated bear and probably the result of a bad science experiment! ",
-    "locationImage" : "src/main/resources/images/lair.png",
+    "locationImage" : "images/lair.jpg",
     "locationItems": [],
     "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
   }
