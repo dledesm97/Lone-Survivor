@@ -1,18 +1,23 @@
 package com.lonesurvivor.Views;
 
+import com.lonesurvivor.Utils.JSONParserClass;
 import org.json.simple.parser.ParseException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class SplashScreen extends JPanel implements ActionListener {
     private JButton jcomp1;
     private JLabel imageLabel;
 
-    public SplashScreen() {
+    public SplashScreen() throws IOException {
         //construct components
         jcomp1 = new JButton ("Start");
 
@@ -23,7 +28,11 @@ public class SplashScreen extends JPanel implements ActionListener {
 
 
         //set props for components
-        ImageIcon imageIcon = new ImageIcon("src/main/resources/images/lone_survivor.png"); // load the image to a imageIcon
+        InputStream imageFile = getFileFromResourceAsStream("images/lone_survivor.png");
+        Image splashPageFile = ImageIO.read(imageFile);
+
+
+        ImageIcon imageIcon = new ImageIcon(splashPageFile); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it
         Image newImg = image.getScaledInstance(626, 705,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         imageLabel = new JLabel( new ImageIcon(newImg)); //
@@ -62,5 +71,14 @@ public class SplashScreen extends JPanel implements ActionListener {
                 }
             }
         }
+    private static InputStream getFileFromResourceAsStream(String fileName) {
+        ClassLoader classLoader = JSONParserClass.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+    }
     }
 

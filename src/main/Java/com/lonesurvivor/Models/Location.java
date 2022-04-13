@@ -39,6 +39,10 @@ public class Location {
         return direction;
     }
 
+    public String getImage() {
+        return image;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
