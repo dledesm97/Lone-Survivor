@@ -1,4 +1,4 @@
-package com.lonesurvivor.Views;
+package com.lonesurvivor.UnusedClasses;
 
 import javax.swing.*;
 import java.awt.*;
