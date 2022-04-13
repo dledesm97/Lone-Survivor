@@ -9,6 +9,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +93,7 @@ public class JSONParserClass {
             JSONObject obj = (JSONObject) o;
 
             // creating location object by passing it's respective paramaters with their data types.
-            location = new Location((String) obj.get("locationName"),(String) obj.get("locationDescription"),(String) obj.get("locationImage") ,(JSONArray)obj.get("locationItems"),(JSONObject) obj.get("locationDirections"));
+            location = new Location((String) obj.get("locationName"),(String) obj.get("locationDescription"),(String) obj.get("locationImage") ,(JSONArray) obj.get("locationItems"),(JSONObject) obj.get("locationDirections"));
 
             //adding the newly created location object into an arraylist
             locations.add(location);

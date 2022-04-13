@@ -1,6 +1,5 @@
 package com.lonesurvivor.Views;
 
-import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 
@@ -28,7 +27,6 @@ public class LocationFrame extends JPanel  implements ActionListener{
     private JLabel jcomp8;
     private JButton enter;
     private JList InventoryBox;
-    private Location currentLocation;
     private JSeparator separator;
     private JLabel imageLabel;
     private static String text;
@@ -50,7 +48,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
         helpMenu.add (soundItem);
         JMenuItem aboutItem = new JMenuItem ("About");
         helpMenu.add (aboutItem);
-        String[] InventoryBoxItems = {"Item 1", "Item 2", "Item 3"};
+        //String[] InventoryBoxItems = {"Item 1", "Item 2", "Item 3"};
 
         //construct components
         north = new JButton ("N");
@@ -64,19 +62,19 @@ public class LocationFrame extends JPanel  implements ActionListener{
         commandInput = new JTextField (5);
         jcomp8 = new JLabel ("Enter Commands");
         enter = new JButton ("Enter");
-        InventoryBox = new JList (InventoryBoxItems);
         separator = new JSeparator();
         jScroll = new JScrollPane(textDisplay);
         playerStatsDisplay = new JTextArea (5, 5);
         seperatorTwo = new JSeparator ();
         playerStatsLabel = new JLabel ("Player Stats");
         // formatting Images
-        InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getPlayerLocation().getImage());
-        Image locationImageFile = ImageIO.read(imageFile);
-        ImageIcon imageIcon = new ImageIcon(locationImageFile); // load the image to a imageIcon
-        Image image = imageIcon.getImage(); // transform it
-        Image newImg = image.getScaledInstance(590, 320,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        imageLabel = new JLabel( new ImageIcon(newImg));
+//        InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getPlayerLocation().getImage());
+//        System.out.println(Player.getInstance().getPlayerLocation().toString());
+//        Image locationImageFile = ImageIO.read(imageFile);
+//        ImageIcon imageIcon = new ImageIcon(locationImageFile); // load the image to a imageIcon
+//        Image image = imageIcon.getImage(); // transform it
+//        Image newImg = image.getScaledInstance(590, 320,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        //imageLabel = new JLabel();
 
 
         //set components properties
@@ -89,8 +87,8 @@ public class LocationFrame extends JPanel  implements ActionListener{
         playerStatsDisplay.setEnabled(false);
         playerStatsDisplay.setBackground(Color.lightGray);
         playerStatsDisplay.setBorder(new LineBorder(Color.BLACK));
-        InventoryBox.setBackground(Color.lightGray);
-        InventoryBox.setBorder(new LineBorder(Color.BLACK));
+//        InventoryBox.setBackground(Color.lightGray);
+//        InventoryBox.setBorder(new LineBorder(Color.BLACK));
         enter.addActionListener(this);
         west.addActionListener(this);
         east.addActionListener(this);
@@ -115,9 +113,9 @@ public class LocationFrame extends JPanel  implements ActionListener{
         add (commandInput);
         add (jcomp8);
         add (enter);
-        add (InventoryBox);
+       // add (InventoryBox);
         add (separator);
-        add (imageLabel);
+       // add (imageLabel);
         add (jScroll);
         add (seperatorTwo);
         add (playerStatsDisplay);
@@ -133,32 +131,69 @@ public class LocationFrame extends JPanel  implements ActionListener{
         commandInput.setBounds (20, 650, 205, 30);
         jcomp8.setBounds (20, 625, 100, 25);
         enter.setBounds (245, 650, 80, 30);
-        InventoryBox.setBounds (445, 495, 165, 125);
+//        InventoryBox.setBounds (445, 495, 165, 125);
         separator.setBounds (0, 470, 1160, 5);
         playerStatsDisplay.setBounds (15, 50, 595, 55);
         seperatorTwo.setBounds (0, 115, 1160, 5);
         playerStatsLabel.setBounds (15, 30, 100, 25);
-        imageLabel.setBounds(15, 130, 595, 320);
+//        imageLabel.setBounds(15, 130, 595, 320);
 
 
         //setting up player data
+        setImageLabel();
+        setInventoryBox();
         setPlayerStatsDisplay();
         locationMapper();
 
     }
 
+    public void setImageLabel() throws IOException {
+        if(imageLabel == null) {
+
+            InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getPlayerLocation().getImage());
+            System.out.println(Player.getInstance().getPlayerLocation().toString());
+            Image locationImageFile = ImageIO.read(imageFile);
+            ImageIcon imageIcon = new ImageIcon(locationImageFile); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it
+            Image newImg = image.getScaledInstance(590, 320, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            imageLabel = new JLabel(new ImageIcon(newImg));
+            add(imageLabel);
+            imageLabel.setBounds(15, 130, 595, 320);
+        }
+        else {
+            remove(imageLabel);
+            InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getPlayerLocation().getImage());
+            System.out.println(Player.getInstance().getPlayerLocation().toString());
+            Image locationImageFile = ImageIO.read(imageFile);
+            ImageIcon imageIcon = new ImageIcon(locationImageFile); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it
+            Image newImg = image.getScaledInstance(590, 320, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            imageLabel = new JLabel(new ImageIcon(newImg));
+            add(imageLabel);
+            imageLabel.setBounds(15, 130, 595, 320);
+            setPlayerStatsDisplay();
+            locationMapper();
+        }
+        revalidate();
+        repaint();
+    }
+
+    public void setInventoryBox(){
+        if (InventoryBox != null) {
+            remove(InventoryBox);
+        }
+        InventoryBox = new JList(Player.getInstance().getItems().toArray());
+        InventoryBox.setBackground(Color.lightGray);
+        InventoryBox.setBorder(new LineBorder(Color.BLACK));
+        InventoryBox.setBounds(445, 495, 165, 125);
+        add(InventoryBox);
+        revalidate();
+        repaint();
+    }
     public void locationMapper(){
         textDisplayGui(Player.getInstance().getPlayerLocation().getDescription());
     }
 
-//    public void renderFrame(){
-//        JFrame frame = new JFrame("Lone Survivor");
-//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-//        frame.getContentPane().add (new LocationFrame(currentLocation));
-//        frame.pack();
-//        frame.setVisible (true);
-//
-//    }
 
     public static void textParser(){
         text = commandInput.getText();
@@ -166,11 +201,6 @@ public class LocationFrame extends JPanel  implements ActionListener{
         commandInput.setText("");
     }
 
-    public void locationParser(String direction){
-        //player.move(direction)
-        //setCurrentLocation(player.getPlayerLocation);
-
-    }
 
     public static void textDisplayGui(String displayText){
         textDisplay.setText("");
@@ -187,17 +217,16 @@ public class LocationFrame extends JPanel  implements ActionListener{
            String command = e.getActionCommand();
             switch(command){
                 case "N":
-                    System.out.println("testN");
-                    updateUI();
+                    game.handleInput("go north");
                     break;
                 case "S":
-                    System.out.println("testS");
+                    game.handleInput("go south");
                     break;
                 case "E":
-                    System.out.println("testE");
+                    game.handleInput("go east");
                     break;
                 case "W":
-                    System.out.println("testW");
+                    game.handleInput("go west");
                     break;
                 case "Enter":
                     textParser();
@@ -205,10 +234,6 @@ public class LocationFrame extends JPanel  implements ActionListener{
                 default://Do nothing
         }
         }
-
-    public void setCurrentLocation(Location currentLocation) {
-        this.currentLocation = currentLocation;
-    }
 
     private static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JSONParserClass.class.getClassLoader();

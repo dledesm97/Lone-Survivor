@@ -5,13 +5,11 @@ import com.lonesurvivor.Utils.DisplayScreen;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.LoneSurvivorBase;
+import com.lonesurvivor.Views.MasterGui;
 import org.json.simple.parser.ParseException;
 
 import java.io.IOException;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 public class Player {
@@ -21,11 +19,13 @@ public class Player {
 
     // Fields
     private String name;
-    private Set<String> inventory = new LinkedHashSet<>();
+   //private Set<String> inventory = new LinkedHashSet<>();
+    private ArrayList<String> inventory = new ArrayList<>();
     private Location playerLocation;
     private List<Location> locations;
     private JSONParserClass jsonParserClass = new JSONParserClass();
     private int health = 50;
+    private int actionTracker = 0;
 
     public static Player getInstance(){
         if(player == null){
@@ -42,109 +42,53 @@ public class Player {
     public Player() throws IOException, ParseException {
     }
 
-    public Player(String name, List<Location> locations) throws IOException, ParseException {
-        this.name = name;
-        this.locations = locations;
-
-    // instantiate when class is instantiated
-    // inventory = new LinkedHashSet<>();
-    }
-
     // Business Methods
 
-    public void moveEngine(String noun){
+    public void moveEngine(String noun) throws IOException {
+        for (Map.Entry<String, String> set : playerLocation.getDirection().entrySet()) {
+            if (set.getKey().equalsIgnoreCase(noun)){
+                for(Location aLocation : locations){
+                    if (set.getValue().equals(aLocation.getName()))
+                    {
+                        setPlayerLocation(aLocation);
+                        actionTracker++;
+                        MasterGui.refreshFrames();
 
-        Map<String, String> playerDirection = playerLocation.getDirection();
-        String choice = playerDirection.get(noun);
-        double randNum = Math.random();
-
-        try {
-            for (Location location : locations) {
-                if (choice.equals("???")) {
-                    //randNum = Math.random();
-                    if (randNum < 0.33) {
-                        //choice = "mysterious animal"
-                        //choice = "forest dead end"
-                        setPlayerLocation(locations.get(9));
-                    } else if (randNum >= 0.33 && randNum <= 0.66) {
-                        setPlayerLocation(locations.get(10));
-                        //dayCount++;
-                    } else {
-                        setPlayerLocation(locations.get(6));
                     }
-                } else if (choice.equals("cross bridge") && noun.equals("east")) {
-                    setPlayerLocation(locations.get(7));
-                } else if (choice.equals("cross bridge") && noun.equals("west")) {
-                    setPlayerLocation(locations.get(6));
-                } else if (choice.equals("investigate sound")) {
-                    //randNum = Math.random();
-                    if (randNum < 0.5) {
-                        setPlayerLocation(locations.get(8));
-                    } else {
-                        setPlayerLocation(locations.get(9));
-                        //dayCount++;
-                    }
-                    //player.setPlayerLocation(locations.get(8));
-
-                }
-                if (choice.equals(location.getName())) {
-                    setPlayerLocation(location);
                 }
             }
-            playerLocation = getPlayerLocation();
-            if (playerLocation.getName().equals("lair - mysterious animal") || playerLocation.getName().equals("forest dead end")) {
-                GameEngine.dayCount++;
-            }
         }
-        catch (NullPointerException e) {
-           // LoneSurvivorBase.GUI.setMultipleText("Invalid command!");
-            LocationFrame.textDisplayGui("Invalid command!");
-        }
-
-        /*playerLocation = player.getPlayerLocation();
-        if (playerLocation.getName().equals("lair - mysterious animal") || playerLocation.getName().equals("forest dead end")) {
-            dayCount++;
-        }*/
     }
 
-    public void getEngine(String noun) throws IOException, ParseException {
-        //storing the items available in that location in a list
-        List<Item> playerItem = playerLocation.getItems();
+    public void getEngine(String noun) throws IOException {
 
-        if (noun.equals("inventory")) {
-           // LoneSurvivorBase.GUI.setMultipleText(getItems().toString());
-            LocationFrame.textDisplayGui(getItems().toString());
+        for (String aItem : playerLocation.getItems()){
+            if (aItem.equalsIgnoreCase(noun)){
+                addItems(aItem);
+                getPlayerLocation().getItems().remove(aItem);
+                LocationFrame.textDisplayGui("You picked up a " + aItem);
+                MasterGui.refreshInventoryBox();
+            }
         }
 
-        else if (playerItem.contains(noun)) {
-            addItems(noun);
-            playerItem.remove(noun);
-            //LoneSurvivorBase.GUI.setMultipleText(noun + " was removed from " + playerLocation.getName());
-            LocationFrame.textDisplayGui(noun + " was removed from " + playerLocation.getName());
-        }
-        else {
-           // LoneSurvivorBase.GUI.setMultipleText("There is no " + noun);
-            LocationFrame.textDisplayGui("There is no " + noun);
-        }
-//            if (playerLocation.getItems().contains(noun)) {
-//                playerLocation.getItems().remove(noun);
-//                System.out.println(noun + " was removed from " + playerLocation.getName());
-//            }
-//            else{
-//                System.out.println("There is no" + noun);
-//            }
-
-        //need to remove items from location after picking it up
-//            for (Location location : locations) {
-//                if (location.getItems().contains(noun)) {
-//                    location.getItems().remove(noun);
-//                    System.out.println(noun + " was removed from " + location.getName());
-//                }
-//            }
-//        else {
-//            System.out.println("There is no " + noun);
+//        //storing the items available in that location in a list
+//        List<Item> playerItem = playerLocation.getItems();
+//
+//        if (noun.equals("inventory")) {
+//           // LoneSurvivorBase.GUI.setMultipleText(getItems().toString());
+//            LocationFrame.textDisplayGui(getItems().toString());
 //        }
-
+//
+//        else if (playerItem.contains(noun)) {
+//            addItems(noun);
+//            playerItem.remove(noun);
+//            //LoneSurvivorBase.GUI.setMultipleText(noun + " was removed from " + playerLocation.getName());
+//            LocationFrame.textDisplayGui(noun + " was removed from " + playerLocation.getName());
+//        }
+//        else {
+//           // LoneSurvivorBase.GUI.setMultipleText("There is no " + noun);
+//            LocationFrame.textDisplayGui("There is no " + noun);
+//        }
     }
 
     public void lookEngine(String noun) throws IOException, ParseException {
@@ -188,7 +132,7 @@ public class Player {
 
         //Creating an Item object using the name of the item
         Item item = new Item(noun);
-        item.useItem();
+        //item.useItem();
 
     }
 
@@ -222,21 +166,18 @@ public class Player {
     }
 
 
-
-    public void addItems(String item) {
-        inventory.add(item);
-        LoneSurvivorBase.GUI.setMultipleText("Player has added " + item + " to their inventory. ");
-    }
-
     // Accessor Methods
 
     public String getName() {
         return name;
     }
 
-    public Set<String> getItems() {
-
+    public ArrayList<String> getItems() {
         return inventory;
+    }
+
+    public void addItems(String aItem) {
+        inventory.add(aItem);
     }
 
     public void setPlayerLocation(Location location) {
@@ -255,7 +196,19 @@ public class Player {
         this.health = health;
     }
 
-    //    // empty method
-//    public void performAction() {}
+    public List<Location> getLocations() {
+        return locations;
+    }
 
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public int getActionTracker() {
+        return actionTracker;
+    }
+
+    public void setActionTracker(int actionTracker) {
+        this.actionTracker = actionTracker;
+    }
 }

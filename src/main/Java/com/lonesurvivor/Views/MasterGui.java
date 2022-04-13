@@ -18,6 +18,7 @@ import java.io.IOException;
 public class MasterGui implements ActionListener {
 
     static GameEngine game = GameEngine.getInstance();
+
     private static SplashScreen splashScreen;
     private static MusicClass musicClass;
 
@@ -62,8 +63,16 @@ public class MasterGui implements ActionListener {
         frame.getContentPane().removeAll();
         frame.getContentPane().add(locationFrame);
         frame.revalidate();
+        frame.repaint();
 
+    }
 
+    public static void refreshFrames() throws IOException {
+     locationFrame.setImageLabel();
+    }
+
+    public static void refreshInventoryBox() throws IOException {
+        locationFrame.setInventoryBox();
     }
 
 

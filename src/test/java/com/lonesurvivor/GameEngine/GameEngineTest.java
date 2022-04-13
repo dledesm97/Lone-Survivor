@@ -19,17 +19,17 @@ public class GameEngineTest {
     public GameEngineTest() {
     }
 
-    @Test
-    public void userWins() {
-        locations = parser.locationParser();
-        boolean winner = gameEngine.validateWin(locations.get(8),locations);
-        assertTrue(winner);
-    }
-
-    @Test
-    public void userContinuesPlaying(){
-        locations = parser.locationParser();
-        boolean winner = gameEngine.validateWin(locations.get(0),locations);
-        assertFalse(winner);
-    }
+//    @Test
+//    public void userWins() {
+//        locations = parser.locationParser();
+//        boolean winner = gameEngine.validateWin(locations.get(8),locations);
+//        assertTrue(winner);
+//    }
+//
+//    @Test
+//    public void userContinuesPlaying(){
+//        locations = parser.locationParser();
+//        boolean winner = gameEngine.validateWin(locations.get(0),locations);
+//        assertFalse(winner);
+//    }
 }
