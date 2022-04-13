@@ -14,10 +14,26 @@ import java.io.IOException;
 public class MasterGui implements ActionListener {
 
     static GameEngine game = GameEngine.getInstance();
-//    private static Player player = Player.getInstance();
-//    private static JSONParserClass jsonParserClass = JSONParserClass.getInstance();
-    private static SplashScreen splashScreen = new SplashScreen();
-    private static LocationFrame locationFrame = new LocationFrame();
+    private static SplashScreen splashScreen;
+
+    static {
+        try {
+            splashScreen = new SplashScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static LocationFrame locationFrame;
+
+    static {
+        try {
+            locationFrame = new LocationFrame();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static JFrame frame;
 
     public MasterGui() throws IOException, ParseException, java.text.ParseException {

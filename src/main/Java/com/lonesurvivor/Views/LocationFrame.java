@@ -2,12 +2,16 @@ package com.lonesurvivor.Views;
 
 import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.Player;
+import com.lonesurvivor.Utils.JSONParserClass;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.lonesurvivor.Views.MasterGui.game;
 
@@ -33,7 +37,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
     private JSeparator seperatorTwo;
     private JLabel playerStatsLabel;
 
-    public LocationFrame() {
+    public LocationFrame() throws IOException {
 
         //construct preComponents
         JMenu fileMenu = new JMenu ("File");
@@ -67,7 +71,9 @@ public class LocationFrame extends JPanel  implements ActionListener{
         seperatorTwo = new JSeparator ();
         playerStatsLabel = new JLabel ("Player Stats");
         // formatting Images
-        ImageIcon imageIcon = new ImageIcon("src/main/resources/3fazpri7n5t51.jpg"); // load the image to a imageIcon
+        InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getPlayerLocation().getImage());
+        Image locationImageFile = ImageIO.read(imageFile);
+        ImageIcon imageIcon = new ImageIcon(locationImageFile); // load the image to a imageIcon
         Image image = imageIcon.getImage(); // transform it
         Image newImg = image.getScaledInstance(590, 320,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         imageLabel = new JLabel( new ImageIcon(newImg));
@@ -204,5 +210,14 @@ public class LocationFrame extends JPanel  implements ActionListener{
         this.currentLocation = currentLocation;
     }
 
+    private static InputStream getFileFromResourceAsStream(String fileName) {
+        ClassLoader classLoader = JSONParserClass.class.getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        if (inputStream == null) {
+            throw new IllegalArgumentException("file not found! " + fileName);
+        } else {
+            return inputStream;
+        }
+    }
 
 }
