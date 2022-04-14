@@ -1,10 +1,8 @@
 package com.lonesurvivor.Models;
 
-import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Utils.DisplayScreen;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Views.LocationFrame;
-import com.lonesurvivor.Views.LoneSurvivorBase;
 import com.lonesurvivor.Views.MasterGui;
 import org.json.simple.parser.ParseException;
 
@@ -23,7 +21,7 @@ public class Player {
     private ArrayList<String> inventory = new ArrayList<>();
     private Location playerLocation;
     private List<Location> locations;
-    private JSONParserClass jsonParserClass = new JSONParserClass();
+//    private JSONParserClass jsonParserClass = getInstance();
     private int health = 50;
     private int actionTracker = 0;
 
@@ -105,6 +103,12 @@ public class Player {
     public void helpEngine(String noun) throws IOException {
         if (noun.equals("commands")) {
             LocationFrame.textDisplayGui(jsonParserClass.commandParser().get(2).toString());
+            //reader = new FileReader("src/Java/External_Files/CommandList.json");
+            //JSONArray fileInfo = (JSONArray) jsonParser.parse(reader);
+            //JSONObject gameInfo = (JSONObject) fileInfo.get(2);
+            //System.out.println(gameInfo);
+            // LoneSurvivorBase.GUI.setMultipleText(jsonParserClass.commandParser().get(2).toString());// Stringify the jpclass
+            LocationFrame.textDisplayGui(JSONParserClass.getInstance().commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
             LocationFrame.textDisplayGui(DisplayScreen.showScreen(GAME_INFO_PATH));

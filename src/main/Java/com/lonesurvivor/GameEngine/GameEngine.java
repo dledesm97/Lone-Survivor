@@ -7,22 +7,25 @@ import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
 import org.json.simple.parser.ParseException;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
-
 import static com.lonesurvivor.Views.LocationFrame.textDisplayGui;
 
 public class GameEngine {
 
+    //singleton
     private static GameEngine engine = null;
-    private static final String LOCATION_PATH="json/PlaneCrash.json";
 
+    //constants
+    private static final String LOCATION_PATH = "json/PlaneCrash.json";
+
+    //field variables
     private TextParser parser;
     private List<Location> locations;
     private NPC npc;
     private List<String> command;
     public static int dayCount = 1;
-    private boolean hasWon;
+    private boolean hasWon = false;
 
     public static GameEngine getInstance(){
         if(engine == null){
@@ -39,7 +42,7 @@ public class GameEngine {
     public GameEngine() throws IOException, ParseException {
         // initializes the object and sets the locations list and default player location
         parser = new TextParser();
-        locations = JSONParserClass.getInstance().locationParser(LOCATION_PATH);
+        locations = JSONParserClass.getInstance().locationGenerator(LOCATION_PATH);
         Player.getInstance().setLocations(locations);
         Player.getInstance().setPlayerLocation(locations.get(2));
 
@@ -47,7 +50,7 @@ public class GameEngine {
 
     public void startGame() throws IOException, ParseException, java.text.ParseException {
 
-        while (!hasWon) {
+        while (hasWon) {
             checkWin();
             dayTracker();
         }
