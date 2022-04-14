@@ -102,12 +102,6 @@ public class Player {
 
     public void helpEngine(String noun) throws IOException {
         if (noun.equals("commands")) {
-            LocationFrame.textDisplayGui(jsonParserClass.commandParser().get(2).toString());
-            //reader = new FileReader("src/Java/External_Files/CommandList.json");
-            //JSONArray fileInfo = (JSONArray) jsonParser.parse(reader);
-            //JSONObject gameInfo = (JSONObject) fileInfo.get(2);
-            //System.out.println(gameInfo);
-            // LoneSurvivorBase.GUI.setMultipleText(jsonParserClass.commandParser().get(2).toString());// Stringify the jpclass
             LocationFrame.textDisplayGui(JSONParserClass.getInstance().commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
