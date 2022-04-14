@@ -18,4 +18,12 @@ public class NPC {
     public Double getPower() {
         return power;
     }
+
+    @Override
+    public String toString() {
+        return "NPC{" +
+                "name='" + name + '\'' +
+                ", power=" + power +
+                '}';
+    }
 }

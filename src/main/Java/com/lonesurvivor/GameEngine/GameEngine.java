@@ -155,7 +155,7 @@ public class GameEngine {
                 break;
             case "attack":
                 //conflict engine
-                Player.getInstance().attackEngine(command.get(0));
+                Player.getInstance().attackEngine(command.get(1));
         }
     }
     public int getDayCount() {

@@ -1,10 +1,10 @@
 [
   {
     "locationName": "cockpit",
-    "locationDescription": "This is the cockpit. Pilots fly the plane from here.",
+    "locationDescription": "This is the cockpit. The PILOT flies the plane from here, maybe he survived....",
     "locationImage" : "images/cockpit.jpg",
     "locationItems": ["radio", "compass"],
-    "locationNPC": {"name": "crazy man","power":6.0},
+    "locationNPC": {"name": "pilot","power":6.0},
     "locationDirections": {"north":"","east": "outside plane", "south": "first class", "west": ""}
   },
   {

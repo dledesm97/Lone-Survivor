@@ -142,26 +142,14 @@ public class Player {
             System.exit(0);
         }
     }
+    
     public void attackEngine(String noun){
-        int playerAttackStat = (int) ( Math.random() * 40);
-        int enemyAttackStat = (int) ( Math.random() * 50);
-
-        while(Objects.equals(noun, "attack")){//while "attack is true ++
-            playerAttackStat++;
-            enemyAttackStat++;
-            if(playerAttackStat > enemyAttackStat && player.health > 30){//if player stat is greater and player health is > player wins
-                //placeholder logic - can add character traits in the condition
-                System.out.println(" You Win Lone Survivor your attack score is " + playerAttackStat);
-                break;
-            }else {//else enemy stat is greater , enemy wins - can add character traits in the logic
-                //placeholder logic
-                System.out.println(" The enemy has defeated you with a level " + enemyAttackStat + " attack score");
-                break;
+            if (playerLocation.getNpc().getName().equalsIgnoreCase(noun)){
+                LocationFrame.textDisplayGui("You attacked " + playerLocation.getNpc().getName());
             }
-        }
-
-
-
+            else{
+                System.out.println("Can't attack that");
+            }
     }
 
     public void helpEngine(String noun) throws IOException, ParseException {
