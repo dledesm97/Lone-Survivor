@@ -17,9 +17,9 @@ public class Player {
     //CONSTANTS
     private static final String GAME_INFO_PATH = "gameInfo.txt";
 
-    // Fields
+    // Fields ***************************************
+
     private String name;
-   //private Set<String> inventory = new LinkedHashSet<>();
     private ArrayList<String> inventory = new ArrayList<>();
     private Location playerLocation;
     private List<Location> locations;
@@ -40,9 +40,10 @@ public class Player {
     }
 
     public Player() throws IOException, ParseException {
+
     }
 
-    // Business Methods
+    // Business Methods ***********************************
 
     public void moveEngine(String noun) throws IOException {
         for (Map.Entry<String, String> set : playerLocation.getDirection().entrySet()) {
@@ -69,75 +70,24 @@ public class Player {
                 MasterGui.refreshInventoryBox();
             }
         }
-
-//        //storing the items available in that location in a list
-//        List<Item> playerItem = playerLocation.getItems();
-//
-//        if (noun.equals("inventory")) {
-//           // LoneSurvivorBase.GUI.setMultipleText(getItems().toString());
-//            LocationFrame.textDisplayGui(getItems().toString());
-//        }
-//
-//        else if (playerItem.contains(noun)) {
-//            addItems(noun);
-//            playerItem.remove(noun);
-//            //LoneSurvivorBase.GUI.setMultipleText(noun + " was removed from " + playerLocation.getName());
-//            LocationFrame.textDisplayGui(noun + " was removed from " + playerLocation.getName());
-//        }
-//        else {
-//           // LoneSurvivorBase.GUI.setMultipleText("There is no " + noun);
-//            LocationFrame.textDisplayGui("There is no " + noun);
-//        }
     }
 
-    public void lookEngine(String noun) throws IOException, ParseException {
+    public void lookEngine(String noun) {
         //get location from JSON file
-        //based on players location, will determine where player can go, what they can do
+        //based on player's location, will determine where player can go, what they can do
         //You look around and see to the north: first class, south: service area
-        //you see the following items: flashlight, life jacket
+        //you see the following items: flashlight, life jacket, etc.
 
-
-//        LoneSurvivorBase.GUI.setMultipleText("You look around and see: ");
-//        LoneSurvivorBase.GUI.setMultipleText(playerLocation.getDescription());
-//        LoneSurvivorBase.GUI.setMultipleText("Items: " + playerLocation.getItems());
-//        LoneSurvivorBase.GUI.setMultipleText("Directions: " + playerLocation.getDirection());
         LocationFrame.textDisplayGui("You look around and see: \n" + playerLocation.getDescription() +
                                                "\nItems: " + playerLocation.getItems() + "\nDirections: " + playerLocation.getDirection());
-
-        /*for (Location location : locations) {
-            //JSONObject location = (JSONObject) fileArray.get(0);
-            //display location name, location description, then directions, then items that can be picked up
-
-            //String location = (String) locationName.get("locationName");
-            //System.out.println(obj);
-            //JSONObject location = (JSONObject) obj;
-
-            //JSONArray locItems = (JSONArray) location.get("locationItems");
-            //JSONArray locDirections = (JSONArray) location.get("locationDirections");
-
-            System.out.println(location.getName());
-            System.out.println(location.getDescription());
-            System.out.println(location.getItems());
-            System.out.println(location.getDirection());
-        }*/
-
-
     }
+
     public void useEngine(String noun){
-//        System.out.println("using" + noun);
-//        if(getItems().contains(noun)){
-//            System.out.println("Using " + noun);
-//        }
-
-        //Creating an Item object using the name of the item
         Item item = new Item(noun);
-        //item.useItem();
-
     }
 
     public void quitEngine(String noun){
         if (noun.equals("game")) {
-           // LoneSurvivorBase.GUI.setMultipleText("Quitting now...");
             LocationFrame.textDisplayGui("Quitting now...");
             System.exit(0);
         }
@@ -148,33 +98,20 @@ public class Player {
                 LocationFrame.textDisplayGui("You attacked " + playerLocation.getNpc().getName());
             }
             else{
-                System.out.println("Can't attack that");
+                LocationFrame.textDisplayGui("Can't attack that");
             }
     }
 
-    public void helpEngine(String noun) throws IOException, ParseException {
+    public void helpEngine(String noun) throws IOException {
         if (noun.equals("commands")) {
-            //reader = new FileReader("src/Java/External_Files/CommandList.json");
-            //JSONArray fileInfo = (JSONArray) jsonParser.parse(reader);
-            //JSONObject gameInfo = (JSONObject) fileInfo.get(2);
-            //System.out.println(gameInfo);
-            // LoneSurvivorBase.GUI.setMultipleText(jsonParserClass.commandParser().get(2).toString());// Stringify the jpclass
             LocationFrame.textDisplayGui(jsonParserClass.commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
-            //reader = new FileReader("src/Java/External_Files/GameInfo.json");
-            //JSONObject fileInfo = (JSONObject) jsonParser.parse(reader);
-            //String gameInfo = (String) fileInfo.get("gameInfo");
-            //System.out.println(gameInfo);
-            
-            //LoneSurvivorBase.GUI.setMultipleText(DisplayScreen.showScreen(GAME_INFO_PATH));
             LocationFrame.textDisplayGui(DisplayScreen.showScreen(GAME_INFO_PATH));
-//            DisplayScreen.showScreen(GAME_INFO_PATH);
         }
     }
 
-
-    // Accessor Methods
+    // Accessor Methods **********************
 
     public String getName() {
         return name;

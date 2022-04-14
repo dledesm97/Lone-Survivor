@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 public class SplashScreen extends JPanel implements ActionListener {
+
     private JButton jcomp1;
     private JLabel imageLabel;
 

@@ -31,7 +31,7 @@ public class MusicClass extends JPanel implements ActionListener{
         add(audioOn);
         audioOn.setVisible(true);
     }
-    public  void audioOffButton(){
+    public void audioOffButton(){
         audioOff = new JButton("audioOff");
         audioOff.setFont(new Font("Arial", Font.PLAIN, 15));
         audioOff.setSize(80, 30);
@@ -43,11 +43,40 @@ public class MusicClass extends JPanel implements ActionListener{
 
     }
 
+    public static void soundFx(String verb){
+        AudioInputStream audioStream = null;
+        switch (verb) {
+            case"get":
+                File getFx = new File("src/main/resources/soundFX/item-equip-6904.wav");
+                try {
+                    audioStream = AudioSystem.getAudioInputStream(getFx);
+                    clip = AudioSystem.getClip();
+                    clip.open(audioStream);
+                    clip.start();
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                    ex.printStackTrace();
+                }
+            case"go":
+                File goFx = new File("src/main/resources/soundFX/clean-fast-swooshaiff-14784.wav");
+                try {
+                    audioStream = AudioSystem.getAudioInputStream(goFx);
+                    clip = AudioSystem.getClip();
+                    clip.open(audioStream);
+                    clip.start();
+                } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                    ex.printStackTrace();
+                }
+            default:
+                //
+        }
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource()== audioOn) {
-            File song = new File("src/main/resources/Get Up OffaThat Thing.wav");
+            File song = new File("src/main/resources/soundFX/ambient-01_junglehillswav-14614.wav");
             AudioInputStream audioStream = null;
             try {
                 audioStream = AudioSystem.getAudioInputStream(song);

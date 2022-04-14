@@ -1,18 +1,16 @@
 package com.lonesurvivor.GameEngine;
 
-import com.lonesurvivor.Models.Item;
 import com.lonesurvivor.Models.Location;
+import com.lonesurvivor.Models.MusicClass;
 import com.lonesurvivor.Models.NPC;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
 import org.json.simple.parser.ParseException;
-import java.io.*;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 import static com.lonesurvivor.Views.LocationFrame.textDisplayGui;
-
 
 public class GameEngine {
 
@@ -45,15 +43,7 @@ public class GameEngine {
         Player.getInstance().setLocations(locations);
         Player.getInstance().setPlayerLocation(locations.get(2));
 
-
     }
-
-    /*NOTE: INITIALIZES GAME && RUNS THE GAME
-        -sets default location of player
-        -prints welcome message hardcode
-        -while user has not won take player input using the playerInterface() method
-        -checks whether won or not
-     */
 
     public void startGame() throws IOException, ParseException, java.text.ParseException {
 
@@ -67,13 +57,11 @@ public class GameEngine {
     public void dayTracker(){
 
     //for every 10 action points, a day pass and it get reset.
-        if (Player.getInstance().getActionTracker() == 10){
+        if (Player.getInstance().getActionTracker() > 10){
             dayCount++;
             Player.getInstance().setActionTracker(0);
         }
     }
-
-
 
     public void checkWin() {
         if(Player.getInstance().getPlayerLocation() == locations.get(8)) {
@@ -88,22 +76,6 @@ public class GameEngine {
         }
 
     }
-
-        //redundant
-//    public boolean validateWin(Location currentLocation, List<Location> locationList){
-//        if (currentLocation.equals(locationList.get(8))) {
-//            return true;
-//        }
-//        return false;
-//    }
-
-
-    /* NOTE:
-        -prompts user to input a command
-        -validates that user enter 2 word commands
-        -if so then it passes that invokes commandProcessor() method to trigger each input case
-     */
-    public void playerInterface() {}
 
     public void handleInput(String input){// public method handleInput if you give it input from GUI (copy and paste from above)
         try {
@@ -131,27 +103,40 @@ public class GameEngine {
             case "go":
                 try {
                     Player.getInstance().moveEngine(command.get(1));
+                    MusicClass.soundFx(command.get(0));
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
                 break;
-            case "get":
-                //get engine
+            case "get": try {
                 Player.getInstance().getEngine(command.get(1));
+                MusicClass.soundFx(command.get(0));
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
                 break;
-            case "look":
-                //look engine
+            case "look": try{
                 Player.getInstance().lookEngine(command.get(1));
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
                 break;
-            case "use":
+            case "use": try{
                 Player.getInstance().useEngine(command.get(1));
-            case "quit":
-                //quit engine
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            case "quit": try{
                 Player.getInstance().quitEngine(command.get(1));
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
                 break;
-            case "help":
-                //help engine
+            case "help": try{
                 Player.getInstance().helpEngine(command.get(1));
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
                 break;
             case "attack":
                 //conflict engine
