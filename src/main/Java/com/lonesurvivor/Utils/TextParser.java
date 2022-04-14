@@ -15,7 +15,7 @@ public class TextParser {
 
     //parser should lowercase all words, remove white spaces and articles, separate the verbs and nouns
     //Ingest Text, Parse it, Identify Keywords, Process Command
-    private JSONParserClass jsonParserClass;
+    //private JSONParserClass jsonParserClass;
 
     private List<JSONArray> commands;
     private List<String> validCommand;
@@ -27,7 +27,7 @@ public class TextParser {
         -but why?
      */
     public TextParser() throws IOException, ParseException {
-        jsonParserClass = new JSONParserClass();
+//        jsonParserClass = new JSONParserClass();
         validCommand = new ArrayList<>();
     }
 
@@ -64,7 +64,7 @@ public class TextParser {
     }
 
     public void ParseCommand(List<String> command) {
-        commands = jsonParserClass.commandParser();
+        commands = JSONParserClass.getInstance().commandParser();
         verbList = commands.get(0);
         nounList = commands.get(1);
         commList = commands.get(2);

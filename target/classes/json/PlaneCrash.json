@@ -77,7 +77,7 @@
     "locationImage" : "images/building.jpg",
     "locationItems": [],
     "locationNPC": {"name": "clay","power": 8.0},
-    "locationDirections": {"north": "","east": "","south": "","west": "tlg building"}
+    "locationDirections": {"north": "","east": "","south": "","west": "village"}
   },
   {
     "locationName": "lair",
