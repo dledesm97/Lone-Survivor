@@ -1,6 +1,5 @@
 package com.lonesurvivor.Utils;
 
-
 import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Models.Location;
 import org.json.simple.JSONArray;
@@ -9,7 +8,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,13 +59,10 @@ public class JSONParserClass {
     }
 
     public JSONParserClass() throws IOException, ParseException {
-        InputStream is = getFileFromResourceAsStream("json/PlaneCrash.json");
-        InputStreamReader isr = new InputStreamReader(is);
-        //InputStreamReader isr1 = new InputStreamReader(getFileFromResourceAsStream("Java/External_Files/PlaneCrash.json"));
         InputStream is2 = getFileFromResourceAsStream("json/CommandList.json");
         InputStreamReader isr2 = new InputStreamReader(is2);
 
-        locations = new ArrayList<>();
+        //locations = new ArrayList<>();
         commands = new ArrayList<>();
         in = new BufferedReader(new InputStreamReader(System.in));
         jsonParser = new JSONParser();
@@ -83,17 +78,30 @@ public class JSONParserClass {
         //infoFile = (JSONObject) jsonParser.parse(infoReader);
         //outsFile = (JSONArray) jsonParser.parse(outsReader);
 
-        locFile = (JSONArray) jsonParser.parse(isr);
+        //locFile = (JSONArray) jsonParser.parse(isr);
         commFile = (JSONArray) jsonParser.parse(isr2);
 
     }
 
-    public List<Location> locationParser() {
-        for (Object o : locFile){
+    public List<Location> locationParser(String file){
+        jsonParser = new JSONParser();
+        try {
+            InputStream is = getFileFromResourceAsStream(file);
+            InputStreamReader isr = new InputStreamReader(is);
+            locFile = (JSONArray) jsonParser.parse(isr);
+        } catch (Exception e) { //If there is no file being passed send message and exit
+            locations = null;
+            System.out.println("File not found");
+            System.exit(0);
+        }
+        locations = new ArrayList<>();
+
+        for (Object o : locFile) {
             JSONObject obj = (JSONObject) o;
 
             // creating location object by passing it's respective paramaters with their data types.
-            location = new Location((String) obj.get("locationName"),(String) obj.get("locationDescription"),(String) obj.get("locationImage") ,(JSONArray) obj.get("locationItems"),(JSONObject) obj.get("locationDirections"));
+            location = new Location((String) obj.get("locationName"), (String) obj.get("locationDescription"), (String) obj.get("locationImage")
+                    , (JSONArray) obj.get("locationItems"), (JSONObject) obj.get("locationDirections"));
 
             //adding the newly created location object into an arraylist
             locations.add(location);
@@ -101,25 +109,6 @@ public class JSONParserClass {
         return locations;
     }
 
-    /*public List<Location> outsideParser() {
-        //for (Object o : locFile)
-        //for (int i = 0; i < locFile.size(); i++)
-        for (Object o : outsFile){
-            //JSONObject obj = (JSONObject) locFile.get("cockpit");
-
-            JSONObject obj = (JSONObject) o;
-            String name = (String) obj.get("locationName");
-            String description = (String) obj.get("locationDescription");
-            JSONArray locItems = (JSONArray) obj.get("locationItems");
-            JSONObject locDirections = (JSONObject) obj.get("locationDirections");
-            //JSONArray locDirections = (JSONArray) obj.get("locationDirections");
-
-            location = new Location(name, description, locItems, locDirections);
-            //System.out.println(location);
-            locations.add(location);
-        }
-        return locations;
-    }*/
 
     public List<JSONArray> commandParser() {
         verbObj = (JSONObject) commFile.get(0);
