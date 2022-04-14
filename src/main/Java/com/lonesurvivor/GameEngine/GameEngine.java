@@ -16,6 +16,8 @@ import static com.lonesurvivor.Views.LocationFrame.textDisplayGui;
 public class GameEngine {
 
     private static GameEngine engine = null;
+    private static final String LOCATION_PATH="json/PlaneCrash.json";
+
     private TextParser parser;
     private List<Location> locations;
     private List<String> command;
@@ -37,7 +39,7 @@ public class GameEngine {
     public GameEngine() throws IOException, ParseException {
         // initializes the object and sets the locations list and default player location
         parser = new TextParser();
-        locations = JSONParserClass.getInstance().locationParser();
+        locations = JSONParserClass.getInstance().locationParser(LOCATION_PATH);
         Player.getInstance().setLocations(locations);
         Player.getInstance().setPlayerLocation(locations.get(2));
 
