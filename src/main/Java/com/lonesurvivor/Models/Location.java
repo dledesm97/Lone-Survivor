@@ -2,7 +2,6 @@ package com.lonesurvivor.Models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Location {
@@ -11,13 +10,15 @@ public class Location {
     private String description;
     private String image;
     private ArrayList<String> items;
+    private NPC npc;
     private Map<String, String> direction;
 
-    public Location(String name, String description, String image ,ArrayList<String> items, HashMap<String, String> direction) {
+    public Location(String name, String description, String image , ArrayList<String> items, NPC npc, HashMap<String, String> direction) {
         this.name = name;
         this.description = description;
         this.image = image;
         this.items = items;
+        this.npc = npc;
         this.direction = direction;
     }
 
@@ -33,6 +34,10 @@ public class Location {
         return items;
     }
 
+    public NPC getNpc() {
+        return npc;
+    }
+
     public Map<String, String> getDirection() {
         return direction;
     }
@@ -46,7 +51,9 @@ public class Location {
         return "Location{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
                 ", items=" + items +
+                ", npc=" + npc +
                 ", direction=" + direction +
                 '}';
     }

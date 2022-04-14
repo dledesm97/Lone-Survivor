@@ -2,6 +2,7 @@ package com.lonesurvivor.GameEngine;
 
 import com.lonesurvivor.Models.Item;
 import com.lonesurvivor.Models.Location;
+import com.lonesurvivor.Models.NPC;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
@@ -20,6 +21,7 @@ public class GameEngine {
 
     private TextParser parser;
     private List<Location> locations;
+    private NPC npc;
     private List<String> command;
     public static int dayCount = 1;
     private boolean hasWon;
@@ -153,7 +155,7 @@ public class GameEngine {
                 break;
             case "attack":
                 //conflict engine
-                Player.getInstance().conflictResolutionEngine(command.get(0));
+                Player.getInstance().attackEngine(command.get(0));
         }
     }
     public int getDayCount() {
