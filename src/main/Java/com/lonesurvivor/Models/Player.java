@@ -53,7 +53,6 @@ public class Player {
                         setPlayerLocation(aLocation);
                         actionTracker++;
                         MasterGui.refreshFrames();
-
                     }
                 }
             }
@@ -143,7 +142,7 @@ public class Player {
             System.exit(0);
         }
     }
-    public void conflictResolutionEngine(String noun){
+    public void attackEngine(String noun){
         int playerAttackStat = (int) ( Math.random() * 40);
         int enemyAttackStat = (int) ( Math.random() * 50);
 
@@ -160,6 +159,7 @@ public class Player {
                 break;
             }
         }
+
 
 
     }

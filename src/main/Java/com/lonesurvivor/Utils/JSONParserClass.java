@@ -1,7 +1,7 @@
 package com.lonesurvivor.Utils;
 
-import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Models.Location;
+import com.lonesurvivor.Models.NPC;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -59,6 +59,7 @@ public class JSONParserClass {
     }
 
     public JSONParserClass() throws IOException, ParseException {
+        InputStream is;
         InputStream is2 = getFileFromResourceAsStream("json/CommandList.json");
         InputStreamReader isr2 = new InputStreamReader(is2);
 
@@ -83,8 +84,33 @@ public class JSONParserClass {
 
     }
 
+    public ArrayList<NPC> npcGenerator(String file) {
+        jsonParser = new JSONParser();
+        ArrayList<NPC> npcs = new ArrayList<>();
+
+        try {
+            InputStream is = getFileFromResourceAsStream(file);
+            InputStreamReader isr = new InputStreamReader(is);
+            locFile = (JSONArray) jsonParser.parse(isr);
+        } catch (Exception e) { //If there is no file being passed send message and exit
+            System.out.println("File not found");
+            System.exit(0);
+        }
+
+        for (Object o : locFile) {
+            JSONObject obj = (JSONObject) o;
+
+            JSONObject npcInLocation = (JSONObject) obj.get("locationNPC");
+
+            NPC newNpc = new NPC((String) npcInLocation.get("name"), (Double) npcInLocation.get("power"));
+            npcs.add(newNpc);
+        }
+        return npcs;
+    }
+
     public List<Location> locationParser(String file){
         jsonParser = new JSONParser();
+        int counter = 0;
         try {
             InputStream is = getFileFromResourceAsStream(file);
             InputStreamReader isr = new InputStreamReader(is);
@@ -101,10 +127,11 @@ public class JSONParserClass {
 
             // creating location object by passing it's respective paramaters with their data types.
             location = new Location((String) obj.get("locationName"), (String) obj.get("locationDescription"), (String) obj.get("locationImage")
-                    , (JSONArray) obj.get("locationItems"), (JSONObject) obj.get("locationDirections"));
+                    , (JSONArray) obj.get("locationItems"), npcGenerator("json/PlaneCrash.json").get(counter),(JSONObject) obj.get("locationDirections"));
 
             //adding the newly created location object into an arraylist
             locations.add(location);
+            counter++;
         }
         return locations;
     }
@@ -125,6 +152,8 @@ public class JSONParserClass {
 
         return commands;
     }
+
+
 
     private static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JSONParserClass.class.getClassLoader();
