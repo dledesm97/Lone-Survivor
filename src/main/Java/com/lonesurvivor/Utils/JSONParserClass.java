@@ -12,45 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * reads and parses all the json files using Simple
+ * Singleton reads and parses all the json files using Json Simple
  */
 public class JSONParserClass {
 
+    //class singleton
     private static JSONParserClass parser = null;
 
-    private JSONParser jsonParser;
-    private BufferedReader in;
-    private FileReader locReader;
-    private FileReader commReader;
-    private FileReader infoReader;
-    //private FileReader outsReader;
+    //constants
+    public static final String COMMAND_LIST = "json/CommandList.json";
 
-    private JSONArray locFile;
-    //private JSONObject locFile;
-    private JSONArray commFile;
-    private JSONObject infoFile;
-    //private JSONArray outsFile;
-
-    private List<Location> locations;
-    private Location location;
-
+    //field variables
+    private JSONParser jsonParser = new JSONParser(); //json simple instance
+    private JSONArray locationFile;
+    private JSONArray commandFile;
     private List<JSONArray> commands;
 
-    private JSONObject verbObj;
-    private JSONObject nounObj;
-    private JSONObject commObj;
-
-    private JSONArray verbList;
-    private JSONArray nounList;
-    private JSONArray commList;
-
-    private String gameInfo;
-
-    public static JSONParserClass getInstance(){
-        if(parser == null){
-            try{
+    //singleton instantiation
+    public static JSONParserClass getInstance() {
+        if (parser == null) {
+            try {
                 parser = new JSONParserClass();
-            }catch (IOException | ParseException e){
+            } catch (IOException | ParseException e) {
                 System.out.println(e.getMessage());
                 System.exit(0);
             }
@@ -58,46 +41,27 @@ public class JSONParserClass {
         return parser;
     }
 
-    public JSONParserClass() throws IOException, ParseException {
-        InputStream is;
-        InputStream is2 = getFileFromResourceAsStream("json/CommandList.json");
-        InputStreamReader isr2 = new InputStreamReader(is2);
-
-        //locations = new ArrayList<>();
+    //class CTOR that initiates list of valid commands
+    private JSONParserClass() throws IOException, ParseException {
+        InputStream inputStream = getFileFromResourceAsStream(COMMAND_LIST);
+        InputStreamReader streamReader = new InputStreamReader(inputStream);
+        commandFile = (JSONArray) jsonParser.parse(streamReader);
         commands = new ArrayList<>();
-        in = new BufferedReader(new InputStreamReader(System.in));
-        jsonParser = new JSONParser();
-
-        //locReader = new FileReader("src/Java/External_Files/PlaneCrash.json");
-        //commReader = new FileReader("src/Java/External_Files/CommandList.json");
-        //infoReader = new FileReader("src/Java/External_Files/GameInfo.json");
-        //outsReader = new FileReader("src/Java/External_Files/Outside.json");
-
-        //locFile = (JSONArray) jsonParser.parse(locReader);
-
-        //commFile = (JSONArray) jsonParser.parse(commReader);
-        //infoFile = (JSONObject) jsonParser.parse(infoReader);
-        //outsFile = (JSONArray) jsonParser.parse(outsReader);
-
-        //locFile = (JSONArray) jsonParser.parse(isr);
-        commFile = (JSONArray) jsonParser.parse(isr2);
-
     }
 
+    //generates NPCs at some locations
     public ArrayList<NPC> npcGenerator(String file) {
-        jsonParser = new JSONParser();
         ArrayList<NPC> npcs = new ArrayList<>();
-
         try {
             InputStream is = getFileFromResourceAsStream(file);
             InputStreamReader isr = new InputStreamReader(is);
-            locFile = (JSONArray) jsonParser.parse(isr);
+            locationFile = (JSONArray) jsonParser.parse(isr);
         } catch (Exception e) { //If there is no file being passed send message and exit
             System.out.println("File not found");
             System.exit(0);
         }
 
-        for (Object o : locFile) {
+        for (Object o : locationFile) {
             JSONObject obj = (JSONObject) o;
 
             JSONObject npcInLocation = (JSONObject) obj.get("locationNPC");
@@ -108,53 +72,50 @@ public class JSONParserClass {
         return npcs;
     }
 
-    public List<Location> locationParser(String file){
-        jsonParser = new JSONParser();
+    public List<Location> locationGenerator(String file) {
+        List<Location> locations = new ArrayList<>();
         int counter = 0;
         try {
             InputStream is = getFileFromResourceAsStream(file);
             InputStreamReader isr = new InputStreamReader(is);
-            locFile = (JSONArray) jsonParser.parse(isr);
+            locationFile = (JSONArray) jsonParser.parse(isr);
         } catch (Exception e) { //If there is no file being passed send message and exit
             locations = null;
             System.out.println("File not found");
             System.exit(0);
         }
-        locations = new ArrayList<>();
 
-        for (Object o : locFile) {
+        for (Object o : locationFile) {
             JSONObject obj = (JSONObject) o;
 
-            // creating location object by passing it's respective paramaters with their data types.
-            location = new Location((String) obj.get("locationName"), (String) obj.get("locationDescription"), (String) obj.get("locationImage")
-                    , (JSONArray) obj.get("locationItems"), npcGenerator("json/PlaneCrash.json").get(counter),(JSONObject) obj.get("locationDirections"));
+            // create location instance by passing its respective args
+            Location location = new Location((String) obj.get("locationName"), (String) obj.get("locationDescription"), (String) obj.get("locationImage")
+                    , (JSONArray) obj.get("locationItems"), npcGenerator("json/PlaneCrash.json").get(counter), (JSONObject) obj.get("locationDirections"));
 
-            //adding the newly created location object into an arraylist
+            //add the newly created location into arraylist of locations
             locations.add(location);
             counter++;
         }
         return locations;
     }
 
-
     public List<JSONArray> commandParser() {
-        verbObj = (JSONObject) commFile.get(0);
-        nounObj = (JSONObject) commFile.get(1);
-        commObj = (JSONObject) commFile.get(2);
+        JSONObject verb = (JSONObject) commandFile.get(0);
+        JSONObject noun = (JSONObject) commandFile.get(1);
+        JSONObject command = (JSONObject) commandFile.get(2);
 
-        verbList = (JSONArray) verbObj.get("verb");
-        nounList = (JSONArray) nounObj.get("noun");
-        commList = (JSONArray) commObj.get("valid commands");
+        JSONArray verbList = (JSONArray) verb.get("verb");
+        JSONArray nounList = (JSONArray) noun.get("noun");
+        JSONArray commandList = (JSONArray) command.get("valid commands");
 
         commands.add(0, verbList);
         commands.add(1, nounList);
-        commands.add(2, commList);
+        commands.add(2, commandList);
 
         return commands;
     }
 
-
-
+    //helper method that allows us to read paths from a resource folder in jar
     private static InputStream getFileFromResourceAsStream(String fileName) {
         ClassLoader classLoader = JSONParserClass.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
@@ -164,5 +125,4 @@ public class JSONParserClass {
             return inputStream;
         }
     }
-
 }
