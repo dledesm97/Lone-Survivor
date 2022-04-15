@@ -36,7 +36,7 @@ public class LoneSurvivorBase extends JFrame
 
 
 
-    public LoneSurvivorBase() throws IOException, ParseException, java.text.ParseException {//Lone Survivor Base Camp
+    public LoneSurvivorBase() throws IOException, ParseException, java.text.ParseException, InterruptedException {//Lone Survivor Base Camp
         GUI = this; // init global singleton (ctor)
         //this.gameEngine = gameEngine;//init gameEngine within class
 
