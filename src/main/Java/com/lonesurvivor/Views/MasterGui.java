@@ -1,17 +1,10 @@
 package com.lonesurvivor.Views;
 
 import com.lonesurvivor.GameEngine.GameEngine;
-import com.lonesurvivor.Models.MusicClass;
-import com.lonesurvivor.Models.Player;
-import com.lonesurvivor.Utils.JSONParserClass;
 import org.json.simple.parser.ParseException;
-
-import javax.sound.sampled.*;
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 
@@ -20,7 +13,6 @@ public class MasterGui implements ActionListener {
     static GameEngine game = GameEngine.getInstance();
 
     private static SplashScreen splashScreen;
-    private static MusicClass musicClass;
 
     static {
         try {
@@ -43,7 +35,6 @@ public class MasterGui implements ActionListener {
     private static JFrame frame;
 
 
-
     public MasterGui() throws IOException, ParseException, java.text.ParseException {
 
         frame = new JFrame("Lone Survivor");
@@ -64,6 +55,7 @@ public class MasterGui implements ActionListener {
         frame.getContentPane().add(locationFrame);
         frame.revalidate();
         frame.repaint();
+
 
     }
 

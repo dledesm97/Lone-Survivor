@@ -1,7 +1,5 @@
 package com.lonesurvivor.Models;
 
-import javax.xml.crypto.Data;
-
 public class NPC {
     String name;
     Double power;
