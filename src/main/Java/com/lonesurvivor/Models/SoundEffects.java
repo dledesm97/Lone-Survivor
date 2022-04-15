@@ -32,7 +32,7 @@ public enum SoundEffects {
     // Constructor to construct each element of the enum with its own sound file.
     SoundEffects(String soundFileName) {
         try {
-             File song = new File("src/main/resources/gameSounds.wav");
+             File song = new File("src/main/resources/AmazonSounds.wav");
             // Use URL (instead of File) if you want to read from disk and JAR. or Use File
             //URL url = this.getClass().getClassLoader().getResource(soundFileName);
             // Set up an audio input stream piped from the sound file.

@@ -20,13 +20,28 @@ public class SoundEffectTest extends JFrame {
         Container cp = this.getContentPane();
         cp.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JButton btnSound1 = new JButton("ATTACK");
-        btnSound1.addActionListener(e -> SoundEffects.ATTACK.play());
+        btnSound1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SoundEffects.ATTACK.play();
+            }
+        });
         cp.add(btnSound1);
         JButton btnSound2 = new JButton("BEAR");
-        btnSound2.addActionListener(e -> SoundEffects.BEAR.play());
+        btnSound2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SoundEffects.BEAR.play();
+            }
+        });
         cp.add(btnSound2);
         JButton btnSound3 = new JButton("FLEE");
-        btnSound3.addActionListener(e -> SoundEffects.FLEE.play());
+        btnSound3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SoundEffects.FLEE.play();
+            }
+        });
         cp.add(btnSound3);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Test SoundEffct");
