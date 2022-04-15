@@ -35,7 +35,8 @@ public class MasterGui implements ActionListener {
     private static JFrame frame;
 
 
-    public MasterGui() throws IOException, ParseException, java.text.ParseException {
+    public MasterGui() throws IOException, ParseException, InterruptedException {
+        boolean won = false;
 
         frame = new JFrame("Lone Survivor");
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
@@ -43,8 +44,11 @@ public class MasterGui implements ActionListener {
         frame.pack();
         frame.setVisible (true);
 
-        game.startGame();
-
+        while(won == false) {
+            won = game.startGame();
+            Thread.sleep(4000); //wait 3 seconds
+        }
+        System.exit(0);
         }
 
 

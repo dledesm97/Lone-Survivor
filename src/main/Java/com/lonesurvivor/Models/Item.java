@@ -1,6 +1,6 @@
 package com.lonesurvivor.Models;
 
-import com.lonesurvivor.Views.LoneSurvivorBase;
+//import com.lonesurvivor.Views.LoneSurvivorBase;
 
 import java.util.Locale;
 

@@ -1,7 +1,7 @@
 package com.lonesurvivor.Utils;
 
 import com.lonesurvivor.Views.LocationFrame;
-import com.lonesurvivor.Views.LoneSurvivorBase;
+//import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 
@@ -40,7 +40,7 @@ public class TextParser {
         String newStr = text.trim().toLowerCase();
 
         if (newStr.equals("")) {
-            LoneSurvivorBase.GUI.setMultipleText("Please enter a command.");
+            LocationFrame.textDisplayGui ("Please enter a command.");
             //LoneSurvivorBase.GUI.commandPromptsTextField
         } else {
             command = TokenizeCommand(newStr);
