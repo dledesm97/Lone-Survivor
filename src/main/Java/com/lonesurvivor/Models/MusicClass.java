@@ -47,7 +47,7 @@ public class MusicClass extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource()== audioOn) {
-            File song = new File("src/main/resources/Get Up OffaThat Thing.wav");
+            File song = new File("src/main/resources/gameSounds.wav");
             AudioInputStream audioStream = null;
             try {
                 audioStream = AudioSystem.getAudioInputStream(song);
