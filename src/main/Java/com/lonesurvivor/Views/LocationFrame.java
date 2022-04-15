@@ -10,6 +10,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -89,8 +90,8 @@ public class LocationFrame extends JPanel  implements ActionListener{
         playerStatsDisplay.setEnabled(false);
         playerStatsDisplay.setBackground(Color.lightGray);
         playerStatsDisplay.setBorder(new LineBorder(Color.BLACK));
-//        InventoryBox.setBackground(Color.lightGray);
-//        InventoryBox.setBorder(new LineBorder(Color.BLACK));
+        playerStatsDisplay.setDisabledTextColor(Color.BLACK);
+
         enter.addActionListener(this);
         west.addActionListener(this);
         east.addActionListener(this);
@@ -98,6 +99,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
         south.addActionListener(this);
         commandInput.addActionListener(this);
         soundItem.addActionListener(this);
+
 
 
 
@@ -211,7 +213,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
     }
 
     public void setPlayerStatsDisplay(){
-        playerStatsDisplay.setText(Player.getInstance().getName() + "\n" + Player.getInstance().getHealth());
+        playerStatsDisplay.setText("" + Player.getInstance().getHealth());
     }
 
     private void renderSoundFrame() {
@@ -228,8 +230,13 @@ public class LocationFrame extends JPanel  implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-           String command = e.getActionCommand();
-            switch(command){
+        if(e.getSource() == commandInput) {
+            textParser();
+        }
+
+        String command = e.getActionCommand();
+
+        switch(command){
                 case "N":
                     game.handleInput("go north");
                     break;
