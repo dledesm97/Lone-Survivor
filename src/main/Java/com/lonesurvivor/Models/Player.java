@@ -1,10 +1,8 @@
 package com.lonesurvivor.Models;
 
-import com.lonesurvivor.GameEngine.GameEngine;
 import com.lonesurvivor.Utils.DisplayScreen;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Views.LocationFrame;
-import com.lonesurvivor.Views.LoneSurvivorBase;
 import com.lonesurvivor.Views.MasterGui;
 import org.json.simple.parser.ParseException;
 
@@ -23,7 +21,7 @@ public class Player {
     private ArrayList<String> inventory = new ArrayList<>();
     private Location playerLocation;
     private List<Location> locations;
-    private JSONParserClass jsonParserClass = new JSONParserClass();
+//    private JSONParserClass jsonParserClass = getInstance();
     private int health = 50;
     private int actionTracker = 0;
 
@@ -53,7 +51,6 @@ public class Player {
                         setPlayerLocation(aLocation);
                         actionTracker++;
                         MasterGui.refreshFrames();
-
                     }
                 }
             }
@@ -143,25 +140,14 @@ public class Player {
             System.exit(0);
         }
     }
-    public void conflictResolutionEngine(String noun){
-        int playerAttackStat = (int) ( Math.random() * 40);
-        int enemyAttackStat = (int) ( Math.random() * 50);
-
-        while(Objects.equals(noun, "attack")){//while "attack is true ++
-            playerAttackStat++;
-            enemyAttackStat++;
-            if(playerAttackStat > enemyAttackStat && player.health > 30){//if player stat is greater and player health is > player wins
-                //placeholder logic - can add character traits in the condition
-                System.out.println(" You Win Lone Survivor your attack score is " + playerAttackStat);
-                break;
-            }else {//else enemy stat is greater , enemy wins - can add character traits in the logic
-                //placeholder logic
-                System.out.println(" The enemy has defeated you with a level " + enemyAttackStat + " attack score");
-                break;
+    
+    public void attackEngine(String noun){
+            if (playerLocation.getNpc().getName().equalsIgnoreCase(noun)){
+                LocationFrame.textDisplayGui("You attacked " + playerLocation.getNpc().getName());
             }
-        }
-
-
+            else{
+                System.out.println("Can't attack that");
+            }
     }
 
     public void helpEngine(String noun) throws IOException, ParseException {
@@ -171,7 +157,7 @@ public class Player {
             //JSONObject gameInfo = (JSONObject) fileInfo.get(2);
             //System.out.println(gameInfo);
             // LoneSurvivorBase.GUI.setMultipleText(jsonParserClass.commandParser().get(2).toString());// Stringify the jpclass
-            LocationFrame.textDisplayGui(jsonParserClass.commandParser().get(2).toString());
+            LocationFrame.textDisplayGui(JSONParserClass.getInstance().commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
             //reader = new FileReader("src/Java/External_Files/GameInfo.json");

@@ -1,5 +1,6 @@
 package com.lonesurvivor.Utils;
 
+import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.LoneSurvivorBase;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
@@ -14,7 +15,7 @@ public class TextParser {
 
     //parser should lowercase all words, remove white spaces and articles, separate the verbs and nouns
     //Ingest Text, Parse it, Identify Keywords, Process Command
-    private JSONParserClass jsonParserClass;
+    //private JSONParserClass jsonParserClass;
 
     private List<JSONArray> commands;
     private List<String> validCommand;
@@ -26,7 +27,7 @@ public class TextParser {
         -but why?
      */
     public TextParser() throws IOException, ParseException {
-        jsonParserClass = new JSONParserClass();
+//        jsonParserClass = new JSONParserClass();
         validCommand = new ArrayList<>();
     }
 
@@ -63,7 +64,7 @@ public class TextParser {
     }
 
     public void ParseCommand(List<String> command) {
-        commands = jsonParserClass.commandParser();
+        commands = JSONParserClass.getInstance().commandParser();
         verbList = commands.get(0);
         nounList = commands.get(1);
         commList = commands.get(2);
@@ -75,7 +76,7 @@ public class TextParser {
         //clears list so there is only ever two elements in it at a time
         validCommand.clear();
         if (command.size() != 2) {
-            LoneSurvivorBase.GUI.setMultipleText("Valid command must contain only two words. Type 'help commands' for a list of valid commands.");
+            LocationFrame.textDisplayGui("Valid command must contain only two words. Type 'help commands' for a list of valid commands.\"");
         }
         else {
             verb = command.get(0);
@@ -88,11 +89,11 @@ public class TextParser {
                     validCommand.add(noun);
                 }
                 else {
-                    LoneSurvivorBase.GUI.setMultipleText(comm + " is not a valid action");
+                    LocationFrame.textDisplayGui(comm + " is not a valid action");
                 }
             }
             else{
-                LoneSurvivorBase.GUI.setMultipleText(verb + " " + noun + " is not a valid action");
+                LocationFrame.textDisplayGui(verb + " " + noun + " is not a valid action");
             }
         }
     }
