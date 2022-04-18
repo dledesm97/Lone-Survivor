@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class MasterGui implements ActionListener {
 
-    static GameEngine game = GameEngine.getInstance();
+    public static GameEngine game = GameEngine.getInstance();
 
     private static SplashScreen splashScreen;
 
@@ -34,7 +34,6 @@ public class MasterGui implements ActionListener {
 
     private static JFrame frame;
 
-
     public MasterGui() throws IOException, ParseException, InterruptedException {
         boolean won = false;
 
@@ -51,16 +50,11 @@ public class MasterGui implements ActionListener {
         System.exit(0);
         }
 
-
-
     public static void renderLocationFrame() throws IOException, ParseException, java.text.ParseException {
-
         frame.getContentPane().removeAll();
         frame.getContentPane().add(locationFrame);
         frame.revalidate();
         frame.repaint();
-
-
     }
 
     public static void refreshFrames() throws IOException {
@@ -71,12 +65,9 @@ public class MasterGui implements ActionListener {
         locationFrame.setInventoryBox();
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
-
     }
-
 }
 

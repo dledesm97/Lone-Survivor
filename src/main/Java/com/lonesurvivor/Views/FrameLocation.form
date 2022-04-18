@@ -30,7 +30,11 @@
               <forms top="5" left="0" bottom="0" right="0" defaultalign-horz="false"/>
             </constraints>
             <properties>
+              <opaque value="true"/>
+              <rolloverEnabled value="true"/>
+              <selected value="false"/>
               <text value="Button"/>
+              <verifyInputWhenFocusTarget value="true"/>
             </properties>
           </component>
         </children>
