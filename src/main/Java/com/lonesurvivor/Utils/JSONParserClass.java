@@ -22,6 +22,7 @@ public class JSONParserClass {
     //constants
     public static final String COMMAND_LIST = "json/CommandList.json";
 
+
     //field variables
     private JSONParser jsonParser = new JSONParser(); //json simple instance
     private JSONArray locationFile;
@@ -113,6 +114,13 @@ public class JSONParserClass {
         commands.add(2, commandList);
 
         return commands;
+    }
+
+    public String parseGameInfo(String filename) throws IOException, ParseException {
+        InputStream inputStream = getFileFromResourceAsStream(filename);
+        InputStreamReader isr = new InputStreamReader(inputStream);
+        JSONObject infoFile = (JSONObject) jsonParser.parse(isr);
+        return (String) infoFile.get("gameInfo");
     }
 
     //helper method that allows us to read paths from a resource folder in jar

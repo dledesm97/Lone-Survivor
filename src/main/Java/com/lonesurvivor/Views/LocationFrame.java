@@ -99,7 +99,6 @@ public class LocationFrame extends JPanel  implements ActionListener{
         playerStatsDisplay.setDisabledTextColor(Color.BLACK);
         seperatorTwo = new JSeparator ();
 
-
         //btn's action listeners
         enterBtn.addActionListener(this);
         north.addActionListener(this);
