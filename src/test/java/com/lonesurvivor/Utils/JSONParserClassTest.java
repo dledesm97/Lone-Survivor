@@ -19,11 +19,18 @@ public class JSONParserClassTest {
         assertNotNull(locations);
     }
 
+//    @Test
+//    public void emptyListOfLocations(){
+//        List<Location> locations;
+//        locations = JSONParserClass.getInstance().locationGenerator("");
+//        assertNotNull(locations);
+//    }
+
     @Test
-    public void emptyListOfLocations(){
+    public void checkListSize(){
         List<Location> locations;
-        locations = JSONParserClass.getInstance().locationGenerator("");
-        assertNotNull(locations);
+        locations = JSONParserClass.getInstance().locationGenerator("json/PlaneCrash.json");
+        assertEquals(locations.size(),11);
     }
 
 }

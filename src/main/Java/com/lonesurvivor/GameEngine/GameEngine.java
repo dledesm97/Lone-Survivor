@@ -49,10 +49,10 @@ public class GameEngine {
     }
 
     public boolean startGame() throws IOException, ParseException, InterruptedException {
-        hasWon = checkWin();
+        hasWon = checkWin(Player.getInstance().getPlayerLocation());
         while (hasWon){
             textDisplayGui("You have arrived to the TLG Building and regrouped with Clay, Izzy, Percell and David.\n You are in good hands with them, they will take over from here! Thanks for playing!");
-            Thread.sleep(6000);
+            Thread.sleep(5000);
            return true;
         }
         return false;
@@ -66,16 +66,16 @@ public class GameEngine {
         }
     }
 
-    public boolean checkWin() {
-        if(Player.getInstance().getPlayerLocation() == locations.get(9)) {
-                return true;
-            }
+    public boolean checkWin(Location playerLocation) {
+        if(playerLocation.getName().equals(locations.get(9).getName())) {
+            return true;
+        }
         //TODO: either handle for rescued win on day 3 OR decide that they die
         //FIXME: edit gameinfo.json to reflect these results
-        else if (dayCount == 4) {
-            textDisplayGui("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.\n You died. Thank you for playing.");
-            System.exit(0);
-        }
+//        else if (dayCount == 4) {
+//            textDisplayGui("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.\n You died. Thank you for playing.");
+//            System.exit(0);
+//        }
         return false;
     }
 
