@@ -50,7 +50,7 @@ public class GameEngine {
 
     public boolean startGame() throws IOException, ParseException, InterruptedException {
         hasWon = checkWin();
-       while (hasWon){
+        while (hasWon){
             textDisplayGui("You have arrived to the TLG Building and regrouped with Clay, Izzy, Percell and David.\n You are in good hands with them, they will take over from here! Thanks for playing!");
             Thread.sleep(6000);
            return true;
@@ -58,9 +58,7 @@ public class GameEngine {
         return false;
     }
 
-
     public void dayTracker(){
-
     //for every 10 action points, a day pass and it get reset.
         if (Player.getInstance().getActionTracker() > 10){
             dayCount++;
@@ -84,14 +82,11 @@ public class GameEngine {
     public void handleInput(String input){// public method handleInput if you give it input from GUI (copy and paste from above)
         try {
             parser.InitialInput(input);
-
             if (parser.getValidCommand().size() == 2) {
                 command = parser.getValidCommand();
-                //processor.processCommand(command);
                 commandProcessor();
             }
-            //TODO update printed text to UI
-            //checkWin();TODO ???
+
         } catch (IOException | ParseException e) {
             System.out.println(e.getMessage());
         } catch (java.text.ParseException e) {
@@ -99,10 +94,8 @@ public class GameEngine {
         }
     }
 
+    //process player commands
     public void commandProcessor() throws IOException, ParseException, java.text.ParseException {
-
-        //converted if statements to a switch. And moved commands to player class
-        //move engine
         switch (command.get(0)) {
             case "go":
                 try {
@@ -146,6 +139,7 @@ public class GameEngine {
                 //conflict engine
                 Player.getInstance().attackEngine(command.get(1));
         }
+
     }
     public int getDayCount() {
         return dayCount;

@@ -44,7 +44,6 @@ public class TextParser {
             //LoneSurvivorBase.GUI.commandPromptsTextField
         } else {
             command = TokenizeCommand(newStr);
-            command.forEach(System.out::println);
             ParseCommand(command);
         }
     }

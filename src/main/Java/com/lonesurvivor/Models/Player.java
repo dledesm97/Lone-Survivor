@@ -11,7 +11,10 @@ import java.util.*;
 
 
 public class Player {
+
+
     private static Player player = null;
+
     //CONSTANTS
     private static final String GAME_INFO_PATH = "gameInfo.txt";
 
@@ -42,7 +45,6 @@ public class Player {
     }
 
     // Business Methods ***********************************
-
     public void moveEngine(String noun) throws IOException {
         for (Map.Entry<String, String> set : playerLocation.getDirection().entrySet()) {
             if (set.getKey().equalsIgnoreCase(noun)){
@@ -59,7 +61,6 @@ public class Player {
     }
 
     public void getEngine(String noun) throws IOException {
-
         for (String aItem : playerLocation.getItems()){
             if (aItem.equalsIgnoreCase(noun)){
                 addItems(aItem);
@@ -110,7 +111,6 @@ public class Player {
     }
 
     // Accessor Methods **********************
-
     public String getName() {
         return name;
     }
