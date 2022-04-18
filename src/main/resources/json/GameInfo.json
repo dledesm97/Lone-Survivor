@@ -1,3 +1,0 @@
-{
-  "gameInfo": "This is a text based adventure game where you are the lone survivor of a plane crash in uncharted forest. \nYour goal is to make it back to civilization or survive until rescue within 3 days. \nCommands for this game are typed using two words (e.g. look around) - a verb (action word) and a noun (person, place, or thing). \nNote that not all nouns work with each verb and vice versa. \nTo see a full list of all the verbs and nouns in the game, type 'help commands'"
-}

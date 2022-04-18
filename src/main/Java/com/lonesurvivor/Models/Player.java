@@ -1,6 +1,5 @@
 package com.lonesurvivor.Models;
 
-import com.lonesurvivor.Utils.DisplayScreen;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.MasterGui;
@@ -16,11 +15,11 @@ public class Player {
     private static Player player = null;
 
     //CONSTANTS
-    private static final String GAME_INFO_PATH = "gameInfo.txt";
+    private static final String GAME_INFO_PATH = "json/gameInfo.json";
 
     // Fields ***************************************
 
-    private String name;
+//    private String name;
     private ArrayList<String> inventory = new ArrayList<>();
     private Location playerLocation;
     private List<Location> locations;
@@ -101,20 +100,16 @@ public class Player {
             }
     }
 
-    public void helpEngine(String noun) throws IOException {
+    public void helpEngine(String noun) throws IOException, ParseException {
         if (noun.equals("commands")) {
             LocationFrame.textDisplayGui(JSONParserClass.getInstance().commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
-            LocationFrame.textDisplayGui(DisplayScreen.showScreen(GAME_INFO_PATH));
+           LocationFrame.textDisplayGui(JSONParserClass.getInstance().parseGameInfo(GAME_INFO_PATH));
         }
     }
 
     // Accessor Methods **********************
-    public String getName() {
-        return name;
-    }
-
     public ArrayList<String> getItems() {
         return inventory;
     }
