@@ -44,6 +44,9 @@ public class GameEngine {
     private GameEngine() throws IOException, ParseException {
         parser = new TextParser();
         locations = JSONParserClass.getInstance().locationGenerator(LOCATION_PATH);
+
+        //random generate radio to any location
+
         Player.getInstance().setLocations(locations);
         Player.getInstance().setCurrentLocation(locations.get(2));
     }
