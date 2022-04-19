@@ -6,6 +6,7 @@ import com.lonesurvivor.Models.MusicClass;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
+import com.lonesurvivor.Views.LocationFrame;
 import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.util.List;
@@ -143,8 +144,14 @@ public class GameEngine {
                 }
                 break;
             case "attack":
-                //conflict engine
-                Player.getInstance().attackEngine(command.get(1));
+               try{
+                   Player.getInstance().attackEngine(command.get(1));
+               }catch (Exception e) {
+                   System.out.println(e.getMessage());
+               }
+               break;
+            default:
+
         }
     }
 

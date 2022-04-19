@@ -1,5 +1,7 @@
 package com.lonesurvivor.Models;
 
+import com.lonesurvivor.Views.LocationFrame;
+
 import java.util.Objects;
 
 public class AttackEngine {
@@ -24,7 +26,24 @@ public class AttackEngine {
             }
         }
 
+    }
 
+    public void attack(){
+        //calcAttackPower();
+
+        if ((Player.getInstance().getCurrentLocation().getNpc()) != null){
+            if (Player.getInstance().getCurrentLocation().getNpc().getPower() > 0){
+                int opponentDamage = (int) (Player.getInstance().getCurrentLocation().getNpc().getPower() - Player.getInstance().getAttackPoints());
+                Player.getInstance().getCurrentLocation().getNpc().setPower((double) opponentDamage);
+                LocationFrame.textDisplayGui("\t you attacked the " + Player.getInstance().getCurrentLocation().getNpc().getName() + "!!\n\tYou inflicted " + Player.getInstance().getAttackPoints() + " damage!");
+                Player.getInstance().setActionTracker(3);
+            } else{
+               LocationFrame.textDisplayGui(Player.getInstance().getCurrentLocation().getNpc().getName() + " is already dead. Calm down killer.");
+
+            }
+        } else{
+            LocationFrame.textDisplayGui("There is nothing to attack, goofy.");
+        }
     }
 
     public static void main(String[] args) {

@@ -168,6 +168,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
         west.addActionListener(this);
         commandInput.addActionListener(this);
         soundItem.addActionListener(this);
+        exitItem.addActionListener(this);
 
         //frame size & layout
         setPreferredSize(new Dimension(626, 705));
@@ -286,7 +287,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
     }
 
     private void renderSoundFrame() {
-        MusicClass musicClass = new MusicClass();
+        MusicClass musicClass = MusicClass.getInstance();
         frame = new JFrame("Sound Controls");
         frame.setDefaultCloseOperation (JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add (musicClass);
@@ -319,6 +320,10 @@ public class LocationFrame extends JPanel  implements ActionListener{
                     break;
                 case "Sound":
                     renderSoundFrame();
+                    break;
+                case "Exit":
+                    System.exit(0);
+                    break;
                 default://Do nothing
         }
     }

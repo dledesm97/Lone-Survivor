@@ -19,6 +19,7 @@ public class Player {
     private Location currentLocation;
     private List<Location> locations;
     private int health = 50;
+    private int attackPoints = 10;
     private int actionTracker = 0;
 
     public static Player getInstance(){
@@ -94,8 +95,13 @@ public class Player {
     }
 
     public void attackEngine(String noun){
+
             if (currentLocation.getNpc().getName().equalsIgnoreCase(noun)){
-                LocationFrame.textDisplayGui("You attacked " + currentLocation.getNpc().getName());
+                AttackEngine attackEngine = new AttackEngine();
+                attackEngine.attack();
+//                LocationFrame.textDisplayGui("You attacked " + currentLocation.getNpc().getName());
+
+
             }
             else{
                 LocationFrame.textDisplayGui("Can't attack that");
@@ -158,6 +164,14 @@ public class Player {
 
     public void setActionTracker(int actionTracker) {
         this.actionTracker = actionTracker;
+    }
+
+    public int getAttackPoints() {
+        return attackPoints;
+    }
+
+    public void setAttackPoints(int attackPoints) {
+        this.attackPoints = attackPoints;
     }
 
     public ArrayList<String> getInventory() {

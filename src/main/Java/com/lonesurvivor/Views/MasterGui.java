@@ -1,6 +1,7 @@
 package com.lonesurvivor.Views;
 
 import com.lonesurvivor.GameEngine.GameEngine;
+import com.lonesurvivor.Models.MusicClass;
 import org.json.simple.parser.ParseException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
