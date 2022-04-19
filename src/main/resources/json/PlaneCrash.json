@@ -1,7 +1,7 @@
 [
   {
     "locationName": "cockpit",
-    "locationDescription": "This is the cockpit. The PILOT flies the plane from here, maybe he survived....",
+    "locationDescription": "This is the cockpit. The PILOT flies the plane from here, maybe he survived....\nLooks like I will get lost if I go outside this plane maybe something in here \ncan help me navigate",
     "locationImage" : "images/cockpit.jpg",
     "locationItems": ["radio", "compass"],
     "locationNPC": {"name": "pilot","power":6.0},
@@ -19,7 +19,7 @@
     "locationName": "economy class",
     "locationDescription": "This is the economy sitting area.",
     "locationImage" : "images/cabin.png",
-    "locationItems": ["flashlight", "life jacket"],
+    "locationItems": ["flashlight"],
     "locationNPC": {"name": "","power": 0.0},
     "locationDirections": {"north": "first class", "east":"","south": "service area", "west": ""}
   },
@@ -88,4 +88,4 @@
     "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
   }
 
-  ]
+]

@@ -48,7 +48,7 @@ public class MasterGui implements ActionListener {
             Thread.sleep(3000); //wait 3 seconds
         }
         System.exit(0);
-        }
+    }
 
     public static void renderLocationFrame() throws IOException, ParseException, java.text.ParseException {
         frame.getContentPane().removeAll();
@@ -58,7 +58,7 @@ public class MasterGui implements ActionListener {
     }
 
     public static void refreshFrames() throws IOException {
-     locationFrame.setImageLabel();
+        locationFrame.setImageLabel();
     }
 
     public static void refreshInventoryBox() throws IOException {

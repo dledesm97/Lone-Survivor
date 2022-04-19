@@ -1,5 +1,6 @@
 package com.lonesurvivor.Models;
 
+import com.lonesurvivor.Items.Item;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.MasterGui;
@@ -76,12 +77,19 @@ public class Player {
         //You look around and see to the north: first class, south: service area
         //you see the following items: flashlight, life jacket, etc.
 
-        LocationFrame.textDisplayGui("You look around and see: \n" + playerLocation.getDescription() +
-                                               "\nItems: " + playerLocation.getItems() + "\nDirections: " + playerLocation.getDirection());
+        String locationName = Player.getInstance().getPlayerLocation().getName();
+        if(locationName.equals("forest") || locationName.equals("forest dead end") || locationName.equals("bridge") || locationName.equals("village") || locationName.equals("outside plane") || locationName.equals("economy class")) {
+            LocationFrame.textDisplayGui("You look around and see: \n" + playerLocation.getDescription() +
+                    "\nItems: " + playerLocation.getItems());
+        }
+        else{
+            LocationFrame.textDisplayGui("You need to USE a FLASHLIGHT to look around\nIf you don't have one maybe you should LOOK AROUND in the plane");
+        }
     }
 
-    public void useEngine(String noun){
+    public void useEngine(String noun) throws IOException, InterruptedException {
         Item item = new Item(noun);
+        item.useItem();
     }
 
     public void quitEngine(String noun){
@@ -90,7 +98,7 @@ public class Player {
             System.exit(0);
         }
     }
-    
+
     public void attackEngine(String noun){
             if (playerLocation.getNpc().getName().equalsIgnoreCase(noun)){
                 LocationFrame.textDisplayGui("You attacked " + playerLocation.getNpc().getName());
@@ -148,5 +156,9 @@ public class Player {
 
     public void setActionTracker(int actionTracker) {
         this.actionTracker = actionTracker;
+    }
+
+    public ArrayList<String> getInventory() {
+        return inventory;
     }
 }
