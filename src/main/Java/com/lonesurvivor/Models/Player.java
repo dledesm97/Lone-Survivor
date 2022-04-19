@@ -1,6 +1,7 @@
 package com.lonesurvivor.Models;
 
 import com.lonesurvivor.Items.Item;
+import com.lonesurvivor.NPC.NPC;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Views.LocationFrame;
 import com.lonesurvivor.Views.MasterGui;
@@ -127,6 +128,11 @@ public class Player {
         } else {
             return "You couldn't find any items, try searching somewhere else.";
         }
+    }
+
+    public void talkEngine(String noun){
+        NPC npc = new NPC();
+        npc.talking(noun);
     }
 
     // Accessor Methods **********************

@@ -2,7 +2,7 @@
 package com.lonesurvivor.Utils;
 
 import com.lonesurvivor.Models.Location;
-import com.lonesurvivor.Models.NPC;
+import com.lonesurvivor.NPC.NPC;
 import org.json.simple.parser.JSONParser;
 import org.junit.Test;
 

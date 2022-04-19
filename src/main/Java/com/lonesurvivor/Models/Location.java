@@ -1,5 +1,7 @@
 package com.lonesurvivor.Models;
 
+import com.lonesurvivor.NPC.NPC;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
