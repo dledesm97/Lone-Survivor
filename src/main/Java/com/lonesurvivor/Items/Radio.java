@@ -42,7 +42,11 @@ public class Radio extends Item{
             clip.start();
             timer.schedule(new TimerTask() {
                 public void run(){
-                    sendMessage();
+                    try {
+                        sendMessage();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             },3000);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
@@ -50,13 +54,14 @@ public class Radio extends Item{
         }
     }
 
-    public void sendMessage(){
-        LocationFrame.textDisplayGui("You: If someone *BREAK* is out there *BREAK* please send some help! *BREAK* I was in flight 210, *BREAK* my name is Rennie!!!");
+    public void sendMessage() throws InterruptedException {
         timer.schedule(new TimerTask() {
             public void run(){
                 stopAudio();
             }
-        },1000);
+        },8000);
+        LocationFrame.textDisplayGui("You: If someone *BREAK* is out there *BREAK* please send some help! *BREAK* I was in flight 210, *BREAK* my name is Rennie!!!");
+        Thread.sleep(5000);
         LocationFrame.textDisplayGui("YOU: I SAY AGAIN! *BREAK* S.O.S my name is RENNIE! *OUT*");
     }
 
@@ -73,7 +78,7 @@ public class Radio extends Item{
         LocationFrame.textDisplayGui("Wait a second...you here breaking static and a faint voice emerging from the static. You turn up the volume. " +
                 "\nVOICE: COPY! RENNIE this is DAVID! *BREAK* We have your location *BREAK* standby for helicopter rescue in 5! *OUT*");
         try{
-            Thread.sleep(5000);
+            Thread.sleep(8000);
         }catch(InterruptedException e){
         e.printStackTrace();
         }

@@ -76,9 +76,8 @@ public class Player {
             LocationFrame.textDisplayGui(viewLocItems());
         }
         else{
-            LocationFrame.textDisplayGui("Its dark, you need to USE a FLASHLIGHT to do that.\nIf you don't have one maybe you should try and LOOK AROUND somewhere in the PLANE for one");
+            LocationFrame.textDisplayGui("Its dark, you need to USE a FLASHLIGHT to do that.\nIf you don't have one maybe you should try and LOOK AROUND somewhere in the PLANE for one.");
         }
-
         actionTracker++;
     }
 
@@ -96,7 +95,6 @@ public class Player {
     }
 
     public void attackEngine(String noun){
-
             if (currentLocation.getNpc().getName().equalsIgnoreCase(noun)){
                 AttackEngine attackEngine = new AttackEngine();
                 attackEngine.attack();
@@ -105,7 +103,7 @@ public class Player {
 
             }
             else{
-                LocationFrame.textDisplayGui("Can't attack that");
+                LocationFrame.textDisplayGui("You can't attack that!");
             }
     }
 
@@ -118,13 +116,17 @@ public class Player {
         }
     }
 
+    //view formatted string message of items in the current location
     public String viewLocItems(){
-        String itemMsg = "";
+        String separator = " ";
+        StringBuilder itemMsg = new StringBuilder();
         if(currentLocation.hasItems()){
             for(String item : currentLocation.getItems()){
-                itemMsg = item.toUpperCase();
+                itemMsg.append(separator);
+                itemMsg.append(item.toUpperCase());
+                separator = ", ";
             }
-            return "\nAfter some searching you can see the following items: " + itemMsg + ".";
+            return "\nAfter some searching you can see the following items:" + itemMsg + ".";
         } else {
             return "You couldn't find any items, try searching somewhere else.";
         }
