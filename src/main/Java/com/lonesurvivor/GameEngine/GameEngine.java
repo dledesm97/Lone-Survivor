@@ -2,7 +2,7 @@ package com.lonesurvivor.GameEngine;
 
 import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.MusicClass;
-//import com.lonesurvivor.Models.NPC;
+//import com.lonesurvivor.NPC.NPC;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
@@ -150,6 +150,13 @@ public class GameEngine {
                    System.out.println(e.getMessage());
                }
                break;
+            case "talk":
+                try{
+                    Player.getInstance().talkEngine(command.get(1));
+                }catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
             default:
 
         }

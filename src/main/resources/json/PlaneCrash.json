@@ -1,7 +1,7 @@
 [
   {
     "locationName": "cockpit",
-    "locationDescription": "This is the Cockpit. The PILOT flies the plane from here, maybe he survived...\nIf you go outside the plane you might get lost maybe something in here can help you navigate around the dense unknown forest.",
+    "locationDescription": "This is the Cockpit. The PILOT flies the plane from here, wait he survived...\nI should TALK to the PILOT and find out what happened \nIf you go outside the plane you might get lost maybe something in here can help you navigate around the dense unknown forest.",
     "locationImage" : "images/cockpit.jpg",
     "locationItems": ["radio", "compass"],
     "locationNPC": {"name": "pilot","power":6.0},
