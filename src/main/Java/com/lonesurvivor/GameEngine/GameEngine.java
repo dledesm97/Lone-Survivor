@@ -53,13 +53,13 @@ public class GameEngine {
         while (hasWon){
             textDisplayGui("You have arrived to the TLG Building and regrouped with Clay, Izzy, Percell and David.\n You are in good hands with them, they will take over from here! Thanks for playing!");
             Thread.sleep(5000);
-           return true;
+            return true;
         }
         return false;
     }
 
     public void dayTracker(){
-    //for every 10 action points, a day pass and it get reset.
+        //for every 10 action points, a day pass and it get reset.
         if (Player.getInstance().getActionTracker() > 10){
             dayCount++;
             Player.getInstance().setActionTracker(0);
@@ -119,6 +119,7 @@ public class GameEngine {
             }
                 break;
             case "use": try{
+
                 Player.getInstance().useEngine(command.get(1));
             }catch (Exception e) {
                 System.out.println(e.getMessage());
