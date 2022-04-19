@@ -12,19 +12,12 @@ import java.util.*;
 
 public class Player {
 
-
     private static Player player = null;
 
-    //CONSTANTS
-    private static final String GAME_INFO_PATH = "json/gameInfo.json";
-
     // Fields ***************************************
-
-//    private String name;
     private ArrayList<String> inventory = new ArrayList<>();
-    private Location playerLocation;
+    private Location currentLocation;
     private List<Location> locations;
-//    private JSONParserClass jsonParserClass = getInstance();
     private int health = 50;
     private int actionTracker = 0;
 
@@ -46,12 +39,11 @@ public class Player {
 
     // Business Methods ***********************************
     public void moveEngine(String noun) throws IOException {
-        for (Map.Entry<String, String> set : playerLocation.getDirection().entrySet()) {
+        for (Map.Entry<String, String> set : currentLocation.getDirection().entrySet()) {
             if (set.getKey().equalsIgnoreCase(noun)){
                 for(Location aLocation : locations){
-                    if (set.getValue().equals(aLocation.getName()))
-                    {
-                        setPlayerLocation(aLocation);
+                    if (set.getValue().equals(aLocation.getName())) {
+                        setCurrentLocation(aLocation);
                         actionTracker++;
                         MasterGui.refreshFrames();
                     }
@@ -61,11 +53,11 @@ public class Player {
     }
 
     public void getEngine(String noun) throws IOException {
-        for (String aItem : playerLocation.getItems()){
+        for (String aItem : currentLocation.getItems()){
             if (aItem.equalsIgnoreCase(noun)){
                 addItems(aItem);
-                getPlayerLocation().getItems().remove(aItem);
-                LocationFrame.textDisplayGui("You picked up a " + aItem);
+                getCurrentLocation().getItems().remove(aItem);
+                LocationFrame.textDisplayGui("You picked up a " + aItem.toUpperCase() + ".");
                 MasterGui.refreshInventoryBox();
             }
         }
@@ -77,19 +69,21 @@ public class Player {
         //You look around and see to the north: first class, south: service area
         //you see the following items: flashlight, life jacket, etc.
 
-        String locationName = Player.getInstance().getPlayerLocation().getName();
+        String locationName = Player.getInstance().getCurrentLocation().getName();
         if(locationName.equals("forest") || locationName.equals("forest dead end") || locationName.equals("bridge") || locationName.equals("village") || locationName.equals("outside plane") || locationName.equals("economy class")) {
-            LocationFrame.textDisplayGui("You look around and see: \n" + playerLocation.getDescription() +
-                    "\nItems: " + playerLocation.getItems());
+            LocationFrame.textDisplayGui(viewLocItems());
         }
         else{
-            LocationFrame.textDisplayGui("You need to USE a FLASHLIGHT to look around\nIf you don't have one maybe you should LOOK AROUND in the plane");
+            LocationFrame.textDisplayGui("Its dark, you need to USE a FLASHLIGHT to do that.\nIf you don't have one maybe you should try and LOOK AROUND somewhere in the PLANE for one");
         }
+
+        actionTracker++;
     }
 
     public void useEngine(String noun) throws IOException, InterruptedException {
         Item item = new Item(noun);
         item.useItem();
+        actionTracker++;
     }
 
     public void quitEngine(String noun){
@@ -100,8 +94,8 @@ public class Player {
     }
 
     public void attackEngine(String noun){
-            if (playerLocation.getNpc().getName().equalsIgnoreCase(noun)){
-                LocationFrame.textDisplayGui("You attacked " + playerLocation.getNpc().getName());
+            if (currentLocation.getNpc().getName().equalsIgnoreCase(noun)){
+                LocationFrame.textDisplayGui("You attacked " + currentLocation.getNpc().getName());
             }
             else{
                 LocationFrame.textDisplayGui("Can't attack that");
@@ -113,7 +107,19 @@ public class Player {
             LocationFrame.textDisplayGui(JSONParserClass.getInstance().commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
-           LocationFrame.textDisplayGui(JSONParserClass.getInstance().parseGameInfo(GAME_INFO_PATH));
+           LocationFrame.textDisplayGui(JSONParserClass.getInstance().parseGameInfo());
+        }
+    }
+
+    public String viewLocItems(){
+        String itemMsg = "";
+        if(currentLocation.hasItems()){
+            for(String item : currentLocation.getItems()){
+                itemMsg = item.toUpperCase();
+            }
+            return "\nAfter some searching you can see the following items: " + itemMsg + ".";
+        } else {
+            return "You couldn't find any items, try searching somewhere else.";
         }
     }
 
@@ -126,12 +132,12 @@ public class Player {
         inventory.add(aItem);
     }
 
-    public void setPlayerLocation(Location location) {
-        playerLocation = location;
+    public void setCurrentLocation(Location location) {
+        currentLocation = location;
     }
 
-    public Location getPlayerLocation() {
-        return playerLocation;
+    public Location getCurrentLocation() {
+        return currentLocation;
     }
 
     public int getHealth() {
@@ -140,10 +146,6 @@ public class Player {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public List<Location> getLocations() {
-        return locations;
     }
 
     public void setLocations(List<Location> locations) {

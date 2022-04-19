@@ -2,7 +2,7 @@ package com.lonesurvivor.GameEngine;
 
 import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.MusicClass;
-import com.lonesurvivor.Models.NPC;
+//import com.lonesurvivor.Models.NPC;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
@@ -22,7 +22,7 @@ public class GameEngine {
     //field variables
     private TextParser parser;
     private List<Location> locations;
-    private NPC npc;
+//    private NPC npc;
     private List<String> command;
     public static int dayCount = 1;
     private boolean hasWon = false;
@@ -39,54 +39,56 @@ public class GameEngine {
         return engine;
     }
 
-    public GameEngine() throws IOException, ParseException {
-        // initializes the object and sets the locations list and default player location
+    // private ctor initializes the object and sets the locations list and default player location
+    private GameEngine() throws IOException, ParseException {
         parser = new TextParser();
         locations = JSONParserClass.getInstance().locationGenerator(LOCATION_PATH);
         Player.getInstance().setLocations(locations);
-        Player.getInstance().setPlayerLocation(locations.get(2));
-
+        Player.getInstance().setCurrentLocation(locations.get(2));
     }
 
+    //public method that runs the game
     public boolean startGame() throws IOException, ParseException, InterruptedException {
-        hasWon = checkWin(Player.getInstance().getPlayerLocation());
-        while (hasWon){
-            textDisplayGui("You have arrived to the TLG Building and regrouped with Clay, Izzy, Percell and David.\n You are in good hands with them, they will take over from here! Thanks for playing!");
-            Thread.sleep(5000);
-            return true;
+        dayTracker();
+        checkWin(Player.getInstance().getCurrentLocation());
+        if (hasWon){
+            textDisplayGui("\nYou've entered the building and HOOORAY! You have regrouped with Clay, Izzy, Percell, and David.\n You are in good hands with them, they will take over from here!\nCONGRATULATIONS!! Thanks for playing!");
+            Thread.sleep(3000);
+            return hasWon = true;
         }
-        return false;
+        return hasWon;
     }
 
+    /*Tracks the Current Day's count
+     for every 10 action points, a day passes & action points is reset.
+     */
     public void dayTracker(){
-        //for every 10 action points, a day pass and it get reset.
-        if (Player.getInstance().getActionTracker() > 10){
+        if (Player.getInstance().getActionTracker() >= 10){
             dayCount++;
             Player.getInstance().setActionTracker(0);
         }
     }
 
-    public boolean checkWin(Location playerLocation) {
+    //verifies if player has won the game
+    public boolean checkWin(Location playerLocation) throws InterruptedException {
         if(playerLocation.getName().equals(locations.get(9).getName())) {
-            return true;
+            return hasWon = true;
+        } else if (dayCount == 4) {
+            textDisplayGui("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.\n You died. Better luck next time!");
+            Thread.sleep(1800);
+            System.exit(0);
         }
-        //TODO: either handle for rescued win on day 3 OR decide that they die
-        //FIXME: edit gameinfo.json to reflect these results
-//        else if (dayCount == 4) {
-//            textDisplayGui("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.\n You died. Thank you for playing.");
-//            System.exit(0);
-//        }
         return false;
     }
 
-    public void handleInput(String input){// public method handleInput if you give it input from GUI (copy and paste from above)
+    // handles user input from GUI
+    public void handleInput(String input){
         try {
             parser.InitialInput(input);
             if (parser.getValidCommand().size() == 2) {
                 command = parser.getValidCommand();
                 commandProcessor();
             }
-
         } catch (IOException | ParseException e) {
             System.out.println(e.getMessage());
         } catch (java.text.ParseException e) {
@@ -94,7 +96,7 @@ public class GameEngine {
         }
     }
 
-    //process player commands
+    //triggers valid player commands
     public void commandProcessor() throws IOException, ParseException, java.text.ParseException {
         switch (command.get(0)) {
             case "go":
@@ -105,48 +107,48 @@ public class GameEngine {
                     System.out.println(e.getMessage());
                 }
                 break;
-            case "get": try {
-                Player.getInstance().getEngine(command.get(1));
-                MusicClass.soundFx(command.get(0));
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            case "get":
+                try {
+                    Player.getInstance().getEngine(command.get(1));
+                    MusicClass.soundFx(command.get(0));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
-            case "look": try{
-                Player.getInstance().lookEngine(command.get(1));
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            case "look":
+                try {
+                    Player.getInstance().lookEngine(command.get(1));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
-            case "use": try{
-
-                Player.getInstance().useEngine(command.get(1));
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            case "quit": try{
-                Player.getInstance().quitEngine(command.get(1));
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            case "use":
+                try{
+                    Player.getInstance().useEngine(command.get(1));
+                }catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            case "quit":
+                try{
+                    Player.getInstance().quitEngine(command.get(1));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
-            case "help": try{
-                Player.getInstance().helpEngine(command.get(1));
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
+            case "help":
+                try{
+                    Player.getInstance().helpEngine(command.get(1));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case "attack":
                 //conflict engine
                 Player.getInstance().attackEngine(command.get(1));
         }
-
     }
+
     public int getDayCount() {
         return dayCount;
-    }
-
-    public void setDayCount(int dayCount) {
-        GameEngine.dayCount = dayCount;
     }
 }

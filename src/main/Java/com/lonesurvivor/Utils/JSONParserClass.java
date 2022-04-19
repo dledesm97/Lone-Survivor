@@ -20,8 +20,8 @@ public class JSONParserClass {
     private static JSONParserClass parser = null;
 
     //constants
-    public static final String COMMAND_LIST = "json/CommandList.json";
-
+    private static final String COMMAND_LIST = "json/CommandList.json";
+    private static final String GAME_INFO_PATH = "json/gameInfo.json";
 
     //field variables
     private JSONParser jsonParser = new JSONParser(); //json simple instance
@@ -116,8 +116,8 @@ public class JSONParserClass {
         return commands;
     }
 
-    public String parseGameInfo(String filename) throws IOException, ParseException {
-        InputStream inputStream = getFileFromResourceAsStream(filename);
+    public String parseGameInfo() throws IOException, ParseException {
+        InputStream inputStream = getFileFromResourceAsStream(GAME_INFO_PATH);
         InputStreamReader isr = new InputStreamReader(inputStream);
         JSONObject infoFile = (JSONObject) jsonParser.parse(isr);
         return (String) infoFile.get("gameInfo");

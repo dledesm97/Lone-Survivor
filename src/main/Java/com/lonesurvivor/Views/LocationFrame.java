@@ -23,6 +23,10 @@ public class LocationFrame extends JPanel  implements ActionListener{
     private static JTextField commandInput;
     private static String text;
 
+    //constants
+    private static final String GREY_STYLING = "#3D3D3D";
+    private static final String DARK_GREY_STYLING = "#333333";
+
     //exits
     private JButton north;
     private JButton south;
@@ -38,17 +42,24 @@ public class LocationFrame extends JPanel  implements ActionListener{
 
     //players inventory
     private JList inventoryBox;
-    private JSeparator separator;
+
+    //separators
+    private JSeparator bottomSeparator;
+    private JSeparator topSeperator;
 
     private JLabel imageLabel;
-
-    private JScrollPane jScroll;
-    private JTextArea playerStatsDisplay;
-    private JSeparator seperatorTwo;
-    private JLabel playerStatsLabel;
     private JFrame frame;
 
+    private JLabel playerStatsLabel;
+    private JTextArea playerStatsDisplay;
+    private JScrollPane jScroll;
+
+
+
+
     public LocationFrame() throws IOException {
+
+        Font monospacedFont = new Font(Font.MONOSPACED,  Font.PLAIN, 13);
 
         //File dropdown menu
         JMenu fileMenu = new JMenu ("File"); //1st dropdown header
@@ -70,34 +81,84 @@ public class LocationFrame extends JPanel  implements ActionListener{
         menuBar.add (helpMenu);
 
         //construct exit --directional-- components
-        north = new JButton ("N");
-        south = new JButton ("S");
-        east = new JButton ("E");
-        west = new JButton ("W");
+        north = new JButton("N");
+        south = new JButton("S");
+        east = new JButton("E");
+        west = new JButton("W");
+
+        //exit btns' styling
+        north.setBackground(Color.WHITE);
+        north.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
+        north.setForeground(Color.RED);
+        north.setFocusPainted(false);
+        north.setBorder(null);
+
+        south.setBackground(Color.WHITE);
+        south.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
+        south.setForeground(Color.RED);
+        south.setFocusPainted(false);
+        south.setBorder(null);;
+
+        east.setBackground(Color.WHITE);
+        east.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
+        east.setForeground(Color.RED);
+        east.setFocusPainted(false);
+        east.setBorder(null);
+
+        west.setBackground(Color.WHITE);
+        west.setFont(new Font(Font.MONOSPACED, Font.BOLD, 15));
+        west.setForeground(Color.RED);
+        west.setFocusPainted(false);
+        west.setBorder(null);
 
         //player input command section
         enterComdsLabel = new JLabel ("Enter Commands");
-        enterBtn = new JButton ("Enter");
+        enterComdsLabel.setForeground(Color.WHITE);
+        enterComdsLabel.setFont(new Font(Font.MONOSPACED, Font.BOLD, 11));
+
+        //enter btn styling
+        enterBtn = new JButton ("ENTER");
+        enterBtn.setBackground(Color.WHITE);
+        enterBtn.setFont(new Font(Font.MONOSPACED, Font.BOLD, 13));
+        enterBtn.setForeground(Color.RED);
+        enterBtn.setFocusPainted(false);
+        enterBtn.setBorder(null);
         commandInput = new JTextField (5);
+        commandInput.setBackground(Color.decode(DARK_GREY_STYLING));
+        commandInput.setForeground(Color.white);
+        commandInput.setBorder(new LineBorder(Color.decode(GREY_STYLING)));
+        commandInput.setCaretColor(Color.WHITE);
+        commandInput.setFont(new Font(Font.MONOSPACED, Font.ITALIC, 10));
 
         //text display properties
         textDisplay = new JTextArea (10, 5);
         textDisplay.setEnabled (false);
-        textDisplay.setBackground(Color.lightGray);
-        textDisplay.setDisabledTextColor(Color.BLACK);
-        textDisplay.setBorder(new LineBorder(Color.BLACK));
+        textDisplay.setBackground(Color.decode(DARK_GREY_STYLING));
+        textDisplay.setDisabledTextColor(Color.WHITE);
+//        textDisplay.setBorder(new LineBorder(Color.decode(GREY_STYLING), 8));
+        textDisplay.setFont(monospacedFont);
         textDisplay.setLineWrap(true);
         jScroll = new JScrollPane(textDisplay); //enable scrollable text-box
-        separator = new JSeparator();
+        jScroll.setBorder(new LineBorder(Color.decode(GREY_STYLING)));
+
+        //separator --styling-- has 2 default colors to override
+        bottomSeparator = new JSeparator();
+        bottomSeparator.setForeground(Color.decode(GREY_STYLING));//top line color
+        bottomSeparator.setBackground(Color.decode(GREY_STYLING).brighter()); //bottom line color
 
         //player's status
-        playerStatsLabel = new JLabel ("Player Stats");
+        playerStatsLabel = new JLabel ();
         playerStatsDisplay = new JTextArea (5, 5);
         playerStatsDisplay.setEnabled(false);
-        playerStatsDisplay.setBackground(Color.lightGray);
-        playerStatsDisplay.setBorder(new LineBorder(Color.BLACK));
-        playerStatsDisplay.setDisabledTextColor(Color.BLACK);
-        seperatorTwo = new JSeparator ();
+        playerStatsDisplay.setBackground(Color.decode(DARK_GREY_STYLING));
+        playerStatsDisplay.setBorder(new LineBorder(Color.decode(GREY_STYLING)));
+        playerStatsDisplay.setFont(monospacedFont);
+        playerStatsDisplay.setDisabledTextColor(Color.WHITE);
+
+        //top separator styling
+        topSeperator = new JSeparator ();
+        topSeperator.setForeground(Color.decode(GREY_STYLING));
+        topSeperator.setBackground(Color.decode(GREY_STYLING).brighter());
 
         //btn's action listeners
         enterBtn.addActionListener(this);
@@ -108,49 +169,47 @@ public class LocationFrame extends JPanel  implements ActionListener{
         commandInput.addActionListener(this);
         soundItem.addActionListener(this);
 
-        //adjust size and set layout
+        //frame size & layout
         setPreferredSize(new Dimension(626, 705));
         setLayout(null);
-        setBackground(Color.LIGHT_GRAY);
+        setBackground(Color.decode("#292929"));
 
         //left-hand menu component
-        add (menuBar);
+        add(menuBar);
 
         //exits component
-        add (north);
-        add (south);
-        add (west);
-        add (east);
+        add(north);
+        add(south);
+        add(west);
+        add(east);
 
         //userinput component
-        add (enterComdsLabel);
-        add (enterBtn);
-        add (commandInput);
+        add(enterComdsLabel);
+        add(enterBtn);
+        add(commandInput);
 
-        add (separator);
+        add(bottomSeparator);
 
-        add (jScroll);
-        add (seperatorTwo);
-        add (playerStatsDisplay);
-        add (playerStatsLabel);
+        add(jScroll);
+        add(topSeperator);
+        add(playerStatsDisplay);
+        add(playerStatsLabel);
 
         //set component bounds (only needed by Absolute Positioning)
-        north.setBounds (500, 625, 55, 25);
-        south.setBounds (500, 675, 55, 25);
-        east.setBounds (555, 650, 55, 25);
-        menuBar.setBounds (0, 0, 1160, 30);
-        west.setBounds (445, 650, 55, 25);
+        north.setBounds(500, 625, 55, 25);
+        south.setBounds(500, 675, 55, 25);
+        east.setBounds(555, 650, 55, 25);
+        menuBar.setBounds(0, 0, 1160, 30);
+        west.setBounds(445, 650, 55, 25);
         jScroll.setBounds(15, 495, 410, 125);
-        commandInput.setBounds (20, 650, 205, 30);
-        enterComdsLabel.setBounds (20, 625, 100, 25);
-        enterBtn.setBounds (245, 650, 80, 30);
+        commandInput.setBounds(20, 650, 205, 30);
+        enterComdsLabel.setBounds(20, 625, 100, 25);
+        enterBtn.setBounds(245, 650, 80, 30);
 //        InventoryBox.setBounds (445, 495, 165, 125);
-        separator.setBounds (0, 470, 1160, 5);
-        playerStatsDisplay.setBounds (15, 50, 595, 55);
-        seperatorTwo.setBounds (0, 115, 1160, 5);
-        playerStatsLabel.setBounds (15, 30, 100, 25);
-//        imageLabel.setBounds(15, 130, 595, 320);
-
+        bottomSeparator.setBounds(0, 470, 1160, 5);
+        playerStatsDisplay.setBounds(15, 50, 595, 55);
+        topSeperator.setBounds(0, 115, 1160, 5);
+        playerStatsLabel.setBounds(15, 30, 100, 25);
 
         //setting up player data
         setImageLabel();
@@ -162,7 +221,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
 
     public void setImageLabel() throws IOException {
         if(imageLabel == null) {
-            InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getPlayerLocation().getImage());
+            InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getCurrentLocation().getImage());
             Image locationImageFile = ImageIO.read(imageFile);
             ImageIcon imageIcon = new ImageIcon(locationImageFile); // load the image to a imageIcon
             Image image = imageIcon.getImage(); // transform it
@@ -172,7 +231,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
             imageLabel.setBounds(15, 130, 595, 320);
         } else {
             remove(imageLabel);
-            InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getPlayerLocation().getImage());
+            InputStream imageFile = getFileFromResourceAsStream(Player.getInstance().getCurrentLocation().getImage());
             Image locationImageFile = ImageIO.read(imageFile);
             ImageIcon imageIcon = new ImageIcon(locationImageFile); // load the image to a imageIcon
 
@@ -194,15 +253,17 @@ public class LocationFrame extends JPanel  implements ActionListener{
             remove(inventoryBox);
         }
         inventoryBox = new JList(Player.getInstance().getItems().toArray());
-        inventoryBox.setBackground(Color.lightGray);
-        inventoryBox.setBorder(new LineBorder(Color.BLACK));
+        inventoryBox.setBackground(Color.decode(DARK_GREY_STYLING));
+        inventoryBox.setBorder(new LineBorder(Color.decode(GREY_STYLING)));
         inventoryBox.setBounds(445, 495, 165, 125);
+        inventoryBox.setForeground(Color.WHITE);
+        inventoryBox.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
         add(inventoryBox);
         revalidate();
         repaint();
     }
     public void locationMapper(){
-        textDisplayGui(Player.getInstance().getPlayerLocation().getDescription());
+        textDisplayGui(Player.getInstance().getCurrentLocation().getDescription());
     }
 
     //parses text input in GUI
@@ -220,7 +281,8 @@ public class LocationFrame extends JPanel  implements ActionListener{
 
     //displays player status in GUI
     public void setPlayerStatsDisplay(){
-        playerStatsDisplay.setText("  Day: " + GameEngine.getInstance().getDayCount() + "\tHealth: " + Player.getInstance().getHealth());
+        playerStatsDisplay.setText("\n  Day: " + GameEngine.getInstance().getDayCount() + "   Health: " + Player.getInstance().getHealth()
+            + "   Location: " + Player.getInstance().getCurrentLocation().getName().toUpperCase());
     }
 
     private void renderSoundFrame() {
@@ -230,7 +292,6 @@ public class LocationFrame extends JPanel  implements ActionListener{
         frame.getContentPane().add (musicClass);
         frame.pack();
         frame.setVisible (true);
-
     }
 
     @Override
@@ -253,7 +314,7 @@ public class LocationFrame extends JPanel  implements ActionListener{
                 case "W":
                     game.handleInput("go west");
                     break;
-                case "Enter":
+                case "ENTER":
                     textParser();
                     break;
                 case "Sound":
