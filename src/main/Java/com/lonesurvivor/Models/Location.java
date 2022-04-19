@@ -56,6 +56,10 @@ public class Location {
         return image;
     }
 
+    public void deleteNpc() {
+        npc = null;
+    }
+
     @Override
     public String toString() {
         return "Location{" +

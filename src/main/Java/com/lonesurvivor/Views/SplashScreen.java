@@ -1,5 +1,6 @@
 package com.lonesurvivor.Views;
 
+import com.lonesurvivor.Models.MusicClass;
 import com.lonesurvivor.Utils.JSONParserClass;
 import org.json.simple.parser.ParseException;
 
@@ -59,6 +60,7 @@ public class SplashScreen extends JPanel implements ActionListener {
             if(e.getActionCommand().equalsIgnoreCase("start")){
                 try {
                     MasterGui.renderLocationFrame();
+                    MusicClass.backgroundFx();
                 } catch (IOException | ParseException | java.text.ParseException ex) {
                     ex.printStackTrace();
                 }
