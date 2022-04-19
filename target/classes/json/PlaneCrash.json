@@ -1,7 +1,7 @@
 [
   {
     "locationName": "cockpit",
-    "locationDescription": "This is the Cockpit. The PILOT flies the plane from here, you should see if he survived...\nMaybe you can TALK to the PILOT and find out what happened. \n\nIf you go outside the plane you might get lost maybe something in here can help you navigate around the dense unknown forest.",
+    "locationDescription": "This is the Cockpit. The PILOT flies the plane \nfrom here, you should see if he survived...\nMaybe you can TALK to the PILOT and find out \nwhat happened. \nIf you go outside the plane you can get lost, maybe something in here can help you navigate \naround the dense unknown forest.",
     "locationImage" : "images/cockpit.jpg",
     "locationItems": ["compass"],
     "locationNPC": {"name": "pilot","power":6.0},
@@ -25,7 +25,7 @@
   },
   {
     "locationName": "service area",
-    "locationDescription": "This is the Service Area typically run by the flight attendants. There might be something edible near by...",
+    "locationDescription": "This is the Service Area typically run by the \nflight attendants.WAIT I see someone...I should TALK to the ATTENDANT and then maybe \nsearch around here",
     "locationImage" : "images/service_area.png",
     "locationItems": ["food", "knife"],
     "locationNPC": {"name": "attendant","power": 5.0},
@@ -57,7 +57,7 @@
   },
   {
     "locationName": "bridge",
-    "locationDescription": "You come across an old steel bridge that splits EAST and SOUTH is appears to be wrapped in vegetation. Seems safe to cross...Hopefully there is no TROLL!",
+    "locationDescription": "You come across an old steel bridge that splits EAST and SOUTH is appears to be wrapped in vegetation. Seems safe to cross...Wait there's something weird looking here, it look like a TROLL, I need to TALK to it",
     "locationImage" : "images/bridge.jpg",
     "locationItems": ["radio"],
     "locationNPC": {"name": "troll","power": 7.0},
@@ -65,7 +65,7 @@
   },
   {
     "locationName": "village",
-    "locationDescription": "You found a hidden forest village that has seen better days, however, you see human faces about. You feel relieved, but do not know if they are friendly or foe.",
+    "locationDescription": "You found a hidden forest village that has seen better days, however, you see human faces about. You feel relieved, but do not know if they are friendly or foe. There is a SURVIVOR it looks like they want to TALK",
     "locationImage" : "images/forest_village.jpg",
     "locationItems": [],
     "locationNPC": {"name": "survivor","power": 6.0},

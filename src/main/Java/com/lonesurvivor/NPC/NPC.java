@@ -27,6 +27,21 @@ public class NPC {
                 case "pilot":
                     Pilot pilot = new Pilot();
                     pilot.firstDialogue();
+                    break;
+                case "attendant":
+                    Attendant attendant = new Attendant();
+                    attendant.firstDialogue();
+                    break;
+                case "troll":
+                    Troll troll = new Troll();
+                    troll.firstDialogue();
+                    break;
+                case"survivor":
+                    Survivor survivor = new Survivor();
+                    survivor.firstDialogue();
+                    break;
+                default:
+                    LocationFrame.textDisplayGui("Umm they cant talk");
             }
         }
         else{

@@ -46,7 +46,7 @@ public class MasterGui implements ActionListener {
 
         while(won == false) {
             won = game.startGame();
-            Thread.sleep(3000); //wait 3 seconds
+            Thread.sleep(5000); //wait 3 seconds
         }
         System.exit(0);
     }

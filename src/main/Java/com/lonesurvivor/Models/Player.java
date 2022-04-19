@@ -76,7 +76,7 @@ public class Player {
             LocationFrame.textDisplayGui(viewLocItems());
         }
         else{
-            LocationFrame.textDisplayGui("Its dark, you need to USE a FLASHLIGHT to do that.\nIf you don't have one maybe you should try and LOOK AROUND somewhere in the PLANE for one.");
+            LocationFrame.textDisplayGui("Its dark, you need to USE a FLASHLIGHT to do \nthat.\nIf you don't have one maybe you should try and \nLOOK AROUND somewhere in the PLANE for one.");
         }
         actionTracker++;
     }
@@ -126,7 +126,7 @@ public class Player {
                 itemMsg.append(item.toUpperCase());
                 separator = ", ";
             }
-            return "\nAfter some searching you can see the following items:" + itemMsg + ".";
+            return "\nAfter some searching you can see the following \nitems:" + itemMsg + ".";
         } else {
             return "You couldn't find any items, try searching somewhere else.";
         }
