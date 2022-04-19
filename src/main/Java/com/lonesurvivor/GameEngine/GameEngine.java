@@ -79,7 +79,7 @@ public class GameEngine {
             return hasWon = true;
         } else if (dayCount == 4) {
             textDisplayGui("The trekking through uncharted forest takes its toll on you over 3 days and you succumb to your fatigue and injuries.\n You died. Better luck next time!");
-            Thread.sleep(1800);
+            Thread.sleep(4000);
             System.exit(0);
         }
         return false;
