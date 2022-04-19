@@ -12,6 +12,7 @@ public class Location {
     private ArrayList<String> items;
     private NPC npc;
     private Map<String, String> direction;
+    private Boolean itemsPresent = false;
 
     public Location(String name, String description, String image , ArrayList<String> items, NPC npc, HashMap<String, String> direction) {
         this.name = name;
@@ -21,6 +22,15 @@ public class Location {
         this.npc = npc;
         this.direction = direction;
     }
+
+    public Boolean hasItems(){
+        if (items.size() > 0){
+            return itemsPresent = true;
+        } else{
+            return itemsPresent = false;
+        }
+    }
+
 
     public String getName() {
         return name;

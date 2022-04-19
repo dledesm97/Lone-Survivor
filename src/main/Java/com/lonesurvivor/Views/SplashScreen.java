@@ -45,8 +45,8 @@ public class SplashScreen extends JPanel implements ActionListener {
         startBtn.addActionListener(this);
 
         //add components
-        add (startBtn);
-        add (imageLabel);
+        add(startBtn);
+        add(imageLabel);
 
         //set component bounds (only needed by Absolute Positioning)
         startBtn.setBounds (265, 465, 95, 28);

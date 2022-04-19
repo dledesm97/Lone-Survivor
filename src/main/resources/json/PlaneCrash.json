@@ -1,7 +1,7 @@
 [
   {
     "locationName": "cockpit",
-    "locationDescription": "This is the cockpit. The PILOT flies the plane from here, maybe he survived....\nLooks like I will get lost if I go outside this plane maybe something in here \ncan help me navigate",
+    "locationDescription": "This is the Cockpit. The PILOT flies the plane from here, maybe he survived...\nIf you go outside the plane you might get lost maybe something in here can help you navigate around the dense unknown forest.",
     "locationImage" : "images/cockpit.jpg",
     "locationItems": ["radio", "compass"],
     "locationNPC": {"name": "pilot","power":6.0},
@@ -9,7 +9,7 @@
   },
   {
     "locationName": "first class",
-    "locationDescription": "This is the first class seating area.",
+    "locationDescription": "This is the First Class seating area.",
     "locationImage" : "images/first_class.png",
     "locationItems": ["flare", "raft"],
     "locationNPC": {"name": "","power": 0.0},
@@ -17,7 +17,7 @@
   },
   {
     "locationName": "economy class",
-    "locationDescription": "This is the economy sitting area.",
+    "locationDescription": "This is the Economy sitting area.",
     "locationImage" : "images/cabin.png",
     "locationItems": ["flashlight"],
     "locationNPC": {"name": "","power": 0.0},
@@ -25,7 +25,7 @@
   },
   {
     "locationName": "service area",
-    "locationDescription": "This is the service area run by the flight attendants.",
+    "locationDescription": "This is the Service Area typically run by the flight attendants. There might be something edible near by...",
     "locationImage" : "images/service_area.png",
     "locationItems": ["food", "knife"],
     "locationNPC": {"name": "attendant","power": 5.0},
@@ -57,7 +57,7 @@
   },
   {
     "locationName": "bridge",
-    "locationDescription": "An old steel bridge that goes east is wrapped in vegetation appears. Seems safe to cross. Hopefully there is no troll",
+    "locationDescription": "You come across an old steel bridge that splits EAST and SOUTH is appears to be wrapped in vegetation. Seems safe to cross...Hopefully there is no troll",
     "locationImage" : "images/bridge.jpg",
     "locationItems": [],
     "locationNPC": {"name": "troll","power": 7.0},
@@ -65,7 +65,7 @@
   },
   {
     "locationName": "village",
-    "locationDescription": "You come across a local village and see human faces about. You feel relieved, but do not know if they are friendly or foes",
+    "locationDescription": "You found a hidden forest village that has seen better days, however, you see human faces about. You feel relieved, but do not know if they are friendly or foe",
     "locationImage" : "images/forest_village.jpg",
     "locationItems": [],
     "locationNPC": {"name": "survivor","power": 6.0},
@@ -73,7 +73,7 @@
   },
   {
     "locationName": "tlg building",
-    "locationDescription": "You entered the village, but there seems to be one building left..the TLG Building",
+    "locationDescription": "Upon entering the village, you notice a peculiar building with the signage that reads, \"TLG\"...odds are odd, but you decide to check it out.",
     "locationImage" : "images/building.jpg",
     "locationItems": [],
     "locationNPC": {"name": "clay","power": 8.0},
@@ -81,7 +81,7 @@
   },
   {
     "locationName": "lair",
-    "locationDescription": "You hear low growling noises, and you see what looks to be a mutated bear and probably the result of a bad science experiment! ",
+    "locationDescription": "You hear low growling noises, and you see what looks to be a mutated BEAR and probably the result of a bad science experiment! This ain't your homegrown poo-bear, no sir. ",
     "locationImage" : "images/lair.jpg",
     "locationItems": [],
     "locationNPC": {"name": "bear","power": 9.0},

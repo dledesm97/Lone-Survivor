@@ -1,6 +1,5 @@
 package com.lonesurvivor.Items;
 
-import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Views.LocationFrame;
 
@@ -12,22 +11,23 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Radio extends Item{
+
     Timer timer = new Timer();
     public static Clip clip = null;
 
     public void turnOn() throws InterruptedException {
-        Location playerLocation = Player.getInstance().getPlayerLocation();
+        //Location playerLocation = Player.getInstance().getCurrentLocation();
         ArrayList<String> items = Player.getInstance().getInventory();
-        for (int aItem = 0; aItem < items.size(); aItem++) {
-            if (items.get(aItem).equals("radio")) {
-                LocationFrame.textDisplayGui("This radio looks like it can still work! I am going to try to turn it on....IT DOES WORK!");
+        for (String item : items) {
+            if (item.equals("radio")) {
+                LocationFrame.textDisplayGui("This radio looks like it can still work! You try to turn it on....IT DOES WORK!");
                 timer.schedule(new TimerTask() {
                     public void run() {
                         playMusic();
                     }
                 }, 2800);
             } else {
-                LocationFrame.textDisplayGui("You do not have a radio");
+                LocationFrame.textDisplayGui("You do not have a radio.");
             }
         }
     }
@@ -51,12 +51,13 @@ public class Radio extends Item{
     }
 
     public void sendMessage(){
-        LocationFrame.textDisplayGui("You: If someone is out there please send some help! I was in flight 210, my name is Rennie");
+        LocationFrame.textDisplayGui("You: If someone *BREAK* is out there *BREAK* please send some help! *BREAK* I was in flight 210, *BREAK* my name is Rennie!!!");
         timer.schedule(new TimerTask() {
             public void run(){
                 stopAudio();
             }
-        },8000);
+        },1000);
+        LocationFrame.textDisplayGui("YOU: I SAY AGAIN! *BREAK* S.O.S my name is RENNIE! *OUT*");
     }
 
     public void stopAudio(){
@@ -65,11 +66,12 @@ public class Radio extends Item{
             public void run(){
                 rescued();
             }
-        },10000);
+        },5000);
     }
 
     public void rescued(){
-        LocationFrame.textDisplayGui("Wait a second...the call worked! There is a team here to rescue me!");
+        LocationFrame.textDisplayGui("Wait a second...you here breaking static and a faint voice emerging from the static. You turn up the volume. " +
+                "\nVOICE: COPY! RENNIE this is DAVID! *BREAK* We have your location *BREAK* standby for helicopter rescue in 5! *OUT*");
         try{
             Thread.sleep(5000);
         }catch(InterruptedException e){
