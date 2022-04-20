@@ -23,6 +23,7 @@ explore your surroundings and gather various items to help you survive the fores
 
 ## Authors
 
-* **Justin Suen** 
-* **Timothy Olowookere** 
-* **Luxi Meng** 
+* **Clayvis Rawlins** 
+* **Isabel Servin** 
+* **Percell Gaskins** 
+* **David Ledesma**
