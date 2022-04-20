@@ -128,6 +128,7 @@ public class GameEngine {
                 }catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
+                break;
             case "quit":
                 try{
                     Player.getInstance().quitEngine(command.get(1));
@@ -145,6 +146,7 @@ public class GameEngine {
             case "attack":
                try{
                    Player.getInstance().attackEngine(command.get(1));
+                   MusicClass.soundFx(command.get(0));
                }catch (Exception e) {
                    System.out.println(e.getMessage());
                }
