@@ -1,10 +1,10 @@
 package com.lonesurvivor.Models;
 
 import com.lonesurvivor.NPC.NPC;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Location {
 
@@ -15,6 +15,8 @@ public class Location {
     private NPC npc;
     private Map<String, String> direction;
     private Boolean itemsPresent = false;
+    private Boolean presentNPC = false;
+    private Boolean isAlive = false;
 
     public Location(String name, String description, String image , ArrayList<String> items, NPC npc, HashMap<String, String> direction) {
         this.name = name;
@@ -33,6 +35,11 @@ public class Location {
         }
     }
 
+    //checks if npc/opponent is present
+    public boolean hasNPC() {
+        presentNPC = !Objects.equals(npc.getName(), "");
+        return presentNPC;
+    }
 
     public String getName() {
         return name;
@@ -56,10 +63,6 @@ public class Location {
 
     public String getImage() {
         return image;
-    }
-
-    public void deleteNpc() {
-        npc = null;
     }
 
     @Override

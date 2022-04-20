@@ -9,7 +9,7 @@ public class Pilot extends NPC {
     Timer timer = new Timer();
 
     public void firstDialogue(){
-        LocationFrame.textDisplayGui("You: Woah...what happend out there?! How did we crash?");
+        LocationFrame.textDisplayGui("YOU: Woah...what happend out there?! How did we crash?");
         timer.schedule(new TimerTask() {
             public void run() {
                 secondDialogue();
@@ -18,19 +18,19 @@ public class Pilot extends NPC {
     }
 
     public void secondDialogue(){
-        LocationFrame.textDisplayGui("You: Woah...what happend out there?! How did we crash?");
-        LocationFrame.textDisplayGui("Pilot: Wait...how are you alive?? Everyone was supposed to be dead!");
+        LocationFrame.textDisplayGui("YOU: Woah...what happend out there?! How did we crash?");
+        LocationFrame.textDisplayGui("PILOT: Wait...how are you alive?? Everyone was supposed to be dead!");
         timer.schedule(new TimerTask() {
             public void run() {
                 thirdDialogue();
             }
-        }, 3000);
+        }, 5000);
     }
 
     public void thirdDialogue(){
-        LocationFrame.textDisplayGui("You: Woah...what happened out there?! How did we crash?");
-        LocationFrame.textDisplayGui("Pilot: Wait...how are you alive?? Everyone was supposed to be dead!");
-        LocationFrame.textDisplayGui("You: What do you mean supposed to?! This was \nplanned?! "
-                + "Should I ATTACK this PILOT or just go elsewhere?");
+        LocationFrame.textDisplayGui("YOU: Woah...what happened out there?! How did we crash?");
+        LocationFrame.textDisplayGui("PILOT: Wait...how are you alive?? Everyone was supposed to be dead!");
+        LocationFrame.textDisplayGui("YOU: What do you mean supposed to?! This was \nplanned?! "
+                + "Do you ATTACK the PILOT or just let him succumb to his wounds naturally?");
     }
 }

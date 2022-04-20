@@ -4,7 +4,7 @@
     "locationDescription": "This is the Cockpit. The PILOT flies the plane \nfrom here, you should see if he survived...\nMaybe you can TALK to the PILOT and find out \nwhat happened. \nIf you go outside the plane you can get lost, maybe something in here can help you navigate \naround the dense unknown forest.",
     "locationImage" : "images/cockpit.jpg",
     "locationItems": ["compass"],
-    "locationNPC": {"name": "pilot","power":6.0},
+    "locationNPC": {"name": "pilot","power":6.0, "health": 15.0},
     "locationDirections": {"north":"","east": "outside plane", "south": "first class", "west": ""}
   },
   {
@@ -12,7 +12,7 @@
     "locationDescription": "This is the First Class seating area.",
     "locationImage" : "images/first_class.png",
     "locationItems": ["flare", "raft"],
-    "locationNPC": {"name": "","power": 0.0},
+    "locationNPC": {"name": "","power": 0.0, "health": 0.0},
     "locationDirections": {"north": "cockpit", "east":"","south": "economy class","west": ""}
   },
   {
@@ -20,15 +20,15 @@
     "locationDescription": "This is the Economy sitting area.",
     "locationImage" : "images/cabin.png",
     "locationItems": ["flashlight"],
-    "locationNPC": {"name": "","power": 0.0},
+    "locationNPC": {"name": "","power": 0.0, "health":  0.0},
     "locationDirections": {"north": "first class", "east":"","south": "service area", "west": ""}
   },
   {
     "locationName": "service area",
-    "locationDescription": "This is the Service Area typically run by the \nflight attendants.WAIT I see someone...I should TALK to the ATTENDANT and then maybe \nsearch around here",
+    "locationDescription": "This is the Service Area typically run by the \nflight attendants. WAIT, you see someone...you should TALK to the ATTENDANT and then maybe \nLOOK AROUND here...",
     "locationImage" : "images/service_area.png",
     "locationItems": ["food", "knife"],
-    "locationNPC": {"name": "attendant","power": 5.0},
+    "locationNPC": {"name": "attendant","power": 5.0, "health": 8.0},
     "locationDirections": {"north": "economy class", "east": "","south": "", "west": ""}
   },
   {
@@ -36,15 +36,15 @@
     "locationDescription": "You are outside the plane crash. Dense tropical rainforest surround the area.",
     "locationImage" : "images/planecrash.jpg",
     "locationItems": [],
-    "locationNPC": {"name": "","power": 0.0},
+    "locationNPC": {"name": "","power": 0.0, "health":  0.0},
     "locationDirections": {"north": "", "east":  "","south": "forest", "west":  "cockpit"}
   },
   {
     "locationName": "forest",
-    "locationDescription": "Dense tropical rainforest surround the area. You hear sounds of water nearby, and hisses of a SNAKE",
+    "locationDescription": "Dense tropical rainforest surround the area. You hear sounds of water nearby and hisses of a SNAKE.",
     "locationImage" : "images/forest_greenery.jpg",
     "locationItems": [],
-    "locationNPC": {"name": "snake","power": 5.0},
+    "locationNPC": {"name": "snake","power": 5.0, "health": 10.0},
     "locationDirections": {"north": "outside plane", "east":  "forest","south": "bridge", "west":  ""}
   },
   {
@@ -52,7 +52,7 @@
     "locationDescription": "The forest seems too dense to go any further at this point. Might be best to re-trace your steps.",
     "locationImage" : "images/forest_dead_end.jpg",
     "locationItems": [],
-    "locationNPC": {"name": "","power": 0.0},
+    "locationNPC": {"name": "","power": 0.0, "health":  0.0},
     "locationDirections": {"north":"","east":"","south":"","west": "forest"}
   },
   {
@@ -60,7 +60,7 @@
     "locationDescription": "You come across an old steel bridge that splits EAST and SOUTH is appears to be wrapped in vegetation. Seems safe to cross...Wait there's something weird looking here, it look like a TROLL, I need to TALK to it",
     "locationImage" : "images/bridge.jpg",
     "locationItems": ["radio"],
-    "locationNPC": {"name": "troll","power": 7.0},
+    "locationNPC": {"name": "troll","power": 7.0 , "health" :  20.0},
     "locationDirections": {"north": "forest", "east": "village", "south": "lair","west": ""}
   },
   {
@@ -68,7 +68,7 @@
     "locationDescription": "You found a hidden forest village that has seen better days, however, you see human faces about. You feel relieved, but do not know if they are friendly or foe. There is a SURVIVOR it looks like they want to TALK",
     "locationImage" : "images/forest_village.jpg",
     "locationItems": [],
-    "locationNPC": {"name": "survivor","power": 6.0},
+    "locationNPC": {"name": "survivor","power": 6.0, "health": 20.0},
     "locationDirections": {"north": "","east": "tlg building","south": "","west": "bridge"}
   },
   {
@@ -76,7 +76,7 @@
     "locationDescription": "Upon entering the village, you notice a peculiar building with the signage that reads, \"TLG\"...odds are odd, but you decide to check it out.",
     "locationImage" : "images/building.jpg",
     "locationItems": [],
-    "locationNPC": {"name": "clay","power": 8.0},
+    "locationNPC": {"name": "clay","power": 8.0, "health" :  50.0},
     "locationDirections": {"north": "","east": "","south": "","west": "village"}
   },
   {
@@ -84,7 +84,7 @@
     "locationDescription": "You hear low growling noises, and you see what looks to be a mutated BEAR and probably the result of a bad science experiment! This ain't your homegrown poo-bear, no sir. ",
     "locationImage" : "images/lair.jpg",
     "locationItems": [],
-    "locationNPC": {"name": "bear","power": 9.0},
+    "locationNPC": {"name": "bear","power": 9.0, "health": 40.0},
     "locationDirections": {"north": "bridge","east": "","south": "","west": ""}
   }
 
