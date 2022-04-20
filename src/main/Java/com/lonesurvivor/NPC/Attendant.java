@@ -9,7 +9,7 @@ public class Attendant {
 
     Timer timer = new Timer();
     public void firstDialogue(){
-        LocationFrame.textDisplayGui("You: Hey you made it! you look like you are in \ncritical condition");
+        LocationFrame.textDisplayGui("YOU: Hey you made it! you look like you are in \ncritical condition!");
         timer.schedule(new TimerTask() {
             public void run() {
                 secondDialogue();
@@ -18,18 +18,18 @@ public class Attendant {
     }
 
     public void secondDialogue(){
-        LocationFrame.textDisplayGui("You: Hey you made it! you look like you are in critical condition");
-        LocationFrame.textDisplayGui("Attendant: Please..you need to do something or I will die");
+        LocationFrame.textDisplayGui("YOU: Hey you made it! You look like you are in critical condition!");
+        LocationFrame.textDisplayGui("ATTENDANT: Please..you need to do something!!! I AM IN SO MUCH PAIN!");
         timer.schedule(new TimerTask() {
             public void run() {
                 thirdDialogue();
             }
-        }, 3000);
+        }, 4000);
     }
 
     public void thirdDialogue(){
-        LocationFrame.textDisplayGui("You: Hey you made it! you look like you are in critical condition");
-        LocationFrame.textDisplayGui("Attendant: Please..you need to do something or I will die");
-        LocationFrame.textDisplayGui("You: I dont know what to do! should I ATTACK the ATTENDANT and end her misery or just move on");
+        LocationFrame.textDisplayGui("YOU: Hey you made it! you look like you are in critical condition");
+        LocationFrame.textDisplayGui("ATTENDANT: Please..you need to do something!!! I AM IN SO MUCH PAIN!");
+        LocationFrame.textDisplayGui("YOU: I don't know what to do! Should I ATTACK the ATTENDANT and end her misery or just move on?");
     }
 }

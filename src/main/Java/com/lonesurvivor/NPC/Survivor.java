@@ -8,7 +8,7 @@ import java.util.TimerTask;
 public class Survivor {
     Timer timer = new Timer();
     public void firstDialogue(){
-        LocationFrame.textDisplayGui("You: Finally, someone who can help me get \nout of here");
+        LocationFrame.textDisplayGui("YOU: Finally, someone who can help me get \nout of here!!!");
         timer.schedule(new TimerTask() {
             public void run() {
                 secondDialogue();
@@ -17,8 +17,8 @@ public class Survivor {
     }
 
     public void secondDialogue(){
-        LocationFrame.textDisplayGui("You: Finally, someone who can help me get \nout of here");
-        LocationFrame.textDisplayGui("Survivor: I am glad you were able to find us\n we have all went through the exact same thing\n");
+        LocationFrame.textDisplayGui("YOU: Finally, someone who can help me get \nout of here!!!");
+        LocationFrame.textDisplayGui("SURVIVOR: I am glad you were able to find us\n we have all went through the exact same thing.\n");
         timer.schedule(new TimerTask() {
             public void run() {
                 thirdDialogue();
@@ -27,8 +27,8 @@ public class Survivor {
     }
 
     public void thirdDialogue(){
-        LocationFrame.textDisplayGui("You: Finally, someone who can help me get \nout of here");
-        LocationFrame.textDisplayGui("Survivor: I am glad you were able to find us\n we have all went through the exact same thing\n");
-        LocationFrame.textDisplayGui("Survivor: Listen here, we all decided to stay \nhere to get away from the world, but there are \na group of engineers here in one of these \nbuildings who can help you go back");
+        LocationFrame.textDisplayGui("YOU: Finally, someone who can help me get \nout of here!!!");
+        LocationFrame.textDisplayGui("SURVIVOR: I am glad you were able to find us\n we have all went through the exact same thing.\n");
+        LocationFrame.textDisplayGui("SURVIVOR: Listen here, we all decided to stay \nand get away from the world, but there is \na group of engineers here, in one of these \nbuildings who can help you get back home.");
     }
 }

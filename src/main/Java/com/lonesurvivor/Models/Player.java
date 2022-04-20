@@ -19,7 +19,7 @@ public class Player {
     private ArrayList<String> inventory = new ArrayList<>();
     private Location currentLocation;
     private List<Location> locations;
-    private int health = 50;
+    private int health;
     private int attackPoints = 10;
     private int actionTracker = 0;
 
@@ -40,6 +40,7 @@ public class Player {
     }
 
     // Business Methods ***********************************
+    //moves player from one location to the next
     public void moveEngine(String noun) throws IOException {
         for (Map.Entry<String, String> set : currentLocation.getDirection().entrySet()) {
             if (set.getKey().equalsIgnoreCase(noun)){
@@ -54,6 +55,7 @@ public class Player {
         }
     }
 
+    //gets -grabs- an item
     public void getEngine(String noun) throws IOException {
         for (String aItem : currentLocation.getItems()){
             if (aItem.equalsIgnoreCase(noun)){
@@ -65,12 +67,12 @@ public class Player {
         }
     }
 
+    //lets player look around surrounding area
+    /* based on player's location, will determine where player can go, what they can do
+         You look around and see to the north: first class, south: service area
+         you see the following items: flashlight, life jacket, etc.
+     */
     public void lookEngine(String noun) {
-        //get location from JSON file
-        //based on player's location, will determine where player can go, what they can do
-        //You look around and see to the north: first class, south: service area
-        //you see the following items: flashlight, life jacket, etc.
-
         String locationName = Player.getInstance().getCurrentLocation().getName();
         if(locationName.equals("forest") || locationName.equals("forest dead end") || locationName.equals("bridge") || locationName.equals("village") || locationName.equals("outside plane") || locationName.equals("economy class")) {
             LocationFrame.textDisplayGui(viewLocItems());
@@ -81,12 +83,14 @@ public class Player {
         actionTracker++;
     }
 
+    //allows user to use a given item
     public void useEngine(String noun) throws IOException, InterruptedException {
         Item item = new Item(noun);
         item.useItem();
         actionTracker++;
     }
 
+    //allows user to quit the game at any point in time
     public void quitEngine(String noun){
         if (noun.equals("game")) {
             LocationFrame.textDisplayGui("Quitting now...");
@@ -94,25 +98,28 @@ public class Player {
         }
     }
 
-    public void attackEngine(String noun){
+    //allows the user to attack a NPC
+    public void attackEngine(String noun) {
+        if(currentLocation.hasNPC()){
             if (currentLocation.getNpc().getName().equalsIgnoreCase(noun)){
-                AttackEngine attackEngine = new AttackEngine();
-                attackEngine.attack();
-//                LocationFrame.textDisplayGui("You attacked " + currentLocation.getNpc().getName());
-
-
+                AttackEngine.attack();
             }
             else{
                 LocationFrame.textDisplayGui("You can't attack that!");
             }
+        } else {
+            LocationFrame.textDisplayGui("There is nothing to attack!");
+        }
+
     }
 
+    //lets user view helpful game info
     public void helpEngine(String noun) throws IOException, ParseException {
         if (noun.equals("commands")) {
             LocationFrame.textDisplayGui(JSONParserClass.getInstance().commandParser().get(2).toString());
         }
         else if (noun.equals("game")){
-           LocationFrame.textDisplayGui(JSONParserClass.getInstance().parseGameInfo());
+            LocationFrame.textDisplayGui(JSONParserClass.getInstance().parseGameInfo());
         }
     }
 
@@ -132,9 +139,17 @@ public class Player {
         }
     }
 
+    //lets user talk to a npc
     public void talkEngine(String noun){
-        NPC npc = new NPC();
-        npc.talking(noun);
+        if (currentLocation.hasNPC()){
+            if(currentLocation.getNpc().isAlive()){
+                currentLocation.getNpc().talk(noun);
+            } else {
+            LocationFrame.textDisplayGui("The dead DON'T talk.");
+            }
+        } else {
+            LocationFrame.textDisplayGui("You cannot do that. There is no one to TALK to.");
+        }
     }
 
     // Accessor Methods **********************
@@ -176,10 +191,6 @@ public class Player {
 
     public int getAttackPoints() {
         return attackPoints;
-    }
-
-    public void setAttackPoints(int attackPoints) {
-        this.attackPoints = attackPoints;
     }
 
     public ArrayList<String> getInventory() {

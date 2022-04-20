@@ -67,7 +67,7 @@ public class JSONParserClass {
 
             JSONObject npcInLocation = (JSONObject) obj.get("locationNPC");
 
-            NPC newNpc = new NPC((String) npcInLocation.get("name"), (Double) npcInLocation.get("power"));
+            NPC newNpc = new NPC((String) npcInLocation.get("name"), (Double) npcInLocation.get("power"), (Double) npcInLocation.get("health"));
             npcs.add(newNpc);
         }
         return npcs;

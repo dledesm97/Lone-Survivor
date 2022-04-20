@@ -66,6 +66,10 @@ public class MasterGui implements ActionListener {
         locationFrame.setInventoryBox();
     }
 
+    public static void refreshPlayerStats() {
+        locationFrame.setPlayerStatsDisplay();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

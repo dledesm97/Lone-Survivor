@@ -2,11 +2,9 @@ package com.lonesurvivor.GameEngine;
 
 import com.lonesurvivor.Models.Location;
 import com.lonesurvivor.Models.MusicClass;
-//import com.lonesurvivor.NPC.NPC;
 import com.lonesurvivor.Models.Player;
 import com.lonesurvivor.Utils.JSONParserClass;
 import com.lonesurvivor.Utils.TextParser;
-import com.lonesurvivor.Views.LocationFrame;
 import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.util.List;
@@ -19,11 +17,11 @@ public class GameEngine {
 
     //constants
     private static final String LOCATION_PATH = "json/PlaneCrash.json";
+    private final int MAX_HEALTH = 50;
 
     //field variables
     private TextParser parser;
     private List<Location> locations;
-//    private NPC npc;
     private List<String> command;
     public static int dayCount = 1;
     private boolean hasWon = false;
@@ -44,21 +42,19 @@ public class GameEngine {
     private GameEngine() throws IOException, ParseException {
         parser = new TextParser();
         locations = JSONParserClass.getInstance().locationGenerator(LOCATION_PATH);
-
-        //random generate radio to any location
-
+        Player.getInstance().setHealth(MAX_HEALTH);
         Player.getInstance().setLocations(locations);
         Player.getInstance().setCurrentLocation(locations.get(2));
     }
 
     //public method that runs the game
-    public boolean startGame() throws IOException, ParseException, InterruptedException {
+    public boolean startGame() throws InterruptedException {
         dayTracker();
         checkWin(Player.getInstance().getCurrentLocation());
         if (hasWon){
             textDisplayGui("\nYou've entered the building and HOOORAY! You have regrouped with Clay, Izzy, Percell, and David.\n You are in good hands with them, they will take over from here!\nCONGRATULATIONS!! Thanks for playing!");
             Thread.sleep(3000);
-            return hasWon = true;
+            hasWon = true; //TODO CHECK IF THIS BROKE ANYTHING
         }
         return hasWon;
     }
